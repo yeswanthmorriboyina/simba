@@ -1636,11 +1636,11 @@
             <stop offset="75%" stop-color="#e8c96b"/>
             <stop offset="100%" stop-color="#8a5308"/>
           </linearGradient>
-          <!-- Inside-bottle Liquid Gradient (Green glass style) -->
+          <!-- Inside-bottle Liquid Gradient (warm amber) -->
           <linearGradient id="ps-liq-inside" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#0f3d1b" stop-opacity="0.85"/>
-            <stop offset="50%" stop-color="#2e7d32" stop-opacity="0.75"/>
-            <stop offset="100%" stop-color="#092410" stop-opacity="0.90"/>
+            <stop offset="0%" stop-color="#3d1c00" stop-opacity="0.85"/>
+            <stop offset="50%" stop-color="#7a3a00" stop-opacity="0.75"/>
+            <stop offset="100%" stop-color="#2a1000" stop-opacity="0.90"/>
           </linearGradient>
           <linearGradient id="ps-liq-h" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%"   stop-color="rgba(255,255,255,.35)"/>
@@ -1655,25 +1655,45 @@
             <stop offset="0%"   stop-color="#c9a84c"/>
             <stop offset="100%" stop-color="#e8c96b"/>
           </linearGradient>
-          <!-- Green ribbed cap gradient -->
+          <!-- Green ribbed cap gradient â†’ now GOLD screw cap -->
           <linearGradient id="ps-cap-green" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#1b5e20"/>
-            <stop offset="35%" stop-color="#2e7d32"/>
-            <stop offset="65%" stop-color="#4caf50"/>
-            <stop offset="100%" stop-color="#0d5c14"/>
+            <stop offset="0%" stop-color="#6b4c11"/>
+            <stop offset="30%" stop-color="#c9a84c"/>
+            <stop offset="60%" stop-color="#e8c96b"/>
+            <stop offset="100%" stop-color="#8a6010"/>
           </linearGradient>
-          <!-- Clear glass filled with brown beverage gradient -->
+          <!-- Gold foil neck gradient -->
+          <linearGradient id="ps-foil" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7a5a10"/>
+            <stop offset="40%" stop-color="#d4af37"/>
+            <stop offset="70%" stop-color="#f0d060"/>
+            <stop offset="100%" stop-color="#6b4c11"/>
+          </linearGradient>
+          <!-- Deep amber glass body gradient -->
           <linearGradient id="ps-bot-liq-grad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#0f3d1b"/>
-            <stop offset="50%" stop-color="#1b5e20"/>
-            <stop offset="100%" stop-color="#092410"/>
+            <stop offset="0%" stop-color="#1a0800"/>
+            <stop offset="25%" stop-color="#3d1c00"/>
+            <stop offset="55%" stop-color="#5c2a00"/>
+            <stop offset="80%" stop-color="#3d1c00"/>
+            <stop offset="100%" stop-color="#1a0800"/>
           </linearGradient>
-          <!-- White wrapper sleeve gradient -->
+          <!-- Amber glass shine overlay -->
           <linearGradient id="ps-bot-wrap-grad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#e8e5dc"/>
-            <stop offset="35%" stop-color="#f7f4ee"/>
-            <stop offset="70%" stop-color="#ffffff"/>
-            <stop offset="100%" stop-color="#d9d6cd"/>
+            <stop offset="0%" stop-color="rgba(255,180,80,0)"/>
+            <stop offset="30%" stop-color="rgba(255,180,80,0.12)"/>
+            <stop offset="55%" stop-color="rgba(255,220,130,0.22)"/>
+            <stop offset="80%" stop-color="rgba(255,180,80,0.08)"/>
+            <stop offset="100%" stop-color="rgba(255,180,80,0)"/>
+          </linearGradient>
+          <!-- Cream label gradient -->
+          <linearGradient id="ps-label-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f5f0e8"/>
+            <stop offset="100%" stop-color="#ede5d0"/>
+          </linearGradient>
+          <!-- Badge bg -->
+          <linearGradient id="ps-badge-bg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2c1a00"/>
+            <stop offset="100%" stop-color="#1a0e00"/>
           </linearGradient>
           <radialGradient id="ps-glow" cx="50%" cy="40%" r="55%">
             <stop offset="0%"   stop-color="#c9a84c" stop-opacity=".10"/>
@@ -1709,67 +1729,72 @@
              At âˆ’72Â° the neck swings left to â‰ˆ(119,221), directly above glass. â•â•â• -->
         <g id="ps-bot-grp">
 
-          <!-- CAP â€” lifted off before pour (Ribbed Green Cap) -->
+          <!-- â•â• CAP (gold screw-top) â•â• -->
           <g id="ps-cap-grp">
-            <rect x="273" y="73" width="54" height="34" rx="3" fill="url(#ps-cap-green)"/>
-            <rect x="279" y="63" width="42" height="11" rx="2" fill="url(#ps-cap-green)"/>
+            <rect x="281" y="63" width="38" height="9" rx="2" fill="url(#ps-cap-green)"/>
+            <rect x="273" y="71" width="54" height="36" rx="3" fill="url(#ps-cap-green)"/>
             <!-- Cap ribs -->
-            <line x1="280" y1="73" x2="280" y2="107" stroke="#1b5e20" stroke-width="1.8"/>
-            <line x1="286" y1="73" x2="286" y2="107" stroke="#1b5e20" stroke-width="1.8"/>
-            <line x1="292" y1="73" x2="292" y2="107" stroke="#1b5e20" stroke-width="1.8"/>
-            <line x1="298" y1="73" x2="298" y2="107" stroke="#1b5e20" stroke-width="1.8"/>
-            <line x1="304" y1="73" x2="304" y2="107" stroke="#1b5e20" stroke-width="1.8"/>
-            <line x1="310" y1="73" x2="310" y2="107" stroke="#1b5e20" stroke-width="1.8"/>
-            <line x1="316" y1="73" x2="316" y2="107" stroke="#1b5e20" stroke-width="1.8"/>
-            <line x1="322" y1="73" x2="322" y2="107" stroke="#1b5e20" stroke-width="1.8"/>
+            <line x1="280" y1="71" x2="280" y2="107" stroke="rgba(100,70,10,0.5)" stroke-width="1.8"/>
+            <line x1="286" y1="71" x2="286" y2="107" stroke="rgba(100,70,10,0.5)" stroke-width="1.8"/>
+            <line x1="292" y1="71" x2="292" y2="107" stroke="rgba(100,70,10,0.5)" stroke-width="1.8"/>
+            <line x1="298" y1="71" x2="298" y2="107" stroke="rgba(100,70,10,0.5)" stroke-width="1.8"/>
+            <line x1="304" y1="71" x2="304" y2="107" stroke="rgba(100,70,10,0.5)" stroke-width="1.8"/>
+            <line x1="310" y1="71" x2="310" y2="107" stroke="rgba(100,70,10,0.5)" stroke-width="1.8"/>
+            <line x1="316" y1="71" x2="316" y2="107" stroke="rgba(100,70,10,0.5)" stroke-width="1.8"/>
+            <line x1="322" y1="71" x2="322" y2="107" stroke="rgba(100,70,10,0.5)" stroke-width="1.8"/>
+            <rect x="280" y="74" width="54" height="6" rx="1" fill="rgba(255,220,100,0.2)"/>
           </g>
 
-          <!-- NECK (Clear green glass) -->
-          <path d="M273 107 Q261 146 256 180 L344 180 Q339 146 327 107 Z" fill="url(#ps-bot-liq-grad)"/>
-          <path d="M273 107 Q261 146 256 180 L344 180 Q339 146 327 107 Z" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+          <!-- â•â• GOLD FOIL NECK â•â• -->
+          <path d="M273 107 Q261 146 256 180 L344 180 Q339 146 327 107 Z" fill="url(#ps-foil)"/>
+          <line x1="282" y1="107" x2="278" y2="180" stroke="rgba(100,70,10,0.35)" stroke-width="1"/>
+          <line x1="300" y1="107" x2="300" y2="180" stroke="rgba(255,230,120,0.25)" stroke-width="0.8"/>
+          <line x1="318" y1="107" x2="322" y2="180" stroke="rgba(100,70,10,0.35)" stroke-width="1"/>
+          <line x1="256" y1="178" x2="344" y2="178" stroke="#d4af37" stroke-width="1.4"/>
+          <line x1="256" y1="181" x2="344" y2="181" stroke="#8a6010" stroke-width="0.7"/>
 
-          <!-- BODY (Clear glass filled with brown beverage) -->
+          <!-- â•â• GLASS BODY (deep amber) â•â• -->
           <path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="url(#ps-bot-liq-grad)"/>
-          <path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="none" stroke="rgba(129,199,132,0.35)" stroke-width="2"/>
+          <path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="url(#ps-bot-wrap-grad)"/>
+          <path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="none" stroke="rgba(201,140,30,0.4)" stroke-width="2.5"/>
 
-          <!-- SHOULDER WRAPPER (White sleeve) -->
-          <path d="M256 180 Q233 208 231 250 L231 326 L369 326 L369 250 Q367 208 344 180 Z" fill="url(#ps-bot-wrap-grad)"/>
+          <!-- â•â• GOLD SHOULDER BAND â•â• -->
+          <rect x="231" y="298" width="138" height="7" fill="#c9a84c" rx="1"/>
+          <rect x="231" y="304" width="138" height="3" fill="#8a6010"/>
 
-          <!-- DECORATIVE CHEVRON BAND -->
-          <!-- Border lines -->
-          <line x1="256" y1="178" x2="344" y2="178" stroke="#311b0b" stroke-width="0.8"/>
-          <line x1="256" y1="184" x2="344" y2="184" stroke="#311b0b" stroke-width="0.8"/>
-          <!-- Zigzags -->
-          <path d="M256 178 L 260 184 L 264 178 L 268 184 L 272 178 L 276 184 L 280 178 L 284 184 L 288 178 L 292 184 L 296 178 L 300 184 L 304 178 L 308 184 L 312 178 L 316 184 L 320 178 L 324 184 L 328 178 L 332 184 L 336 178 L 340 184 L 344 178" stroke="#311b0b" stroke-width="0.8" fill="none"/>
+          <!-- â•â• CREAM LABEL â•â• -->
+          <rect x="234" y="305" width="132" height="128" rx="5" fill="url(#ps-label-grad)"/>
+          <rect x="234" y="305" width="132" height="128" rx="5" fill="none" stroke="#c9a84c" stroke-width="2.5"/>
+          <rect x="240" y="311" width="120" height="116" rx="3" fill="none" stroke="#c9a84c" stroke-width="0.9"/>
 
-          <!-- LABEL (Dark Brown body label) -->
-          <rect x="231" y="326" width="138" height="94" fill="#311b0b"/>
+          <!-- Lion badge on label -->
+          <circle cx="300" cy="340" r="21" fill="url(#ps-badge-bg)" stroke="#d4af37" stroke-width="1.8"/>
+          <circle cx="300" cy="340" r="15" fill="none" stroke="rgba(212,175,55,0.5)" stroke-width="0.8"/>
+          <use href="#lion-logo" x="300" y="340" transform="scale(0.85)" transform-origin="300 340"/>
 
-          <!-- Badge Circle & Logo -->
-          <circle cx="300" cy="292" r="19" fill="#ffffff" stroke="#d4af37" stroke-width="1.2"/>
-          <use href="#lion-logo" x="300" y="292" />
+          <!-- Brand Texts on cream label -->
+          <text x="300" y="373" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="700" font-size="9" fill="#1a0e00" letter-spacing="2">VIN</text>
+          <line x1="246" y1="377" x2="354" y2="377" stroke="#c9a84c" stroke-width="0.8"/>
+          <text x="300" y="390" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="700" font-size="13.5" fill="#1a0e00" letter-spacing="2.5">NKOLO</text>
+          <text x="300" y="405" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="700" font-size="13.5" fill="#1a0e00" letter-spacing="2.5">MBOKA</text>
+          <line x1="246" y1="410" x2="354" y2="410" stroke="#c9a84c" stroke-width="0.8"/>
+          <text x="300" y="420" text-anchor="middle" font-family="'Inter',sans-serif" font-size="5" fill="#6b4c11" letter-spacing="1.5">GINGER-BASED ALCOHOLIC BEVERAGE</text>
+          <text x="300" y="428" text-anchor="middle" font-family="'Inter',sans-serif" font-size="4.5" fill="#8a6010" letter-spacing="0.8">330 ml Â· 12% Vol Â· Dar es Salaam</text>
 
-          <!-- Brand Texts on Dark Brown -->
-          <text x="300" y="348" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="13.5" fill="#ffffff" letter-spacing="0.8">VIN</text>
-          <text x="300" y="362" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="13.5" fill="none" stroke="#ffffff" stroke-width="2.2" letter-spacing="0.8">NKOLO</text>
-          <text x="300" y="362" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="13.5" fill="none" stroke="#311b0b" stroke-width="0.8" letter-spacing="0.8">NKOLO</text>
-          <text x="300" y="376" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="13.5" fill="none" stroke="#ffffff" stroke-width="2.2" letter-spacing="0.8">MBOKA</text>
-          <text x="300" y="376" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="13.5" fill="none" stroke="#311b0b" stroke-width="0.8" letter-spacing="0.8">MBOKA</text>
-          <text x="300" y="386" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.5" fill="#d4af37" letter-spacing="0.2">GINGER-BASED ALCOHOLIC BEVERAGE</text>
-          
-          <!-- Red Swahili banner -->
-          <rect x="231" y="398" width="138" height="22" fill="#b71c1c" />
-          <text x="300" y="411" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" font-size="4.2" fill="#ffffff" letter-spacing="0.1">NGUVU YA SIMBA, FAHARI YA TANZANIA</text>
+          <!-- â•â• RED SWAHILI BANNER â•â• -->
+          <rect x="234" y="430" width="132" height="24" rx="3" fill="#b71c1c"/>
+          <text x="300" y="444" text-anchor="middle" font-family="'Inter',sans-serif" font-weight="700" font-size="4.8" fill="#ffffff" letter-spacing="0.4">NGUVU YA SIMBA Â· FAHARI YA TANZANIA</text>
 
-          <!-- Shines -->
-          <path d="M240 184 Q236 306 240 446" stroke="rgba(255,255,255,.09)" stroke-width="8" stroke-linecap="round"/>
-          <path d="M255 182 Q252 246 255 336" stroke="rgba(255,255,255,.06)" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- â•â• GLASS SHEEN â•â• -->
+          <path d="M240 184 Q236 306 240 446" stroke="rgba(255,180,80,0.16)" stroke-width="10" stroke-linecap="round"/>
+          <path d="M255 182 Q252 320 255 456" stroke="rgba(255,220,140,0.10)" stroke-width="4" stroke-linecap="round"/>
+          <path d="M263 183 Q300 192 337 183" stroke="rgba(255,220,100,0.22)" stroke-width="4" stroke-linecap="round"/>
 
           <!-- Dynamic liquid inside bottle with counter-rotation -->
           <g clip-path="url(#ps-bottle-clip)">
             <g id="ps-bottle-liq-level-grp">
               <rect id="ps-bottle-liq" x="100" y="130" width="400" height="340" fill="url(#ps-liq-inside)" />
-              <ellipse id="ps-bottle-liq-surface" cx="300" cy="130" rx="200" ry="7" fill="#81c784" opacity="0.65" />
+              <ellipse id="ps-bottle-liq-surface" cx="300" cy="130" rx="200" ry="7" fill="#c9a84c" opacity="0.55" />
             </g>
           </g>
         </g>
