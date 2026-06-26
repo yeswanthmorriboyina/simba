@@ -77,7 +77,7 @@ export default function Hero({ onExplorePress, onB2BPress }) {
             <Line x1={90} y1={5} x2={90} y2={27} stroke="#1b5e20" strokeWidth={1.2}/>
             <Line x1={95} y1={5} x2={95} y2={27} stroke="#1b5e20" strokeWidth={1.2}/>
             <Path d="M60 27 Q52 50 50 70 L110 70 Q108 50 100 27Z" fill="url(#p1wrap)" />
-            <Path d="M50 70 Q38 85 36 110 L36 185 Q36 215 80 220 Q124 215 124 185 L124 110 Q122 85 110 70Z" fill="url(#p1body)" />
+            <Path d="M50 70 Q38 85 36 110 L36 185 Q36 215 80 220 Q124 215 124 185 L124 110 Q122 85 110 70Z" fill="url(#p1body)" stroke="rgba(129,199,132,0.35)" strokeWidth={1.5} />
             <G clipPath="url(#p1-label-clip)">
               <Rect x={42} y={110} width={76} height={40} fill="#f7f4ee" />
               <Rect x={42} y={150} width={76} height={40} fill="#311b0b" />
@@ -104,9 +104,9 @@ export default function Hero({ onExplorePress, onB2BPress }) {
                 <Stop offset="100%" stopColor="#d9d6cd" />
               </LinearGradient>
               <LinearGradient id="p1body" x1="36" y1="0" x2="124" y2="0" gradientUnits="userSpaceOnUse">
-                <Stop offset="0%" stopColor="#3c1e08" />
-                <Stop offset="50%" stopColor="#5a2d0d" />
-                <Stop offset="100%" stopColor="#2a1202" />
+                <Stop offset="0%" stopColor="#0f3d1b" />
+                <Stop offset="50%" stopColor="#1b5e20" />
+                <Stop offset="100%" stopColor="#092410" />
               </LinearGradient>
               <ClipPath id="p1-label-clip">
                 <Rect x={42} y={110} width={76} height={80} rx={6} />

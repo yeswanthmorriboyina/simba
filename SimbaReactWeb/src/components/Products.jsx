@@ -4,7 +4,7 @@ export const PRODUCT_DATA = {
   "Nkolo Mboka": {
     category: "Traditional Wine",
     desc: "A premium traditional wine crafted with natural ingredients, offering a rich and authentic taste of African heritage. Perfectly matured and blended.",
-    sizes: ["750ml", "1L"],
+    sizes: ["330ml"],
     basePrice: 14.50,
     gradient: "linear-gradient(135deg, #1e0a12, #441624)",
     svg: (
@@ -45,9 +45,9 @@ export const PRODUCT_DATA = {
             <stop offset="100%" stopColor="#d9d6cd" />
           </linearGradient>
           <linearGradient id="p1body" x1="36" y1="0" x2="124" y2="0" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#3c1e08" />
-            <stop offset="50%" stopColor="#5a2d0d" />
-            <stop offset="100%" stopColor="#2a1202" />
+            <stop offset="0%" stopColor="#0f3d1b" />
+            <stop offset="50%" stopColor="#1b5e20" />
+            <stop offset="100%" stopColor="#092410" />
           </linearGradient>
           <clipPath id="p1-label-clip">
             <rect x="42" y="110" width="76" height="80" rx="6" />

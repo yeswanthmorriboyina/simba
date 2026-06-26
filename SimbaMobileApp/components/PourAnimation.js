@@ -224,11 +224,11 @@ export default function PourAnimation({ scrollY, layoutY }) {
               <Stop offset="75%" stopColor="#e8c96b" />
               <Stop offset="100%" stopColor="#8a5308" />
             </LinearGradient>
-            {/* Inside-bottle Liquid Gradient */}
+            {/* Inside-bottle Liquid Gradient (Green glass style) */}
             <LinearGradient id="ps-liq-inside" x1="0" y1="0" x2="1" y2="0">
-              <Stop offset="0%" stopColor="#8a5308" stopOpacity={0.8} />
-              <Stop offset="50%" stopColor="#e8c96b" stopOpacity={0.7} />
-              <Stop offset="100%" stopColor="#6e3e08" stopOpacity={0.9} />
+              <Stop offset="0%" stopColor="#0f3d1b" stopOpacity={0.85} />
+              <Stop offset="50%" stopColor="#2e7d32" stopOpacity={0.75} />
+              <Stop offset="100%" stopColor="#092410" stopOpacity={0.90} />
             </LinearGradient>
             <LinearGradient id="ps-liq-h" x1="0" y1="0" x2="1" y2="0">
               <Stop offset="0%" stopColor="rgba(255,255,255,0.35)" />
@@ -243,9 +243,9 @@ export default function PourAnimation({ scrollY, layoutY }) {
             </LinearGradient>
             {/* Clear glass filled with brown beverage gradient */}
             <LinearGradient id="ps-bot-liq-grad" x1="0" y1="0" x2="1" y2="0">
-              <Stop offset="0%" stopColor="#3c1e08" />
-              <Stop offset="50%" stopColor="#5a2d0d" />
-              <Stop offset="100%" stopColor="#2a1202" />
+              <Stop offset="0%" stopColor="#0f3d1b" />
+              <Stop offset="50%" stopColor="#1b5e20" />
+              <Stop offset="100%" stopColor="#092410" />
             </LinearGradient>
             {/* White wrapper sleeve gradient */}
             <LinearGradient id="ps-bot-wrap-grad" x1="0" y1="0" x2="1" y2="0">
@@ -293,7 +293,7 @@ export default function PourAnimation({ scrollY, layoutY }) {
 
             {/* Body (Clear glass filled with brown beverage) */}
             <Path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="url(#ps-bot-liq-grad)" />
-            <Path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth={2} />
+            <Path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="none" stroke="rgba(129,199,132,0.35)" strokeWidth={2} />
 
             {/* Label */}
             <G clipPath="url(#ps-label-clip)">
@@ -325,7 +325,7 @@ export default function PourAnimation({ scrollY, layoutY }) {
             <G clipPath="url(#ps-bottle-clip)">
               <G transform={progress >= 0.78 ? finalBottleLiqTransform : bottleLiqTransform}>
                 <Rect x="100" y={liqY} width="400" height={470 - liqY} fill="url(#ps-liq-inside)" />
-                <Ellipse cx="300" cy={liqY} rx="200" ry="7" fill="#ffee58" opacity={0.65} />
+                <Ellipse cx="300" cy={liqY} rx="200" ry="7" fill="#81c784" opacity={0.65} />
               </G>
             </G>
           </G>

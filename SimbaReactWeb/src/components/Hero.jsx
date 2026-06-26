@@ -91,9 +91,9 @@ export default function Hero({ onExplorePress, onB2BPress }) {
                     <stop offset="100%" stopColor="#0d5c14"/>
                   </linearGradient>
                   <linearGradient id="hero-bot-liq-grad" x1="38" y1="0" x2="162" y2="0" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#3c1e08"/>
-                    <stop offset="50%" stopColor="#5a2d0d"/>
-                    <stop offset="100%" stopColor="#2a1202"/>
+                    <stop offset="0%" stopColor="#0f3d1b"/>
+                    <stop offset="50%" stopColor="#1b5e20"/>
+                    <stop offset="100%" stopColor="#092410"/>
                   </linearGradient>
                   <linearGradient id="hero-bot-wrap-grad" x1="38" y1="0" x2="162" y2="0" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stopColor="#e8e5dc"/>
@@ -124,7 +124,7 @@ export default function Hero({ onExplorePress, onB2BPress }) {
 
                 {/* BODY */}
                 <path d="M60 110 Q40 130 38 170 L38 360 Q38 400 100 410 Q162 400 162 360 L162 170 Q160 130 140 110 Z" fill="url(#hero-bot-liq-grad)"/>
-                <path d="M60 110 Q40 130 38 170 L38 360 Q38 400 100 410 Q162 400 162 360 L162 170 Q160 130 140 110 Z" fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="2.2"/>
+                <path d="M60 110 Q40 130 38 170 L38 360 Q38 400 100 410 Q162 400 162 360 L162 170 Q160 130 140 110 Z" fill="none" stroke="rgba(129,199,132,0.35)" strokeWidth="2.2"/>
 
                 {/* LABEL (Split White/Brown with Lion & Crown) */}
                 <g clipPath="url(#hero-label-clip)">

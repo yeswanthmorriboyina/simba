@@ -529,11 +529,11 @@ export default function PourAnimation() {
               <stop offset="75%" stopColor="#e8c96b"/>
               <stop offset="100%" stopColor="#8a5308"/>
             </linearGradient>
-            {/* Inside-bottle Liquid Gradient */}
+            {/* Inside-bottle Liquid Gradient (Green glass style) */}
             <linearGradient id="ps-liq-inside" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#8a5308" stopOpacity="0.8"/>
-              <stop offset="50%" stopColor="#e8c96b" stopOpacity="0.7"/>
-              <stop offset="100%" stopColor="#6e3e08" stopOpacity="0.9"/>
+              <stop offset="0%" stopColor="#0f3d1b" stopOpacity="0.85"/>
+              <stop offset="50%" stopColor="#2e7d32" stopOpacity="0.75"/>
+              <stop offset="100%" stopColor="#092410" stopOpacity="0.90"/>
             </linearGradient>
             <linearGradient id="ps-liq-h" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%"   stopColor="rgba(255,255,255,.35)"/>
@@ -548,9 +548,9 @@ export default function PourAnimation() {
             </linearGradient>
             {/* Clear glass filled with brown beverage gradient */}
             <linearGradient id="ps-bot-liq-grad" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#3c1e08"/>
-              <stop offset="50%" stopColor="#5a2d0d"/>
-              <stop offset="100%" stopColor="#2a1202"/>
+              <stop offset="0%" stopColor="#0f3d1b"/>
+              <stop offset="50%" stopColor="#1b5e20"/>
+              <stop offset="100%" stopColor="#092410"/>
             </linearGradient>
             {/* White wrapper sleeve gradient */}
             <linearGradient id="ps-bot-wrap-grad" x1="0" y1="0" x2="1" y2="0">
@@ -609,7 +609,7 @@ export default function PourAnimation() {
 
             {/* BODY (Clear glass filled with brown beverage) */}
             <path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="url(#ps-bot-liq-grad)"/>
-            <path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="2"/>
+            <path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="none" stroke="rgba(129,199,132,0.35)" strokeWidth="2"/>
 
             {/* LABEL (Nkolo Mboka Premium Label) */}
             <g clipPath="url(#ps-label-clip)">
@@ -642,7 +642,7 @@ export default function PourAnimation() {
             <g clipPath="url(#ps-bottle-clip)">
               <g id="ps-bottle-liq-level-grp" ref={bottleLiqLevelGrpRef}>
                 <rect id="ps-bottle-liq" ref={bottleLiqRef} x="100" y="130" width="400" height="340" fill="url(#ps-liq-inside)" />
-                <ellipse id="ps-bottle-liq-surface" ref={bottleSurfaceRef} cx="300" cy="130" rx="200" ry="7" fill="#ffee58" opacity="0.65" />
+                <ellipse id="ps-bottle-liq-surface" ref={bottleSurfaceRef} cx="300" cy="130" rx="200" ry="7" fill="#81c784" opacity="0.65" />
               </g>
             </g>
           </g>
