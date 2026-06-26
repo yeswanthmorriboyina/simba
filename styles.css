@@ -314,11 +314,6 @@ nav.scrolled { background: rgba(10,22,40,.95); }
 /* ===========================
    POUR ANIMATION SECTION
 =========================== */
-#ps-bot-grp, #ps-cap-grp, #ps-stream, #ps-glass, #ps-gfill, #ps-foam, #ps-foam-dots, .ps-sub-spark, .ps-mdrip {
-  will-change: transform, opacity;
-  transform: translateZ(0);
-}
-
 #pour-scene {
   height: 550vh;
   position: relative;
