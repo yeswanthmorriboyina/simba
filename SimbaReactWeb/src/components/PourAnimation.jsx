@@ -426,9 +426,13 @@ export default function PourAnimation() {
       sceneHeight = scene.offsetHeight;
     }
 
-    // Cache layout on mount/resize
+    // Cache layout on load, resize, and font ready events to handle layout shifts
     window.addEventListener('resize', cacheLayout);
     window.addEventListener('orientationchange', cacheLayout);
+    window.addEventListener('load', cacheLayout);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(cacheLayout);
+    }
     cacheLayout();
 
     var scrollScheduled = false;
@@ -481,6 +485,7 @@ export default function PourAnimation() {
     return () => {
       window.removeEventListener('resize', cacheLayout);
       window.removeEventListener('orientationchange', cacheLayout);
+      window.removeEventListener('load', cacheLayout);
       window.removeEventListener('scroll', onScroll);
       if (sceneObserver && scene) sceneObserver.unobserve(scene);
       bubblesAlive = false;
@@ -534,22 +539,36 @@ export default function PourAnimation() {
               <stop offset="0%"   stopColor="rgba(255,255,255,.35)"/>
               <stop offset="100%" stopColor="transparent"/>
             </linearGradient>
-            <linearGradient id="ps-bot" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%"   stopColor="#1a3a6e" stopOpacity=".92"/>
-              <stop offset="48%"  stopColor="#234a8a" stopOpacity=".86"/>
-              <stop offset="100%" stopColor="#0f2040" stopOpacity=".96"/>
+            {/* Green ribbed cap gradient */}
+            <linearGradient id="ps-cap-green" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#1b5e20"/>
+              <stop offset="35%" stopColor="#2e7d32"/>
+              <stop offset="65%" stopColor="#4caf50"/>
+              <stop offset="100%" stopColor="#0d5c14"/>
             </linearGradient>
-            <linearGradient id="ps-cap-g" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%"   stopColor="#c9a84c"/>
-              <stop offset="100%" stopColor="#e8c96b"/>
+            {/* Clear glass filled with brown beverage gradient */}
+            <linearGradient id="ps-bot-liq-grad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#3c1e08"/>
+              <stop offset="50%" stopColor="#5a2d0d"/>
+              <stop offset="100%" stopColor="#2a1202"/>
+            </linearGradient>
+            {/* White wrapper sleeve gradient */}
+            <linearGradient id="ps-bot-wrap-grad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#e8e5dc"/>
+              <stop offset="35%" stopColor="#f7f4ee"/>
+              <stop offset="70%" stopColor="#ffffff"/>
+              <stop offset="100%" stopColor="#d9d6cd"/>
             </linearGradient>
             <radialGradient id="ps-glow" cx="50%" cy="40%" r="55%">
               <stop offset="0%"   stopColor="#c9a84c" stopOpacity=".10"/>
               <stop offset="100%" stopColor="transparent"/>
             </radialGradient>
-            {/* Bottle silhouette clip path */}
             <clipPath id="ps-bottle-clip">
               <path d="M273 107 Q261 146 256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Q339 146 327 107 Z"/>
+            </clipPath>
+            {/* Bottle label clip path */}
+            <clipPath id="ps-label-clip">
+              <rect x="242" y="258" width="116" height="144" rx="13" />
             </clipPath>
             {/* Glass clip (above heavy base) */}
             <clipPath id="ps-gcl">
@@ -569,29 +588,51 @@ export default function PourAnimation() {
 
           {/* BOTTLE GROUP */}
           <g id="ps-bot-grp" ref={bottleGrpRef}>
-            {/* CAP */}
+            {/* CAP — lifted off before pour (Ribbed Green Cap) */}
             <g id="ps-cap-grp" ref={capGrpRef}>
-              <rect x="273" y="73"  width="54" height="34" rx="7" fill="url(#ps-cap-g)"/>
-              <rect x="279" y="63"  width="42" height="15" rx="5" fill="url(#ps-cap-g)"/>
-              <line x1="284" y1="67" x2="284" y2="104" stroke="rgba(255,255,255,.22)" strokeWidth="2.5" strokeLinecap="round"/>
-              <line x1="294" y1="67" x2="294" y2="106" stroke="rgba(255,255,255,.10)" strokeWidth="1.5" strokeLinecap="round"/>
-              <line x1="316" y1="67" x2="316" y2="106" stroke="rgba(255,255,255,.07)" strokeWidth="1.5" strokeLinecap="round"/>
+              <rect x="273" y="73" width="54" height="34" rx="3" fill="url(#ps-cap-green)"/>
+              <rect x="279" y="63" width="42" height="11" rx="2" fill="url(#ps-cap-green)"/>
+              {/* Cap ribs */}
+              <line x1="280" y1="73" x2="280" y2="107" stroke="#1b5e20" strokeWidth="1.8"/>
+              <line x1="286" y1="73" x2="286" y2="107" stroke="#1b5e20" strokeWidth="1.8"/>
+              <line x1="292" y1="73" x2="292" y2="107" stroke="#1b5e20" strokeWidth="1.8"/>
+              <line x1="298" y1="73" x2="298" y2="107" stroke="#1b5e20" strokeWidth="1.8"/>
+              <line x1="304" y1="73" x2="304" y2="107" stroke="#1b5e20" strokeWidth="1.8"/>
+              <line x1="310" y1="73" x2="310" y2="107" stroke="#1b5e20" strokeWidth="1.8"/>
+              <line x1="316" y1="73" x2="316" y2="107" stroke="#1b5e20" strokeWidth="1.8"/>
+              <line x1="322" y1="73" x2="322" y2="107" stroke="#1b5e20" strokeWidth="1.8"/>
             </g>
 
-            {/* NECK */}
-            <path d="M273 107 Q261 146 256 180 L344 180 Q339 146 327 107 Z" fill="url(#ps-bot)"/>
-            <path d="M267 113 Q261 149 258 178" stroke="rgba(255,255,255,.10)" strokeWidth="3.5" strokeLinecap="round"/>
+            {/* NECK (White wrapper sleeve) */}
+            <path d="M273 107 Q261 146 256 180 L344 180 Q339 146 327 107 Z" fill="url(#ps-bot-wrap-grad)"/>
+            <path d="M273 107 Q261 146 256 180 L344 180 Q339 146 327 107 Z" fill="none" stroke="rgba(255,255,255,0.18)" strokeWidth="1.5"/>
 
-            {/* BODY */}
-            <path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="url(#ps-bot)"/>
+            {/* BODY (Clear glass filled with brown beverage) */}
+            <path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="url(#ps-bot-liq-grad)"/>
+            <path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="2"/>
 
-            {/* LABEL */}
-            <rect x="242" y="258" width="116" height="144" rx="13" fill="#050d1a" opacity=".9"/>
-            <text x="300" y="307" textAnchor="middle" fontFamily="Playfair Display,serif" fontSize="21" fontWeight="700" fill="#c9a84c">SIMBA</text>
-            <text x="300" y="327" textAnchor="middle" fontFamily="Inter,sans-serif" fontSize="7.5" fill="#e8c96b" letterSpacing="3.5">BEVERAGES</text>
-            <line x1="258" y1="337" x2="342" y2="337" stroke="#c9a84c" strokeWidth=".6" opacity=".35"/>
-            <text x="300" y="375" textAnchor="middle" fontSize="34">🦁</text>
-            <text x="300" y="393" text-anchor="middle" fontFamily="Inter,sans-serif" fontSize="6.5" fill="#c9a84c" letterSpacing="2.5" opacity=".6">LIMITED · Tanzania</text>
+            {/* LABEL (Nkolo Mboka Premium Label) */}
+            <g clipPath="url(#ps-label-clip)">
+              {/* Top Half White */}
+              <rect x="242" y="258" width="116" height="68" fill="#f7f4ee" />
+              {/* Bottom Half Dark Brown */}
+              <rect x="242" y="326" width="116" height="76" fill="#311b0b" />
+              
+              {/* Lion Circle & Gold Crown */}
+              <circle cx="300" cy="292" r="19" fill="none" stroke="#d4af37" strokeWidth="1.2" strokeDasharray="2,1" />
+              <path d="M291 264 L295 269 L300 265 L305 269 L309 264 L306 272 L294 272 Z" fill="#d4af37" />
+              <text x="300" y="298" textAnchor="middle" fontSize="21">🦁</text>
+
+              {/* Brand Texts on Dark Brown */}
+              <text x="300" y="344" textAnchor="middle" fontFamily="Inter,sans-serif" fontWeight="800" fontSize="13" fill="#ffffff" letterSpacing="0.8">VIN</text>
+              <text x="300" y="358" textAnchor="middle" fontFamily="Inter,sans-serif" fontWeight="800" fontSize="13" fill="#ffffff" letterSpacing="0.8">NKOLO</text>
+              <text x="300" y="372" textAnchor="middle" fontFamily="Inter,sans-serif" fontWeight="800" fontSize="13" fill="#ffffff" letterSpacing="0.8">MBOKA</text>
+              <text x="300" y="381" text-anchor="middle" fontFamily="Inter,sans-serif" fontSize="4.5" fill="#d4af37" letterSpacing="0.2">GINGER-BASED ALCOHOLIC BEVERAGE</text>
+              
+              {/* Red Swahili banner */}
+              <rect x="242" y="388" width="116" height="14" fill="#b71c1c" />
+              <text x="300" y="398" text-anchor="middle" fontFamily="Inter,sans-serif" fontWeight="700" fontSize="4.2" fill="#ffffff" letterSpacing="0.1">NGUVU YA SIMBA, FAHARI YA TANZANIA</text>
+            </g>
 
             {/* Shines */}
             <path d="M240 184 Q236 306 240 446" stroke="rgba(255,255,255,.09)" strokeWidth="8" stroke-linecap="round"/>

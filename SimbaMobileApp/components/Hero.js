@@ -1,6 +1,6 @@
-﻿import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Animated } from 'react-native';
-import Svg, { Rect, Path, Defs, LinearGradient, Stop } from 'react-native-svg';
+import Svg, { Rect, Path, Defs, LinearGradient, Stop, Circle, ClipPath, Line, G, Text as SvgText } from 'react-native-svg';
 import { COLORS, GLOBAL_STYLES } from '../styles';
 
 export default function Hero({ onExplorePress, onB2BPress }) {
@@ -13,11 +13,13 @@ export default function Hero({ onExplorePress, onB2BPress }) {
           toValue: -18,
           duration: 3000,
           useNativeDriver: true,
+          isInteraction: false,
         }),
         Animated.timing(floatAnim, {
           toValue: 0,
           duration: 3000,
           useNativeDriver: true,
+          isInteraction: false,
         }),
       ])
     ).start();
@@ -66,19 +68,49 @@ export default function Hero({ onExplorePress, onB2BPress }) {
         {/* Floating Bottle Visualization */}
         <Animated.View style={[styles.bottleContainer, { transform: [{ translateY: floatAnim }] }]}>
           <Svg viewBox="0 0 160 220" width={160} height={220}>
-            <Rect x="60" y="5" width="40" height="22" rx="5" fill="url(#p1cap)" />
-            <Path d="M60 27 Q52 50 50 70 L110 70 Q108 50 100 27Z" fill="url(#p1body)" />
+            <Rect x="60" y="5" width="40" height="22" rx="3" fill="url(#p1cap)" />
+            <Line x1={65} y1={5} x2={65} y2={27} stroke="#1b5e20" strokeWidth={1.2}/>
+            <Line x1={70} y1={5} x2={70} y2={27} stroke="#1b5e20" strokeWidth={1.2}/>
+            <Line x1={75} y1={5} x2={75} y2={27} stroke="#1b5e20" strokeWidth={1.2}/>
+            <Line x1={80} y1={5} x2={80} y2={27} stroke="#1b5e20" strokeWidth={1.2}/>
+            <Line x1={85} y1={5} x2={85} y2={27} stroke="#1b5e20" strokeWidth={1.2}/>
+            <Line x1={90} y1={5} x2={90} y2={27} stroke="#1b5e20" strokeWidth={1.2}/>
+            <Line x1={95} y1={5} x2={95} y2={27} stroke="#1b5e20" strokeWidth={1.2}/>
+            <Path d="M60 27 Q52 50 50 70 L110 70 Q108 50 100 27Z" fill="url(#p1wrap)" />
             <Path d="M50 70 Q38 85 36 110 L36 185 Q36 215 80 220 Q124 215 124 185 L124 110 Q122 85 110 70Z" fill="url(#p1body)" />
-            <Rect x="42" y="110" width="76" height="80" rx="6" fill="#060e1c" opacity="0.7" />
+            <G clipPath="url(#p1-label-clip)">
+              <Rect x={42} y={110} width={76} height={40} fill="#f7f4ee" />
+              <Rect x={42} y={150} width={76} height={40} fill="#311b0b" />
+              <Circle cx={80} cy={130} r={11} fill="none" stroke="#d4af37" strokeWidth={0.6} strokeDasharray="1,0.5" />
+              <Path d="M75 116 L77 120 L80 117 L83 120 L85 116 L83 123 L77 123 Z" fill="#d4af37" />
+              <SvgText x={80} y={134} textAnchor="middle" fontSize={12}>🦁</SvgText>
+              <SvgText x={80} y={157} textAnchor="middle" fontFamily="System" fontWeight="800" fontSize={5.5} fill="#ffffff" letterSpacing={0.8}>VIN</SvgText>
+              <SvgText x={80} y={165} textAnchor="middle" fontFamily="System" fontWeight="800" fontSize={5.5} fill="#ffffff" letterSpacing={0.8}>NKOLO</SvgText>
+              <SvgText x={80} y={173} textAnchor="middle" fontFamily="System" fontWeight="800" fontSize={5.5} fill="#ffffff" letterSpacing={0.8}>MBOKA</SvgText>
+              <Rect x={42} y={178} width={76} height={8} fill="#b71c1c" />
+              <SvgText x={80} y={184} textAnchor="middle" fontFamily="System" fontWeight="700" fontSize={2.4} fill="#ffffff" letterSpacing={0.05}>NGUVU YA SIMBA</SvgText>
+            </G>
             <Defs>
               <LinearGradient id="p1cap" x1="60" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse">
-                <Stop offset="0%" stopColor="#c9a84c" />
-                <Stop offset="100%" stopColor="#e8c96b" />
+                <Stop offset="0%" stopColor="#1b5e20" />
+                <Stop offset="35%" stopColor="#2e7d32" />
+                <Stop offset="65%" stopColor="#4caf50" />
+                <Stop offset="100%" stopColor="#0d5c14" />
+              </LinearGradient>
+              <LinearGradient id="p1wrap" x1="60" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse">
+                <Stop offset="0%" stopColor="#e8e5dc" />
+                <Stop offset="35%" stopColor="#f7f4ee" />
+                <Stop offset="70%" stopColor="#ffffff" />
+                <Stop offset="100%" stopColor="#d9d6cd" />
               </LinearGradient>
               <LinearGradient id="p1body" x1="36" y1="0" x2="124" y2="0" gradientUnits="userSpaceOnUse">
-                <Stop offset="0%" stopColor="#1a4a7e" stopOpacity="0.9" />
-                <Stop offset="100%" stopColor="#0f2040" stopOpacity="0.95" />
+                <Stop offset="0%" stopColor="#3c1e08" />
+                <Stop offset="50%" stopColor="#5a2d0d" />
+                <Stop offset="100%" stopColor="#2a1202" />
               </LinearGradient>
+              <ClipPath id="p1-label-clip">
+                <Rect x={42} y={110} width={76} height={80} rx={6} />
+              </ClipPath>
             </Defs>
           </Svg>
         </Animated.View>

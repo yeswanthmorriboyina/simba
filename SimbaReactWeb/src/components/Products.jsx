@@ -9,23 +9,49 @@ export const PRODUCT_DATA = {
     gradient: "linear-gradient(135deg, #1e0a12, #441624)",
     svg: (
       <svg viewBox="0 0 160 220" style={{ width: '100px', height: 'auto', position: 'relative', zIndex: 1 }}>
-        <rect x="60" y="5" width="40" height="22" rx="5" fill="url(#p1cap)" />
-        <path d="M60 27 Q52 50 50 70 L110 70 Q108 50 100 27Z" fill="url(#p1body)" />
+        <rect x="60" y="5" width="40" height="22" rx="3" fill="url(#p1cap)" />
+        <line x1="65" y1="5" x2="65" y2="27" stroke="#1b5e20" strokeWidth="1.2"/>
+        <line x1="70" y1="5" x2="70" y2="27" stroke="#1b5e20" strokeWidth="1.2"/>
+        <line x1="75" y1="5" x2="75" y2="27" stroke="#1b5e20" strokeWidth="1.2"/>
+        <line x1="80" y1="5" x2="80" y2="27" stroke="#1b5e20" strokeWidth="1.2"/>
+        <line x1="85" y1="5" x2="85" y2="27" stroke="#1b5e20" strokeWidth="1.2"/>
+        <line x1="90" y1="5" x2="90" y2="27" stroke="#1b5e20" strokeWidth="1.2"/>
+        <line x1="95" y1="5" x2="95" y2="27" stroke="#1b5e20" strokeWidth="1.2"/>
+        <path d="M60 27 Q52 50 50 70 L110 70 Q108 50 100 27Z" fill="url(#p1wrap)" />
         <path d="M50 70 Q38 85 36 110 L36 185 Q36 215 80 220 Q124 215 124 185 L124 110 Q122 85 110 70Z" fill="url(#p1body)" />
-        <rect x="42" y="110" width="76" height="80" rx="6" fill="#060e1c" opacity=".7" />
-        <text x="80" y="148" textAnchor="middle" fontFamily="Playfair Display,serif" fontSize="10" fontWeight="700" fill="#c9a84c">SIMBA</text>
-        <text x="80" y="163" textAnchor="middle" fontFamily="Inter,sans-serif" fontSize="5.5" fill="#e8c96b" letterSpacing="1.5">NKOLO MBOKA</text>
-        <text x="80" y="180" textAnchor="middle" fontSize="12" fill="#ef5350">🍇</text>
-        <path d="M56 72 Q58 140 54 188" stroke="rgba(255,255,255,0.1)" strokeWidth="4" strokeLinecap="round" />
+        <g clipPath="url(#p1-label-clip)">
+          <rect x="42" y="110" width="76" height="40" fill="#f7f4ee" />
+          <rect x="42" y="150" width="76" height="40" fill="#311b0b" />
+          <circle cx="80" cy="130" r="11" fill="none" stroke="#d4af37" strokeWidth="0.6" strokeDasharray="1,0.5" />
+          <path d="M75 116 L77 120 L80 117 L83 120 L85 116 L83 123 L77 123 Z" fill="#d4af37" />
+          <text x="80" y="134" textAnchor="middle" fontSize="12">🦁</text>
+          <text x="80" y="157" textAnchor="middle" fontFamily="Inter,sans-serif" fontWeight="800" fontSize="5.5" fill="#ffffff" letterSpacing="0.8">VIN</text>
+          <text x="80" y="165" textAnchor="middle" fontFamily="Inter,sans-serif" fontWeight="800" fontSize="5.5" fill="#ffffff" letterSpacing="0.8">NKOLO</text>
+          <text x="80" y="173" textAnchor="middle" fontFamily="Inter,sans-serif" fontWeight="800" fontSize="5.5" fill="#ffffff" letterSpacing="0.8">MBOKA</text>
+          <rect x="42" y="178" width="76" height="8" fill="#b71c1c" />
+          <text x="80" y="184" textAnchor="middle" fontFamily="Inter,sans-serif" fontWeight="700" fontSize="2.4" fill="#ffffff" letterSpacing="0.05">NGUVU YA SIMBA</text>
+        </g>
         <defs>
           <linearGradient id="p1cap" x1="60" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#c9a84c" />
-            <stop offset="100%" stopColor="#e8c96b" />
+            <stop offset="0%" stopColor="#1b5e20" />
+            <stop offset="35%" stopColor="#2e7d32" />
+            <stop offset="65%" stopColor="#4caf50" />
+            <stop offset="100%" stopColor="#0d5c14" />
+          </linearGradient>
+          <linearGradient id="p1wrap" x1="60" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#e8e5dc" />
+            <stop offset="35%" stopColor="#f7f4ee" />
+            <stop offset="70%" stopColor="#ffffff" />
+            <stop offset="100%" stopColor="#d9d6cd" />
           </linearGradient>
           <linearGradient id="p1body" x1="36" y1="0" x2="124" y2="0" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#5a0f2b" stopOpacity=".9" />
-            <stop offset="100%" stopColor="#2e0716" stopOpacity=".95" />
+            <stop offset="0%" stopColor="#3c1e08" />
+            <stop offset="50%" stopColor="#5a2d0d" />
+            <stop offset="100%" stopColor="#2a1202" />
           </linearGradient>
+          <clipPath id="p1-label-clip">
+            <rect x="42" y="110" width="76" height="80" rx="6" />
+          </clipPath>
         </defs>
       </svg>
     )

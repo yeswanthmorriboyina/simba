@@ -234,18 +234,33 @@ export default function PourAnimation({ scrollY, layoutY }) {
               <Stop offset="0%" stopColor="rgba(255,255,255,0.35)" />
               <Stop offset="100%" stopColor="transparent" />
             </LinearGradient>
-            <LinearGradient id="ps-bot" x1="0" y1="0" x2="1" y2="0">
-              <Stop offset="0%" stopColor="#1a3a6e" stopOpacity={0.92} />
-              <Stop offset="48%" stopColor="#234a8a" stopOpacity={0.86} />
-              <Stop offset="100%" stopColor="#0f2040" stopOpacity={0.96} />
+            {/* Green ribbed cap gradient */}
+            <LinearGradient id="ps-cap-green" x1="0" y1="0" x2="1" y2="0">
+              <Stop offset="0%" stopColor="#1b5e20" />
+              <Stop offset="35%" stopColor="#2e7d32" />
+              <Stop offset="65%" stopColor="#4caf50" />
+              <Stop offset="100%" stopColor="#0d5c14" />
             </LinearGradient>
-            <LinearGradient id="ps-cap-g" x1="0" y1="0" x2="1" y2="0">
-              <Stop offset="0%" stopColor="#c9a84c" />
-              <Stop offset="100%" stopColor="#e8c96b" />
+            {/* Clear glass filled with brown beverage gradient */}
+            <LinearGradient id="ps-bot-liq-grad" x1="0" y1="0" x2="1" y2="0">
+              <Stop offset="0%" stopColor="#3c1e08" />
+              <Stop offset="50%" stopColor="#5a2d0d" />
+              <Stop offset="100%" stopColor="#2a1202" />
+            </LinearGradient>
+            {/* White wrapper sleeve gradient */}
+            <LinearGradient id="ps-bot-wrap-grad" x1="0" y1="0" x2="1" y2="0">
+              <Stop offset="0%" stopColor="#e8e5dc" />
+              <Stop offset="35%" stopColor="#f7f4ee" />
+              <Stop offset="70%" stopColor="#ffffff" />
+              <Stop offset="100%" stopColor="#d9d6cd" />
             </LinearGradient>
             {/* Silhouette bottle clip path */}
             <ClipPath id="ps-bottle-clip">
               <Path d="M273 107 Q261 146 256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Q339 146 327 107 Z" />
+            </ClipPath>
+            {/* Bottle label clip path */}
+            <ClipPath id="ps-label-clip">
+              <Rect x="242" y="258" width="116" height="144" rx="13" />
             </ClipPath>
             {/* Glass clip path */}
             <ClipPath id="ps-gcl">
@@ -258,27 +273,50 @@ export default function PourAnimation({ scrollY, layoutY }) {
 
           {/* BOTTLE GROUP */}
           <G transform={progress >= 0.78 ? finalBottleTransform : bottleTransform}>
-            {/* Cap */}
+            {/* Cap — lifted off before pour (Ribbed Green Cap) */}
             <G opacity={capOpacity} transform={`translate(0, ${capY})`}>
-              <Rect x="273" y="73" width="54" height="34" rx="7" fill="url(#ps-cap-g)" />
-              <Rect x="279" y="63" width="42" height="15" rx="5" fill="url(#ps-cap-g)" />
-              <Line x1="284" y1="67" x2="284" y2="104" stroke="rgba(255,255,255,0.22)" strokeWidth="2.5" />
+              <Rect x="273" y="73" width="54" height="34" rx="3" fill="url(#ps-cap-green)" />
+              <Rect x="279" y="63" width="42" height="11" rx="2" fill="url(#ps-cap-green)" />
+              <Line x1="280" y1="73" x2="280" y2="107" stroke="#1b5e20" strokeWidth={1.8} />
+              <Line x1="286" y1="73" x2="286" y2="107" stroke="#1b5e20" strokeWidth={1.8} />
+              <Line x1="292" y1="73" x2="292" y2="107" stroke="#1b5e20" strokeWidth={1.8} />
+              <Line x1="298" y1="73" x2="298" y2="107" stroke="#1b5e20" strokeWidth={1.8} />
+              <Line x1="304" y1="73" x2="304" y2="107" stroke="#1b5e20" strokeWidth={1.8} />
+              <Line x1="310" y1="73" x2="310" y2="107" stroke="#1b5e20" strokeWidth={1.8} />
+              <Line x1="316" y1="73" x2="316" y2="107" stroke="#1b5e20" strokeWidth={1.8} />
+              <Line x1="322" y1="73" x2="322" y2="107" stroke="#1b5e20" strokeWidth={1.8} />
             </G>
 
-            {/* Neck */}
-            <Path d="M273 107 Q261 146 256 180 L344 180 Q339 146 327 107 Z" fill="url(#ps-bot)" />
-            <Path d="M267 113 Q261 149 258 178" stroke="rgba(255,255,255,0.1)" strokeWidth="3.5" />
+            {/* Neck (White wrapper sleeve) */}
+            <Path d="M273 107 Q261 146 256 180 L344 180 Q339 146 327 107 Z" fill="url(#ps-bot-wrap-grad)" />
+            <Path d="M267 113 Q261 149 258 178" stroke="rgba(255,255,255,0.1)" strokeWidth={1.5} />
 
-            {/* Body */}
-            <Path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="url(#ps-bot)" />
+            {/* Body (Clear glass filled with brown beverage) */}
+            <Path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="url(#ps-bot-liq-grad)" />
+            <Path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth={2} />
 
             {/* Label */}
-            <Rect x="242" y="258" width="116" height="144" rx="13" fill="#050d1a" opacity={0.9} />
-            <SvgText x="300" y="307" textAnchor="middle" fontFamily="Playfair Display" fontSize="21" fontWeight="700" fill="#c9a84c">SIMBA</SvgText>
-            <SvgText x="300" y="327" textAnchor="middle" fontFamily="Inter" fontSize="7.5" fill="#e8c96b" letterSpacing={3.5}>BEVERAGES</SvgText>
-            <Line x1="258" y1="337" x2="342" y2="337" stroke="#c9a84c" strokeWidth="0.6" opacity={0.35} />
-            <SvgText x="300" y="375" textAnchor="middle" fontSize="34">🦁</SvgText>
-            <SvgText x="300" y="393" textAnchor="middle" fontFamily="Inter" fontSize="6.5" fill="#c9a84c" letterSpacing={2.5} opacity={0.6}>LIMITED · Tanzania</SvgText>
+            <G clipPath="url(#ps-label-clip)">
+              {/* Top Half White */}
+              <Rect x="242" y="258" width="116" height="68" fill="#f7f4ee" />
+              {/* Bottom Half Dark Brown */}
+              <Rect x="242" y="326" width="116" height="76" fill="#311b0b" />
+              
+              {/* Lion Circle & Gold Crown */}
+              <Circle cx="300" cy="292" r="19" fill="none" stroke="#d4af37" strokeWidth={1.2} strokeDasharray="2,1" />
+              <Path d="M291 264 L295 269 L300 265 L305 269 L309 264 L306 272 L294 272 Z" fill="#d4af37" />
+              <SvgText x="300" y="298" textAnchor="middle" fontSize="21">🦁</SvgText>
+
+              {/* Brand Texts on Dark Brown */}
+              <SvgText x="300" y="344" textAnchor="middle" fontFamily="System" fontWeight="800" fontSize={13} fill="#ffffff" letterSpacing={0.8}>VIN</SvgText>
+              <SvgText x="300" y="358" textAnchor="middle" fontFamily="System" fontWeight="800" fontSize={13} fill="#ffffff" letterSpacing={0.8}>NKOLO</SvgText>
+              <SvgText x="300" y="372" textAnchor="middle" fontFamily="System" fontWeight="800" fontSize={13} fill="#ffffff" letterSpacing={0.8}>MBOKA</SvgText>
+              <SvgText x="300" y="381" textAnchor="middle" fontFamily="System" fontSize="4.5" fill="#d4af37" letterSpacing={0.2}>GINGER-BASED ALCOHOLIC BEVERAGE</SvgText>
+              
+              {/* Red Swahili banner */}
+              <Rect x="242" y="388" width="116" height="14" fill="#b71c1c" />
+              <SvgText x="300" y="398" textAnchor="middle" fontFamily="System" fontWeight="700" fontSize={4.2} fill="#ffffff" letterSpacing={0.1}>NGUVU YA SIMBA, FAHARI YA TANZANIA</SvgText>
+            </G>
 
             {/* Reflections */}
             <Path d="M240 184 Q236 306 240 446" stroke="rgba(255,255,255,0.09)" strokeWidth="8" />

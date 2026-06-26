@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function Hero({ onExplorePress, onB2BPress }) {
   const [years, setYears] = useState(0);
@@ -82,25 +82,75 @@ export default function Hero({ onExplorePress, onB2BPress }) {
             <div className="bottle-ring bottle-ring-3"></div>
             <div className="svg-bottle">
               {/* Simba bottle SVG */}
-              <svg viewBox="0 0 160 220" style={{ width: '200px', height: 'auto' }}>
-                <rect x="60" y="5" width="40" height="22" rx="5" fill="url(#p1cap)" />
-                <path d="M60 27 Q52 50 50 70 L110 70 Q108 50 100 27Z" fill="url(#p1body)" />
-                <path d="M50 70 Q38 85 36 110 L36 185 Q36 215 80 220 Q124 215 124 185 L124 110 Q122 85 110 70Z" fill="url(#p1body)" />
-                <rect x="42" y="110" width="76" height="80" rx="6" fill="#060e1c" opacity=".7" />
-                <text x="80" y="148" textAnchor="middle" fontFamily="Playfair Display,serif" fontSize="11" fontWeight="700" fill="#c9a84c">SIMBA</text>
-                <text x="80" y="163" textAnchor="middle" fontFamily="Inter,sans-serif" fontSize="6" fill="#e8c96b" letterSpacing="2">PURE WATER</text>
-                <text x="80" y="180" textAnchor="middle" fontFamily="Inter,sans-serif" fontSize="8" fill="#6a8abf">500ml</text>
-                <path d="M56 72 Q58 140 54 188" stroke="rgba(255,255,255,0.1)" strokeWidth="4" strokeLinecap="round" />
+              <svg viewBox="0 0 200 480" style={{ width: '200px', height: 'auto' }}>
                 <defs>
-                  <linearGradient id="p1cap" x1="60" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#c9a84c" />
-                    <stop offset="100%" stopColor="#e8c96b" />
+                  <linearGradient id="hero-cap-green" x1="75" y1="0" x2="125" y2="0" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#1b5e20"/>
+                    <stop offset="35%" stopColor="#2e7d32"/>
+                    <stop offset="65%" stopColor="#4caf50"/>
+                    <stop offset="100%" stopColor="#0d5c14"/>
                   </linearGradient>
-                  <linearGradient id="p1body" x1="36" y1="0" x2="124" y2="0" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#1a4a7e" stopOpacity=".9" />
-                    <stop offset="100%" stopColor="#0f2040" stopOpacity=".95" />
+                  <linearGradient id="hero-bot-liq-grad" x1="38" y1="0" x2="162" y2="0" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#3c1e08"/>
+                    <stop offset="50%" stopColor="#5a2d0d"/>
+                    <stop offset="100%" stopColor="#2a1202"/>
                   </linearGradient>
+                  <linearGradient id="hero-bot-wrap-grad" x1="38" y1="0" x2="162" y2="0" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#e8e5dc"/>
+                    <stop offset="35%" stopColor="#f7f4ee"/>
+                    <stop offset="70%" stopColor="#ffffff"/>
+                    <stop offset="100%" stopColor="#d9d6cd"/>
+                  </linearGradient>
+                  <clipPath id="hero-label-clip">
+                    <rect x="46" y="180" width="108" height="140" rx="10" />
+                  </clipPath>
                 </defs>
+
+                {/* CAP */}
+                <rect x="75" y="10" width="50" height="32" rx="3" fill="url(#hero-cap-green)"/>
+                <rect x="80" y="6" width="40" height="10" rx="2" fill="url(#hero-cap-green)"/>
+                {/* Cap Ribs */}
+                <line x1="81" y1="10" x2="81" y2="42" stroke="#1b5e20" strokeWidth="1.8"/>
+                <line x1="87" y1="10" x2="87" y2="42" stroke="#1b5e20" strokeWidth="1.8"/>
+                <line x1="93" y1="10" x2="93" y2="42" stroke="#1b5e20" strokeWidth="1.8"/>
+                <line x1="99" y1="10" x2="99" y2="42" stroke="#1b5e20" strokeWidth="1.8"/>
+                <line x1="105" y1="10" x2="105" y2="42" stroke="#1b5e20" strokeWidth="1.8"/>
+                <line x1="111" y1="10" x2="111" y2="42" stroke="#1b5e20" strokeWidth="1.8"/>
+                <line x1="117" y1="10" x2="117" y2="42" stroke="#1b5e20" strokeWidth="1.8"/>
+
+                {/* NECK (White wrapper sleeve) */}
+                <path d="M75 45 Q65 80 60 110 L140 110 Q135 80 125 45 Z" fill="url(#hero-bot-wrap-grad)"/>
+                <path d="M75 45 Q65 80 60 110 L140 110 Q135 80 125 45 Z" fill="none" stroke="rgba(255,255,255,0.18)" strokeWidth="1.5"/>
+
+                {/* BODY */}
+                <path d="M60 110 Q40 130 38 170 L38 360 Q38 400 100 410 Q162 400 162 360 L162 170 Q160 130 140 110 Z" fill="url(#hero-bot-liq-grad)"/>
+                <path d="M60 110 Q40 130 38 170 L38 360 Q38 400 100 410 Q162 400 162 360 L162 170 Q160 130 140 110 Z" fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="2.2"/>
+
+                {/* LABEL (Split White/Brown with Lion & Crown) */}
+                <g clipPath="url(#hero-label-clip)">
+                  {/* Top Half White */}
+                  <rect x="46" y="180" width="108" height="66" fill="#f7f4ee" />
+                  {/* Bottom Half Dark Brown */}
+                  <rect x="46" y="246" width="108" height="74" fill="#311b0b" />
+                  
+                  {/* Lion Circle & Gold Crown */}
+                  <circle cx="100" cy="212" r="18" fill="none" stroke="#d4af37" strokeWidth="1.2" strokeDasharray="2,1" />
+                  <path d="M92 186 L95 190 L100 186 L105 190 L108 186 L105 193 L95 193 Z" fill="#d4af37" />
+                  <text x="100" y="218" textAnchor="middle" fontSize="20">🦁</text>
+
+                  {/* Brand Texts on Dark Brown */}
+                  <text x="100" y="262" textAnchor="middle" fontFamily="Inter,sans-serif" fontWeight="800" fontSize="11.5" fill="#ffffff" letterSpacing="0.8">VIN</text>
+                  <text x="100" y="275" text-anchor="middle" fontFamily="Inter,sans-serif" fontWeight="800" fontSize="11.5" fill="#ffffff" letterSpacing="0.8">NKOLO</text>
+                  <text x="100" y="288" text-anchor="middle" fontFamily="Inter,sans-serif" fontWeight="800" fontSize="11.5" fill="#ffffff" letterSpacing="0.8">MBOKA</text>
+                  <text x="100" y="297" text-anchor="middle" fontFamily="Inter,sans-serif" fontSize="4.2" fill="#d4af37" letterSpacing="0.2">GINGER-BASED ALCOHOLIC BEVERAGE</text>
+                  
+                  {/* Red Swahili banner */}
+                  <rect x="46" y="304" width="108" height="16" fill="#b71c1c" />
+                  <text x="100" y="315" text-anchor="middle" fontFamily="Inter,sans-serif" fontWeight="700" fontSize="3.6" fill="#ffffff" letterSpacing="0.1">NGUVU YA SIMBA, FAHARI YA TANZANIA</text>
+                </g>
+
+                <path d="M70 115 Q72 200 68 360" stroke="rgba(255,255,255,0.15)" strokeWidth="6" strokeLinecap="round"/>
+                <path d="M80 113 Q82 160 80 240" stroke="rgba(255,255,255,0.08)" strokeWidth="3" strokeLinecap="round"/>
               </svg>
             </div>
           </div>

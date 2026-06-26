@@ -498,9 +498,13 @@ window.addEventListener('scroll', () => {
     sceneHeight = scene.offsetHeight;
   }
 
-  // Cache layout on load and resize
+  // Cache layout on load, resize, and font ready events to handle layout shifts
   window.addEventListener('resize', cacheLayout);
   window.addEventListener('orientationchange', cacheLayout);
+  window.addEventListener('load', cacheLayout);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(cacheLayout);
+  }
   cacheLayout();
 
   var scrollScheduled = false;
@@ -567,7 +571,7 @@ const productData = {
     },
     sizes: ["750ml", "1L"],
     basePrice: 14.50,
-    icon: `<rect x="60" y="5" width="40" height="22" rx="5" fill="url(#p1cap)"/><path d="M60 27 Q52 50 50 70 L110 70 Q108 50 100 27Z" fill="url(#p1body)"/><path d="M50 70 Q38 85 36 110 L36 185 Q36 215 80 220 Q124 215 124 185 L124 110 Q122 85 110 70Z" fill="url(#p1body)"/><rect x="42" y="110" width="76" height="80" rx="6" fill="#060e1c" opacity=".7"/><text x="80" y="148" text-anchor="middle" font-family="Playfair Display,serif" font-size="10" font-weight="700" fill="#c9a84c">SIMBA</text><text x="80" y="163" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" fill="#e8c96b" letter-spacing="1.5">NKOLO MBOKA</text><text x="80" y="180" text-anchor="middle" font-size="12" fill="#ef5350">🍇</text><path d="M56 72 Q58 140 54 188" stroke="rgba(255,255,255,0.1)" stroke-width="4" stroke-linecap="round"/><defs><linearGradient id="p1cap" x1="60" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#c9a84c"/><stop offset="100%" stop-color="#e8c96b"/></linearGradient><linearGradient id="p1body" x1="36" y1="0" x2="124" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#5a0f2b" stop-opacity=".9"/><stop offset="100%" stop-color="#2e0716" stop-opacity=".95"/></linearGradient></defs>`
+    icon: `<rect x="60" y="5" width="40" height="22" rx="3" fill="url(#p1cap)"/><line x1="65" y1="5" x2="65" y2="27" stroke="#1b5e20" stroke-width="1.2"/><line x1="70" y1="5" x2="70" y2="27" stroke="#1b5e20" stroke-width="1.2"/><line x1="75" y1="5" x2="75" y2="27" stroke="#1b5e20" stroke-width="1.2"/><line x1="80" y1="5" x2="80" y2="27" stroke="#1b5e20" stroke-width="1.2"/><line x1="85" y1="5" x2="85" y2="27" stroke="#1b5e20" stroke-width="1.2"/><line x1="90" y1="5" x2="90" y2="27" stroke="#1b5e20" stroke-width="1.2"/><line x1="95" y1="5" x2="95" y2="27" stroke="#1b5e20" stroke-width="1.2"/><path d="M60 27 Q52 50 50 70 L110 70 Q108 50 100 27Z" fill="url(#p1wrap)"/><path d="M50 70 Q38 85 36 110 L36 185 Q36 215 80 220 Q124 215 124 185 L124 110 Q122 85 110 70Z" fill="url(#p1body)"/><g clip-path="url(#p1-label-clip)"><rect x="42" y="110" width="76" height="40" fill="#f7f4ee"/><rect x="42" y="150" width="76" height="40" fill="#311b0b"/><circle cx="80" cy="130" r="11" fill="none" stroke="#d4af37" stroke-width="0.6" stroke-dasharray="1,0.5"/><path d="M75 116 L77 120 L80 117 L83 120 L85 116 L83 123 L77 123 Z" fill="#d4af37" /><text x="80" y="134" text-anchor="middle" font-size="12">🦁</text><text x="80" y="157" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="5.5" fill="#ffffff" letter-spacing="0.8">VIN</text><text x="80" y="165" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="5.5" fill="#ffffff" letter-spacing="0.8">NKOLO</text><text x="80" y="173" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="5.5" fill="#ffffff" letter-spacing="0.8">MBOKA</text><rect x="42" y="178" width="76" height="8" fill="#b71c1c"/><text x="80" y="184" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" font-size="2.4" fill="#ffffff" letter-spacing="0.05">NGUVU YA SIMBA</text></g><defs><linearGradient id="p1cap" x1="60" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#1b5e20"/><stop offset="35%" stop-color="#2e7d32"/><stop offset="65%" stop-color="#4caf50"/><stop offset="100%" stop-color="#0d5c14"/></linearGradient><linearGradient id="p1wrap" x1="60" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#e8e5dc"/><stop offset="35%" stop-color="#f7f4ee"/><stop offset="70%" stop-color="#ffffff"/><stop offset="100%" stop-color="#d9d6cd"/></linearGradient><linearGradient id="p1body" x1="36" y1="0" x2="124" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#3c1e08"/><stop offset="50%" stop-color="#5a2d0d"/><stop offset="100%" stop-color="#2a1202"/></linearGradient><clipPath id="p1-label-clip"><rect x="42" y="110" width="76" height="80" rx="6"/></clipPath></defs>`
   },
   "Ola Kombucha": {
     category: "Probiotic Tea",
