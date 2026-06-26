@@ -287,37 +287,83 @@ export default function PourAnimation({ scrollY, layoutY }) {
               <Line x1="322" y1="73" x2="322" y2="107" stroke="#1b5e20" strokeWidth={1.8} />
             </G>
 
-            {/* Neck (White wrapper sleeve) */}
-            <Path d="M273 107 Q261 146 256 180 L344 180 Q339 146 327 107 Z" fill="url(#ps-bot-wrap-grad)" />
-            <Path d="M267 113 Q261 149 258 178" stroke="rgba(255,255,255,0.1)" strokeWidth={1.5} />
+            {/* Neck (Clear green glass) */}
+            <Path d="M273 107 Q261 146 256 180 L344 180 Q339 146 327 107 Z" fill="url(#ps-bot-liq-grad)" />
+            <Path d="M273 107 Q261 146 256 180 L344 180 Q339 146 327 107 Z" fill="none" stroke="rgba(255,255,255,0.18)" strokeWidth={1.5} />
 
             {/* Body (Clear glass filled with brown beverage) */}
             <Path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="url(#ps-bot-liq-grad)" />
             <Path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="none" stroke="rgba(129,199,132,0.35)" strokeWidth={2} />
 
-            {/* Label */}
-            <G clipPath="url(#ps-label-clip)">
-              {/* Top Half White */}
-              <Rect x="242" y="258" width="116" height="68" fill="#f7f4ee" />
-              {/* Bottom Half Dark Brown */}
-              <Rect x="242" y="326" width="116" height="76" fill="#311b0b" />
-              
-              {/* Lion Circle & Gold Crown */}
-              <Circle cx="300" cy="292" r="19" fill="none" stroke="#d4af37" strokeWidth={1.2} strokeDasharray="2,1" />
-              <Path d="M291 264 L295 269 L300 265 L305 269 L309 264 L306 272 L294 272 Z" fill="#d4af37" />
-              <SvgText x="300" y="298" textAnchor="middle" fontSize="21">🦁</SvgText>
+            {/* Shoulder Wrapper (White Sleeve) */}
+            <Path d="M256 180 Q233 208 231 250 L231 326 L369 326 L369 250 Q367 208 344 180 Z" fill="url(#ps-bot-wrap-grad)" />
 
-              {/* Brand Texts on Dark Brown */}
-              <SvgText x="300" y="344" textAnchor="middle" fontFamily="System" fontWeight="800" fontSize={13} fill="#ffffff" letterSpacing={0.8}>VIN</SvgText>
-              <SvgText x="300" y="358" textAnchor="middle" fontFamily="System" fontWeight="800" fontSize={13} fill="#ffffff" letterSpacing={0.8}>NKOLO</SvgText>
-              <SvgText x="300" y="372" textAnchor="middle" fontFamily="System" fontWeight="800" fontSize={13} fill="#ffffff" letterSpacing={0.8}>MBOKA</SvgText>
-              <SvgText x="300" y="381" textAnchor="middle" fontFamily="System" fontSize="4.5" fill="#d4af37" letterSpacing={0.2}>GINGER-BASED ALCOHOLIC BEVERAGE</SvgText>
+            {/* Decorative Chevron Band */}
+            <Line x1="256" y1="178" x2="344" y2="178" stroke="#311b0b" strokeWidth={0.8} />
+            <Line x1="256" y1="184" x2="344" y2="184" stroke="#311b0b" strokeWidth={0.8} />
+            <Path d="M256 178 L 260 184 L 264 178 L 268 184 L 272 178 L 276 184 L 280 178 L 284 184 L 288 178 L 292 184 L 296 178 L 300 184 L 304 178 L 308 184 L 312 178 L 316 184 L 320 178 L 324 184 L 328 178 L 332 184 L 336 178 L 340 184 L 344 178" stroke="#311b0b" strokeWidth={0.8} fill="none" />
+
+            {/* Dark Brown label */}
+            <Rect x="231" y="326" width="138" height="94" fill="#311b0b" />
+
+            {/* Badge Circle & Logo */}
+            <Circle cx="300" cy="292" r="19" fill="#ffffff" stroke="#d4af37" strokeWidth={1.2} />
+            <G transform="translate(300, 292)">
+              {/* Gold Crown */}
+              <Path d="M-10 -7 Q-5 -9 0 -9 Q5 -9 10 -7 L12 -12 L6 -16 L3 -12 L0 -20 L-3 -12 L-6 -16 L-12 -12 Z" fill="#d4af37"/>
+              <Circle cx={0} cy={-20} r={1.5} fill="#d4af37"/>
+              <Circle cx={-6} cy={-16} r={1.2} fill="#d4af37"/>
+              <Circle cx={6} cy={-16} r={1.2} fill="#d4af37"/>
+              <Circle cx={-12} cy={-12} r={1.0} fill="#d4af37"/>
+              <Circle cx={12} cy={-12} r={1.0} fill="#d4af37"/>
               
-              {/* Red Swahili banner */}
-              <Rect x="242" y="388" width="116" height="14" fill="#b71c1c" />
-              <SvgText x="300" y="398" textAnchor="middle" fontFamily="System" fontWeight="700" fontSize={4.2} fill="#ffffff" letterSpacing={0.1}>NGUVU YA SIMBA, FAHARI YA TANZANIA</SvgText>
+              {/* Lion Face */}
+              <Path d="M-2.5 3 L2.5 3 L1 7 L-1 7 Z" fill="#000000"/>
+              <Path d="M-1 7 Q0 8 1 7 Q0 9.5 0 12" stroke="#000000" strokeWidth={0.8} fill="none"/>
+              <Path d="M-4 6 Q-2 7 0 6.5 Q2 7 4 6" stroke="#000000" strokeWidth={0.8} fill="none"/>
+              <Path d="M-6 -0.5 Q-4 -2.5 -2 -1.5" stroke="#000000" strokeWidth={1.2} fill="none"/>
+              <Path d="M2 -1.5 Q4 -2.5 6 -0.5" stroke="#000000" strokeWidth={1.2} fill="none"/>
+              <Path d="M-5 -1 L-3 -1.5 L-2 -1 L-3 -0.5 Z" fill="#000000"/>
+              <Path d="M5 -1 L3 -1.5 L2 -1 L3 -0.5 Z" fill="#000000"/>
+              <Path d="M-3 -4 Q0 -5.5 3 -4" stroke="#000000" strokeWidth={0.8} fill="none"/>
+              <Path d="M-2.5 -6 Q0 -8 2.5 -6" stroke="#000000" strokeWidth={0.8} fill="none"/>
+              <Path d="M-1.5 -8 Q0 -9.5 1.5 -8" stroke="#000000" strokeWidth={0.8} fill="none"/>
+              
+              {/* Mane locks */}
+              <Path d="M-3 -8 L0 -12 L3 -8 L0 -9 Z" fill="#000000"/>
+              <Path d="M-2 -10 C-6 -10 -9 -7 -10 -4 L-8 -5 C-7 -7 -5 -8 -2 -8 Z" fill="#000000"/>
+              <Path d="M-10 -4 C-13 -3 -15 0 -15 4 L-12 2 C-12 0 -10 -2 -8 -3 Z" fill="#000000"/>
+              <Path d="M-15 4 C-16 8 -14 11 -11 13 L-10 10 C-11 9 -12 7 -12 4 Z" fill="#000000"/>
+              <Path d="M-11 13 C-8 15 -5 15 -2 13 L-3 11 C-5 12 -7 12 -9 11 Z" fill="#000000"/>
+              <Path d="M-6 -8 C-9 -9 -11 -7 -12 -5 L-10 -5 C-9 -6 -8 -7 -6 -7 Z" fill="#000000"/>
+              <Path d="M-11 -5 C-13 -4 -14 -1 -14 2 L-12 1 C-12 -1 -11 -2 -10 -3 Z" fill="#000000"/>
+              <Path d="M-14 2 C-15 5 -14 8 -12 10 L-10 8 C-11 7 -11 5 -11 3 Z" fill="#000000"/>
+              
+              <Path d="M2 -10 C6 -10 9 -7 10 -4 L8 -5 C7 -7 5 -8 2 -8 Z" fill="#000000"/>
+              <Path d="M10 -4 C13 -3 15 0 15 4 L12 2 C12 0 10 -2 8 -3 Z" fill="#000000"/>
+              <Path d="M15 4 C16 8 14 11 11 13 L10 10 C11 9 12 7 12 4 Z" fill="#000000"/>
+              <Path d="M11 13 C8 15 5 15 2 13 L3 11 C5 12 7 12 9 11 Z" fill="#000000"/>
+              <Path d="M6 -8 C9 -9 11 -7 12 -5 L10 -5 C9 -6 8 -7 6 -7 Z" fill="#000000"/>
+              <Path d="M11 -5 C13 -4 14 -1 14 2 L12 1 C12 -1 11 -2 10 -3 Z" fill="#000000"/>
+              <Path d="M14 2 C15 5 14 8 12 10 L10 8 C11 7 11 5 11 3 Z" fill="#000000"/>
+              
+              <Path d="M0 12 L-2 15 L0 18 L2 15 Z" fill="#000000"/>
+              <Path d="M-3 11 L-5 14 L-2 15 L-1 13 Z" fill="#000000"/>
+              <Path d="M3 11 L5 14 L2 15 L1 13 Z" fill="#000000"/>
             </G>
 
+            {/* Brand Texts on Dark Brown */}
+            <SvgText x="300" y="348" textAnchor="middle" fontFamily="System" fontWeight="800" fontSize={13.5} fill="#ffffff" letterSpacing={0.8}>VIN</SvgText>
+            <SvgText x="300" y="362" textAnchor="middle" fontFamily="System" fontWeight="800" fontSize={13.5} fill="none" stroke="#ffffff" strokeWidth={2.2} letterSpacing={0.8}>NKOLO</SvgText>
+            <SvgText x="300" y="362" textAnchor="middle" fontFamily="System" fontWeight="800" fontSize={13.5} fill="none" stroke="#311b0b" strokeWidth={0.8} letterSpacing={0.8}>NKOLO</SvgText>
+            <SvgText x="300" y="376" textAnchor="middle" fontFamily="System" fontWeight="800" fontSize={13.5} fill="none" stroke="#ffffff" strokeWidth={2.2} letterSpacing={0.8}>MBOKA</SvgText>
+            <SvgText x="300" y="376" textAnchor="middle" fontFamily="System" fontWeight="800" fontSize={13.5} fill="none" stroke="#311b0b" strokeWidth={0.8} letterSpacing={0.8}>MBOKA</SvgText>
+            <SvgText x="300" y="386" textAnchor="middle" fontFamily="System" fontSize={4.5} fill="#d4af37" letterSpacing={0.2}>GINGER-BASED ALCOHOLIC BEVERAGE</SvgText>
+            
+            {/* Red Swahili banner */}
+            <Rect x="231" y="398" width="138" height={22} fill="#b71c1c" />
+            <SvgText x="300" y="411" textAnchor="middle" fontFamily="System" fontWeight="700" fontSize={4.2} fill="#ffffff" letterSpacing={0.1}>NGUVU YA SIMBA, FAHARI YA TANZANIA</SvgText>
+            
             {/* Reflections */}
             <Path d="M240 184 Q236 306 240 446" stroke="rgba(255,255,255,0.09)" strokeWidth="8" />
 
