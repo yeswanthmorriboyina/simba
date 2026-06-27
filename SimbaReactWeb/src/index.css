@@ -445,6 +445,32 @@ nav.scrolled { background: rgba(10,22,40,.95); }
 #psl-4 { top: 66%; }
 #psl-5 { bottom: 22%; }
 
+/* Premium Flowing Liquid Animation for Pour Stream */
+#ps-sp2 {
+  stroke-dasharray: 12, 16;
+  animation: pourFlow 0.8s linear infinite;
+  stroke-linecap: round;
+}
+
+#ps-sp {
+  animation: streamPulse 0.15s ease-in-out infinite alternate;
+}
+
+@keyframes pourFlow {
+  to {
+    stroke-dashoffset: -56;
+  }
+}
+
+@keyframes streamPulse {
+  0% {
+    opacity: 0.78;
+  }
+  100% {
+    opacity: 0.86;
+  }
+}
+
 /* ===========================
    MARQUEE BAR
 =========================== */

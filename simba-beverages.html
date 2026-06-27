@@ -455,6 +455,32 @@
   #psl-4 { top: 66%; }
   #psl-5 { bottom: 22%; }
   
+  /* Premium Flowing Liquid Animation for Pour Stream */
+  #ps-sp2 {
+    stroke-dasharray: 12, 16;
+    animation: pourFlow 0.8s linear infinite;
+    stroke-linecap: round;
+  }
+  
+  #ps-sp {
+    animation: streamPulse 0.15s ease-in-out infinite alternate;
+  }
+  
+  @keyframes pourFlow {
+    to {
+      stroke-dashoffset: -56;
+    }
+  }
+  
+  @keyframes streamPulse {
+    0% {
+      opacity: 0.78;
+    }
+    100% {
+      opacity: 0.86;
+    }
+  }
+  
   /* ===========================
      MARQUEE BAR
   =========================== */
@@ -2977,11 +3003,11 @@
       capGrp.style.opacity = ''+clamp(1-easeOut(clamp((p-0.14)/0.10,0,1)),0,1);
       if (p>=0.04 && p<0.24) setStage(0);
   
-      // Phase 0.22 â†’ 0.44: bottle tilts
+      // Phase 0.22 â†’ 0.44: bottle tilts and translates over the glass
       var p2  = easeIO(clamp((p-0.22)/0.22, 0, 1));
       var ang = -65 * p2;       // natural pour tilt (-65Â°)
-      var dx  = 0;
-      var dy  = 0;
+      var dx  = 65 * p2;        // translate bottle right to align mouth above glass
+      var dy  = 15 * p2;        // translate bottle down slightly
       setBottle(ang, dx, dy);
       
       // Liquid level inside bottle sloshes to stay horizontal relative to ground
@@ -3014,32 +3040,32 @@
       if (p3 > 0) {
         stream.style.opacity = ''+easeOut(Math.min(p3*5,1));
   
-        // Get mouth positions
+        // Get mouth positions (wider offset for a richer, premium stream thickness)
         var m = mouthPos(ang, dx, dy);
-        var m_left = mouthEdgePos(ang, dx, dy, -8);
-        var m_right = mouthEdgePos(ang, dx, dy, 8);
+        var m_left = mouthEdgePos(ang, dx, dy, -14);
+        var m_right = mouthEdgePos(ang, dx, dy, 14);
         
-        var g_left_x = GLASS_CX - 2;
-        var g_right_x = GLASS_CX + 2;
+        var g_left_x = GLASS_CX - 4.5;
+        var g_right_x = GLASS_CX + 4.5;
   
         var radA   = ang * Math.PI / 180;
         var exitVx = Math.sin(radA);
         var wobble = Math.sin(Date.now() * 0.005) * 1.5;
   
-        // Left stream control points
-        var cp1_left_x = m_left.x + exitVx * 15 + wobble;
+        // Left stream control points (very small exitVx multiplier for a straight fall)
+        var cp1_left_x = m_left.x + exitVx * 5 + wobble;
         var cp1_left_y = m_left.y + 40;
         var cp2_left_x = g_left_x + wobble * 0.4;
         var cp2_left_y = GLASS_TOP - 50;
   
         // Right stream control points
-        var cp1_right_x = m_right.x + exitVx * 15 + wobble;
+        var cp1_right_x = m_right.x + exitVx * 5 + wobble;
         var cp1_right_y = m_right.y + 40;
         var cp2_right_x = g_right_x + wobble * 0.4;
         var cp2_right_y = GLASS_TOP - 50;
   
         // Spine control points (for spine highlight and glow)
-        var cp1x = m.x + exitVx * 15 + wobble;
+        var cp1x = m.x + exitVx * 5 + wobble;
         var cp1y = m.y + 40;
         var cp2x = GLASS_CX + wobble * 0.4;
         var cp2y = GLASS_TOP - 50;

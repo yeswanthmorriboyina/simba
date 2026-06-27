@@ -214,11 +214,11 @@ export default function PourAnimation() {
       }
       if (p >= 0.04 && p < 0.24) setStage(0);
 
-      // Phase 0.22 -> 0.44: bottle tilts
+      // Phase 0.22 -> 0.44: bottle tilts and translates over the glass
       var p2  = easeIO(clamp((p - 0.22) / 0.22, 0, 1));
       var ang = -65 * p2;
-      var dx  = 0;
-      var dy  = 0;
+      var dx  = 65 * p2;
+      var dy  = 15 * p2;
       setBottle(ang, dx, dy);
 
       // Counter-rotate liquid body inside bottle
@@ -251,27 +251,27 @@ export default function PourAnimation() {
         if (streamRef.current) streamRef.current.style.opacity = '' + easeOut(Math.min(p3 * 5, 1));
 
         var m = mouthPos(ang, dx, dy);
-        var m_left = mouthEdgePos(ang, dx, dy, -8);
-        var m_right = mouthEdgePos(ang, dx, dy, 8);
-        var g_left_x = GLASS_CX - 2;
-        var g_right_x = GLASS_CX + 2;
+        var m_left = mouthEdgePos(ang, dx, dy, -14);
+        var m_right = mouthEdgePos(ang, dx, dy, 14);
+        var g_left_x = GLASS_CX - 4.5;
+        var g_right_x = GLASS_CX + 4.5;
 
         var radA = ang * Math.PI / 180;
         var exitVx = Math.sin(radA);
         var wobble = Math.sin(Date.now() * 0.005) * 1.5;
 
-        // Bezier points
-        var cp1_left_x = m_left.x + exitVx * 15 + wobble;
+        // Bezier points (straight pour stream)
+        var cp1_left_x = m_left.x + exitVx * 5 + wobble;
         var cp1_left_y = m_left.y + 40;
         var cp2_left_x = g_left_x + wobble * 0.4;
         var cp2_left_y = GLASS_TOP - 50;
 
-        var cp1_right_x = m_right.x + exitVx * 15 + wobble;
+        var cp1_right_x = m_right.x + exitVx * 5 + wobble;
         var cp1_right_y = m_right.y + 40;
         var cp2_right_x = g_right_x + wobble * 0.4;
         var cp2_right_y = GLASS_TOP - 50;
 
-        var cp1x = m.x + exitVx * 15 + wobble;
+        var cp1x = m.x + exitVx * 5 + wobble;
         var cp1y = m.y + 40;
         var cp2x = GLASS_CX + wobble * 0.4;
         var cp2y = GLASS_TOP - 50;
