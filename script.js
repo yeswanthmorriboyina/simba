@@ -129,7 +129,7 @@ window.addEventListener('scroll', () => {
 
   // ── Bottle geometry ───────────────────────────────────────
   var PX = 300, PY = 280;       // pivot at mid-bottle (natural hand-hold)
-  var MX = 300, MY = 90;        // mouth when upright
+  var MX = 300, MY = 107;        // mouth when upright (slender bottle mouth tip at y=107)
   var GLASS_CX  = 200;          // glass centre-x
   var GLASS_TOP = 530;          // liquid top y (full)
   var GLASS_BOT = 655;          // liquid bottom y (base)

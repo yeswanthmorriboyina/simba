@@ -132,39 +132,39 @@ export default function Hero({ onExplorePress, onB2BPress }) {
                     <path d="M-3 11 L-5 14 L-2 15 L-1 13 Z" fill="#000"/><path d="M3 11 L5 14 L2 15 L1 13 Z" fill="#000"/>
                   </g>
                 </defs>
-
-                {/* ══ GOLD SCREW CAP ══ */}
-                <rect x="84" y="5" width="32" height="8" rx="2" fill="url(#hb-cap)"/>
-                <rect x="78" y="12" width="44" height="30" rx="3" fill="url(#hb-cap)"/>
-                <line x1="84" y1="12" x2="84" y2="42" stroke="rgba(100,70,10,0.5)" strokeWidth="1.5"/>
-                <line x1="90" y1="12" x2="90" y2="42" stroke="rgba(100,70,10,0.5)" strokeWidth="1.5"/>
+                {/* ══ CAP (gold screw-top) — slender ══ */}
+                <rect x="86" y="5" width="28" height="8" rx="2" fill="url(#hb-cap)"/>
+                <rect x="80" y="12" width="40" height="30" rx="3" fill="url(#hb-cap)"/>
+                <line x1="86" y1="12" x2="86" y2="42" stroke="rgba(100,70,10,0.5)" strokeWidth="1.5"/>
+                <line x1="91" y1="12" x2="91" y2="42" stroke="rgba(100,70,10,0.5)" strokeWidth="1.5"/>
                 <line x1="96" y1="12" x2="96" y2="42" stroke="rgba(100,70,10,0.5)" strokeWidth="1.5"/>
-                <line x1="102" y1="12" x2="102" y2="42" stroke="rgba(100,70,10,0.5)" strokeWidth="1.5"/>
-                <line x1="108" y1="12" x2="108" y2="42" stroke="rgba(100,70,10,0.5)" strokeWidth="1.5"/>
-                <line x1="114" y1="12" x2="114" y2="42" stroke="rgba(100,70,10,0.5)" strokeWidth="1.5"/>
-                <rect x="84" y="14" width="44" height="5" rx="1" fill="rgba(255,220,100,0.25)"/>
+                <line x1="101" y1="12" x2="101" y2="42" stroke="rgba(100,70,10,0.5)" strokeWidth="1.5"/>
+                <line x1="106" y1="12" x2="106" y2="42" stroke="rgba(100,70,10,0.5)" strokeWidth="1.5"/>
+                <line x1="111" y1="12" x2="111" y2="42" stroke="rgba(100,70,10,0.5)" strokeWidth="1.5"/>
+                <line x1="116" y1="12" x2="116" y2="42" stroke="rgba(100,70,10,0.5)" strokeWidth="1.5"/>
+                <rect x="80" y="14" width="40" height="5" rx="1" fill="rgba(255,220,100,0.25)"/>
 
                 {/* ══ GOLD FOIL NECK ══ */}
-                <path d="M78 42 Q72 60 70 80 L130 80 Q128 60 122 42 Z" fill="url(#hb-foil)"/>
-                <line x1="85" y1="42" x2="83" y2="80" stroke="rgba(100,70,10,0.4)" strokeWidth="0.8"/>
+                <path d="M80 42 Q74 60 72 80 L128 80 Q126 60 120 42 Z" fill="url(#hb-foil)"/>
+                <line x1="86" y1="42" x2="82" y2="80" stroke="rgba(100,70,10,0.4)" strokeWidth="0.8"/>
                 <line x1="100" y1="42" x2="100" y2="80" stroke="rgba(255,230,120,0.3)" strokeWidth="0.6"/>
-                <line x1="115" y1="42" x2="117" y2="80" stroke="rgba(100,70,10,0.4)" strokeWidth="0.8"/>
-                <line x1="70" y1="78" x2="130" y2="78" stroke="#d4af37" strokeWidth="1.2"/>
-                <line x1="70" y1="81" x2="130" y2="81" stroke="#8a6010" strokeWidth="0.6"/>
+                <line x1="114" y1="42" x2="118" y2="80" stroke="rgba(100,70,10,0.4)" strokeWidth="0.8"/>
+                <line x1="72" y1="78" x2="128" y2="78" stroke="#d4af37" strokeWidth="1.2"/>
+                <line x1="72" y1="81" x2="128" y2="81" stroke="#8a6010" strokeWidth="0.6"/>
 
-                {/* ══ DEEP AMBER GLASS BODY ══ */}
-                <path d="M70 80 Q52 102 48 140 L48 370 Q48 416 100 424 Q152 416 152 370 L152 140 Q148 102 130 80 Z" fill="url(#hb-glass)"/>
-                <path d="M70 80 Q52 102 48 140 L48 370 Q48 416 100 424 Q152 416 152 370 L152 140 Q148 102 130 80 Z" fill="url(#hb-shine)"/>
-                <path d="M70 80 Q52 102 48 140 L48 370 Q48 416 100 424 Q152 416 152 370 L152 140 Q148 102 130 80 Z" fill="none" stroke="rgba(201,140,30,0.4)" strokeWidth="2"/>
+                {/* ══ GLASS BODY (slender deep amber) ══ */}
+                <path d="M72 80 Q62 105 60 140 L60 380 Q60 420 100 426 Q140 420 140 380 L140 140 Q138 105 128 80 Z" fill="url(#hb-glass)"/>
+                <path d="M72 80 Q62 105 60 140 L60 380 Q60 420 100 426 Q140 420 140 380 L140 140 Q138 105 128 80 Z" fill="url(#hb-shine)"/>
+                <path d="M72 80 Q62 105 60 140 L60 380 Q60 420 100 426 Q140 420 140 380 L140 140 Q138 105 128 80 Z" fill="none" stroke="rgba(201,140,30,0.4)" strokeWidth="2"/>
 
                 {/* ══ GOLD SHOULDER BAND ══ */}
-                <rect x="48" y="218" width="104" height="6" fill="#c9a84c" rx="1"/>
-                <rect x="48" y="223" width="104" height="2" fill="#8a6010"/>
+                <rect x="60" y="218" width="80" height="6" fill="#c9a84c" rx="1"/>
+                <rect x="60" y="223" width="80" height="2" fill="#8a6010"/>
 
                 {/* ══ CREAM LABEL ══ */}
-                <rect x="50" y="222" width="100" height="120" rx="4" fill="url(#hb-label)"/>
-                <rect x="50" y="222" width="100" height="120" rx="4" fill="none" stroke="#c9a84c" strokeWidth="2.2"/>
-                <rect x="55" y="227" width="90" height="110" rx="2" fill="none" stroke="#c9a84c" strokeWidth="0.8"/>
+                <rect x="62" y="222" width="76" height="135" rx="4" fill="url(#hb-label)"/>
+                <rect x="62" y="222" width="76" height="135" rx="4" fill="none" stroke="#c9a84c" strokeWidth="2.2"/>
+                <rect x="67" y="227" width="66" height="125" rx="2" fill="none" stroke="#c9a84c" strokeWidth="0.8"/>
 
                 {/* Lion badge */}
                 <circle cx="100" cy="255" r="17" fill="url(#hb-badge)" stroke="#d4af37" strokeWidth="1.5"/>
@@ -173,22 +173,22 @@ export default function Hero({ onExplorePress, onB2BPress }) {
 
                 {/* Brand name */}
                 <text x="100" y="283" textAnchor="middle" fontFamily="'Playfair Display',serif" fontWeight="700" fontSize="8" fill="#1a0e00" letterSpacing="1.5">VIN</text>
-                <line x1="62" y1="286" x2="138" y2="286" stroke="#c9a84c" strokeWidth="0.7"/>
-                <text x="100" y="297" textAnchor="middle" fontFamily="'Playfair Display',serif" fontWeight="700" fontSize="11.5" fill="#1a0e00" letterSpacing="2">NKOLO</text>
-                <text x="100" y="310" textAnchor="middle" fontFamily="'Playfair Display',serif" fontWeight="700" fontSize="11.5" fill="#1a0e00" letterSpacing="2">MBOKA</text>
-                <line x1="62" y1="314" x2="138" y2="314" stroke="#c9a84c" strokeWidth="0.7"/>
-                <text x="100" y="323" textAnchor="middle" fontFamily="'Inter',sans-serif" fontSize="3.8" fill="#6b4c11" letterSpacing="1.2">GINGER-BASED ALCOHOLIC BEVERAGE</text>
-                <text x="100" y="332" textAnchor="middle" fontFamily="'Inter',sans-serif" fontSize="3.5" fill="#8a6010" letterSpacing="0.6">330 ml · 12% Vol · Dar es Salaam</text>
+                <line x1="72" y1="286" x2="128" y2="286" stroke="#c9a84c" strokeWidth="0.7"/>
+                <text x="100" y="297" textAnchor="middle" fontFamily="'Playfair Display',serif" fontWeight="700" fontSize="10.5" fill="#1a0e00" letterSpacing="1.5">NKOLO</text>
+                <text x="100" y="310" textAnchor="middle" fontFamily="'Playfair Display',serif" fontWeight="700" fontSize="10.5" fill="#1a0e00" letterSpacing="1.5">MBOKA</text>
+                <line x1="72" y1="314" x2="128" y2="314" stroke="#c9a84c" strokeWidth="0.7"/>
+                <text x="100" y="323" textAnchor="middle" fontFamily="'Inter',sans-serif" fontSize="3.2" fill="#6b4c11" letterSpacing="0.8">GINGER-BASED ALCOHOLIC BEVERAGE</text>
+                <text x="100" y="332" textAnchor="middle" fontFamily="'Inter',sans-serif" fontSize="3.0" fill="#8a6010" letterSpacing="0.4">330 ml · 12% Vol · Dar es Salaam</text>
 
                 {/* ══ RED BANNER ══ */}
-                <rect x="50" y="340" width="100" height="18" rx="2" fill="#b71c1c"/>
-                <text x="100" y="351" textAnchor="middle" fontFamily="'Inter',sans-serif" fontWeight="700" fontSize="3.8" fill="#ffffff" letterSpacing="0.3">NGUVU YA SIMBA · FAHARI YA TANZANIA</text>
+                <rect x="62" y="357" width="76" height="18" rx="2" fill="#b71c1c"/>
+                <text x="100" y="368" textAnchor="middle" fontFamily="'Inter',sans-serif" fontWeight="700" fontSize="2.8" fill="#ffffff" letterSpacing="0.1">NGUVU YA SIMBA · FAHARI YA TANZANIA</text>
 
                 {/* Glass sheens */}
-                <path d="M56 84 Q53 200 56 390" stroke="rgba(255,180,80,0.18)" strokeWidth="7" strokeLinecap="round"/>
-                <path d="M63 82 Q61 160 63 340" stroke="rgba(255,220,140,0.12)" strokeWidth="3" strokeLinecap="round"/>
-                <path d="M72 84 Q100 90 128 84" stroke="rgba(255,220,100,0.25)" strokeWidth="3" strokeLinecap="round"/>
-                <ellipse cx="100" cy="420" rx="50" ry="6" fill="rgba(100,50,0,0.35)"/>
+                <path d="M66 84 Q63 200 66 390" stroke="rgba(255,180,80,0.18)" strokeWidth="7" strokeLinecap="round"/>
+                <path d="M72 82 Q70 160 72 340" stroke="rgba(255,220,140,0.12)" strokeWidth="3" strokeLinecap="round"/>
+                <path d="M80 84 Q100 90 120 84" stroke="rgba(255,220,100,0.25)" strokeWidth="3" strokeLinecap="round"/>
+                <ellipse cx="100" cy="422" rx="40" ry="5" fill="rgba(100,50,0,0.35)"/>
               </svg>
             </div>
           </div>

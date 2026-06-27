@@ -76,7 +76,7 @@ export default function PourAnimation() {
 
     // Bottle geometry
     var PX = 300, PY = 280;       // Pivot
-    var MX = 300, MY = 90;        // Mouth upright
+    var MX = 300, MY = 107;        // Mouth upright (slender bottle mouth tip at y=107)
     var GLASS_CX  = 200;
     var GLASS_TOP = 530;          // liquid top y (full)
     var GLASS_BOT = 655;          // liquid bottom y (base)
@@ -691,65 +691,65 @@ export default function PourAnimation() {
 
           {/* BOTTLE GROUP */}
           <g id="ps-bot-grp" ref={bottleGrpRef}>
-            {/* ══ GOLD CAP ══ */}
+            {/* ══ CAP (gold screw-top) — slender ══ */}
             <g id="ps-cap-grp" ref={capGrpRef}>
-              <rect x="281" y="63" width="38" height="9" rx="2" fill="url(#ps-cap-green)"/>
-              <rect x="273" y="71" width="54" height="36" rx="3" fill="url(#ps-cap-green)"/>
-              <line x1="280" y1="71" x2="280" y2="107" stroke="rgba(100,70,10,0.5)" strokeWidth="1.8"/>
-              <line x1="286" y1="71" x2="286" y2="107" stroke="rgba(100,70,10,0.5)" strokeWidth="1.8"/>
-              <line x1="292" y1="71" x2="292" y2="107" stroke="rgba(100,70,10,0.5)" strokeWidth="1.8"/>
-              <line x1="298" y1="71" x2="298" y2="107" stroke="rgba(100,70,10,0.5)" strokeWidth="1.8"/>
-              <line x1="304" y1="71" x2="304" y2="107" stroke="rgba(100,70,10,0.5)" strokeWidth="1.8"/>
-              <line x1="310" y1="71" x2="310" y2="107" stroke="rgba(100,70,10,0.5)" strokeWidth="1.8"/>
-              <line x1="316" y1="71" x2="316" y2="107" stroke="rgba(100,70,10,0.5)" strokeWidth="1.8"/>
-              <line x1="322" y1="71" x2="322" y2="107" stroke="rgba(100,70,10,0.5)" strokeWidth="1.8"/>
-              <rect x="280" y="74" width="54" height="6" rx="1" fill="rgba(255,220,100,0.2)"/>
+              <rect x="286" y="70" width="28" height="8" rx="2" fill="url(#ps-cap-green)"/>
+              <rect x="280" y="78" width="40" height="30" rx="3" fill="url(#ps-cap-green)"/>
+              {/* Cap ribs */}
+              <line x1="286" y1="78" x2="286" y2="108" stroke="rgba(100,70,10,0.5)" strokeWidth="1.5"/>
+              <line x1="291" y1="78" x2="291" y2="108" stroke="rgba(100,70,10,0.5)" strokeWidth="1.5"/>
+              <line x1="296" y1="78" x2="296" y2="108" stroke="rgba(100,70,10,0.5)" strokeWidth="1.5"/>
+              <line x1="301" y1="78" x2="301" y2="108" stroke="rgba(100,70,10,0.5)" strokeWidth="1.5"/>
+              <line x1="306" y1="78" x2="306" y2="108" stroke="rgba(100,70,10,0.5)" strokeWidth="1.5"/>
+              <line x1="311" y1="78" x2="311" y2="108" stroke="rgba(100,70,10,0.5)" strokeWidth="1.5"/>
+              <line x1="316" y1="78" x2="316" y2="108" stroke="rgba(100,70,10,0.5)" strokeWidth="1.5"/>
+              <rect x="280" y="80" width="40" height="5" rx="1" fill="rgba(255,220,100,0.2)"/>
             </g>
 
             {/* ══ GOLD FOIL NECK ══ */}
-            <path d="M273 107 Q261 146 256 180 L344 180 Q339 146 327 107 Z" fill="url(#ps-foil)"/>
-            <line x1="282" y1="107" x2="278" y2="180" stroke="rgba(100,70,10,0.35)" strokeWidth="1"/>
-            <line x1="300" y1="107" x2="300" y2="180" stroke="rgba(255,230,120,0.25)" strokeWidth="0.8"/>
-            <line x1="318" y1="107" x2="322" y2="180" stroke="rgba(100,70,10,0.35)" strokeWidth="1"/>
-            <line x1="256" y1="178" x2="344" y2="178" stroke="#d4af37" strokeWidth="1.4"/>
-            <line x1="256" y1="181" x2="344" y2="181" stroke="#8a6010" strokeWidth="0.7"/>
+            <path d="M280 107 Q274 125 272 145 L328 145 Q326 125 320 107 Z" fill="url(#ps-foil)"/>
+            <line x1="286" y1="107" x2="282" y2="145" stroke="rgba(100,70,10,0.35)" strokeWidth="1"/>
+            <line x1="300" y1="107" x2="300" y2="145" stroke="rgba(255,230,120,0.25)" strokeWidth="0.8"/>
+            <line x1="314" y1="107" x2="318" y2="145" stroke="rgba(100,70,10,0.35)" strokeWidth="1"/>
+            <line x1="272" y1="143" x2="328" y2="143" stroke="#d4af37" strokeWidth="1.4"/>
+            <line x1="272" y1="146" x2="328" y2="146" stroke="#8a6010" strokeWidth="0.7"/>
 
-            {/* ══ AMBER GLASS BODY ══ */}
-            <path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="url(#ps-bot-liq-grad)"/>
-            <path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="url(#ps-bot-wrap-grad)"/>
-            <path d="M256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Z" fill="none" stroke="rgba(201,140,30,0.4)" strokeWidth="2.5"/>
+            {/* ══ GLASS BODY (slender deep amber) ══ */}
+            <path d="M272 145 Q262 170 260 205 L260 425 Q260 460 300 466 Q340 460 340 425 L340 205 Q338 170 328 145 Z" fill="url(#ps-bot-liq-grad)"/>
+            <path d="M272 145 Q262 170 260 205 L260 425 Q260 460 300 466 Q340 460 340 425 L340 205 Q338 170 328 145 Z" fill="url(#ps-bot-wrap-grad)"/>
+            <path d="M272 145 Q262 170 260 205 L260 425 Q260 460 300 466 Q340 460 340 425 L340 205 Q338 170 328 145 Z" fill="none" stroke="rgba(201,140,30,0.4)" strokeWidth="2.5"/>
 
             {/* ══ GOLD SHOULDER BAND ══ */}
-            <rect x="231" y="298" width="138" height="7" fill="#c9a84c" rx="1"/>
-            <rect x="231" y="304" width="138" height="3" fill="#8a6010"/>
+            <rect x="260" y="298" width="80" height="7" fill="#c9a84c" rx="1"/>
+            <rect x="260" y="304" width="80" height="3" fill="#8a6010"/>
 
             {/* ══ CREAM LABEL ══ */}
-            <rect x="234" y="305" width="132" height="128" rx="5" fill="url(#ps-label-grad)"/>
-            <rect x="234" y="305" width="132" height="128" rx="5" fill="none" stroke="#c9a84c" strokeWidth="2.5"/>
-            <rect x="240" y="311" width="120" height="116" rx="3" fill="none" stroke="#c9a84c" strokeWidth="0.9"/>
+            <rect x="262" y="305" width="76" height="128" rx="5" fill="url(#ps-label-grad)"/>
+            <rect x="262" y="305" width="76" height="128" rx="5" fill="none" stroke="#c9a84c" strokeWidth="2.5"/>
+            <rect x="267" y="311" width="66" height="116" rx="3" fill="none" stroke="#c9a84c" strokeWidth="0.9"/>
 
             {/* Lion badge */}
-            <circle cx="300" cy="340" r="21" fill="url(#ps-badge-bg)" stroke="#d4af37" strokeWidth="1.8"/>
-            <circle cx="300" cy="340" r="15" fill="none" stroke="rgba(212,175,55,0.5)" strokeWidth="0.8"/>
-            <use href="#lion-logo" x="300" y="340" transform="scale(0.85)" transformOrigin="300 340"/>
+            <circle cx="300" cy="340" r="17" fill="url(#ps-badge-bg)" stroke="#d4af37" strokeWidth="1.5"/>
+            <circle cx="300" cy="340" r="12" fill="none" stroke="rgba(212,175,55,0.5)" strokeWidth="0.7"/>
+            <use href="#lion-logo" x="300" y="340" transform="scale(0.72)" transformOrigin="300 340"/>
 
             {/* Brand text */}
-            <text x="300" y="373" textAnchor="middle" fontFamily="'Playfair Display',serif" fontWeight="700" fontSize="9" fill="#1a0e00" letterSpacing="2">VIN</text>
-            <line x1="246" y1="377" x2="354" y2="377" stroke="#c9a84c" strokeWidth="0.8"/>
-            <text x="300" y="390" textAnchor="middle" fontFamily="'Playfair Display',serif" fontWeight="700" fontSize="13.5" fill="#1a0e00" letterSpacing="2.5">NKOLO</text>
-            <text x="300" y="405" textAnchor="middle" fontFamily="'Playfair Display',serif" fontWeight="700" fontSize="13.5" fill="#1a0e00" letterSpacing="2.5">MBOKA</text>
-            <line x1="246" y1="410" x2="354" y2="410" stroke="#c9a84c" strokeWidth="0.8"/>
-            <text x="300" y="420" textAnchor="middle" fontFamily="'Inter',sans-serif" fontSize="5" fill="#6b4c11" letterSpacing="1.5">GINGER-BASED ALCOHOLIC BEVERAGE</text>
-            <text x="300" y="428" textAnchor="middle" fontFamily="'Inter',sans-serif" fontSize="4.5" fill="#8a6010" letterSpacing="0.8">330 ml · 12% Vol · Dar es Salaam</text>
+            <text x="300" y="367" textAnchor="middle" fontFamily="'Playfair Display',serif" fontWeight="700" fontSize="8" fill="#1a0e00" letterSpacing="1.5">VIN</text>
+            <line x1="272" y1="370" x2="328" y2="370" stroke="#c9a84c" strokeWidth="0.7"/>
+            <text x="300" y="381" textAnchor="middle" fontFamily="'Playfair Display',serif" fontWeight="700" fontSize="10.5" fill="#1a0e00" letterSpacing="1.5">NKOLO</text>
+            <text x="300" y="394" textAnchor="middle" fontFamily="'Playfair Display',serif" fontWeight="700" fontSize="10.5" fill="#1a0e00" letterSpacing="1.5">MBOKA</text>
+            <line x1="272" y1="398" x2="328" y2="398" stroke="#c9a84c" strokeWidth="0.7"/>
+            <text x="300" y="407" textAnchor="middle" fontFamily="'Inter',sans-serif" fontSize="3.2" fill="#6b4c11" letterSpacing="0.8">GINGER-BASED ALCOHOLIC BEVERAGE</text>
+            <text x="300" y="416" textAnchor="middle" fontFamily="'Inter',sans-serif" fontSize="3.0" fill="#8a6010" letterSpacing="0.4">330 ml · 12% Vol · Dar es Salaam</text>
 
             {/* ══ RED BANNER ══ */}
-            <rect x="234" y="430" width="132" height="24" rx="3" fill="#b71c1c"/>
-            <text x="300" y="444" textAnchor="middle" fontFamily="'Inter',sans-serif" fontWeight="700" fontSize="4.8" fill="#ffffff" letterSpacing="0.4">NGUVU YA SIMBA · FAHARI YA TANZANIA</text>
+            <rect x="262" y="430" width="76" height="20" rx="3" fill="#b71c1c"/>
+            <text x="300" y="443" textAnchor="middle" fontFamily="'Inter',sans-serif" fontWeight="700" fontSize="2.8" fill="#ffffff" letterSpacing="0.1">NGUVU YA SIMBA · FAHARI YA TANZANIA</text>
 
             {/* ══ GLASS SHEEN ══ */}
-            <path d="M240 184 Q236 306 240 446" stroke="rgba(255,180,80,0.16)" strokeWidth="10" strokeLinecap="round"/>
-            <path d="M255 182 Q252 320 255 456" stroke="rgba(255,220,140,0.10)" strokeWidth="4" strokeLinecap="round"/>
-            <path d="M263 183 Q300 192 337 183" stroke="rgba(255,220,100,0.22)" strokeWidth="4" strokeLinecap="round"/>
+            <path d="M266 149 Q263 260 266 440" stroke="rgba(255,180,80,0.16)" strokeWidth="8" strokeLinecap="round"/>
+            <path d="M272 147 Q270 220 272 380" stroke="rgba(255,220,140,0.10)" strokeWidth="4" strokeLinecap="round"/>
+            <path d="M280 149 Q300 155 320 149" stroke="rgba(255,220,100,0.22)" strokeWidth="4" strokeLinecap="round"/>
             
             {/* Dynamic liquid inside bottle */}
             <g clipPath="url(#ps-bottle-clip)">
