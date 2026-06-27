@@ -251,28 +251,28 @@ export default function PourAnimation() {
         if (streamRef.current) streamRef.current.style.opacity = '' + easeOut(Math.min(p3 * 5, 1));
 
         var m = mouthPos(ang, dx, dy);
-        var m_left = mouthEdgePos(ang, dx, dy, -12);
-        var m_right = mouthEdgePos(ang, dx, dy, 12);
-        var g_left_x = GLASS_CX - 3;
-        var g_right_x = GLASS_CX + 3;
+        var m_left = mouthEdgePos(ang, dx, dy, -8);
+        var m_right = mouthEdgePos(ang, dx, dy, 8);
+        var g_left_x = GLASS_CX - 2;
+        var g_right_x = GLASS_CX + 2;
 
         var radA = ang * Math.PI / 180;
         var exitVx = Math.sin(radA);
         var wobble = Math.sin(Date.now() * 0.005) * 1.5;
 
         // Bezier points
-        var cp1_left_x = m_left.x + exitVx * 45 + wobble;
-        var cp1_left_y = m_left.y + 80;
+        var cp1_left_x = m_left.x + exitVx * 15 + wobble;
+        var cp1_left_y = m_left.y + 40;
         var cp2_left_x = g_left_x + wobble * 0.4;
         var cp2_left_y = GLASS_TOP - 50;
 
-        var cp1_right_x = m_right.x + exitVx * 45 + wobble;
-        var cp1_right_y = m_right.y + 80;
+        var cp1_right_x = m_right.x + exitVx * 15 + wobble;
+        var cp1_right_y = m_right.y + 40;
         var cp2_right_x = g_right_x + wobble * 0.4;
         var cp2_right_y = GLASS_TOP - 50;
 
-        var cp1x = m.x + exitVx * 45 + wobble;
-        var cp1y = m.y + 80;
+        var cp1x = m.x + exitVx * 15 + wobble;
+        var cp1y = m.y + 40;
         var cp2x = GLASS_CX + wobble * 0.4;
         var cp2y = GLASS_TOP - 50;
 
@@ -583,6 +583,43 @@ export default function PourAnimation() {
               <stop offset="0%"   stopColor="#c9a84c" stopOpacity=".10"/>
               <stop offset="100%" stopColor="transparent"/>
             </radialGradient>
+
+            {/* ══ PREMIUM GLASS GRADIENTS ══ */}
+            <linearGradient id="ps-glass-body" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"   stopColor="rgba(180,210,240,0.08)"/>
+              <stop offset="20%"  stopColor="rgba(220,235,255,0.12)"/>
+              <stop offset="50%"  stopColor="rgba(255,255,255,0.06)"/>
+              <stop offset="80%"  stopColor="rgba(200,220,245,0.10)"/>
+              <stop offset="100%" stopColor="rgba(160,190,225,0.05)"/>
+            </linearGradient>
+            <linearGradient id="ps-glass-highlight" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stopColor="rgba(255,255,255,0.35)"/>
+              <stop offset="30%"  stopColor="rgba(255,255,255,0.18)"/>
+              <stop offset="60%"  stopColor="rgba(255,255,255,0.06)"/>
+              <stop offset="100%" stopColor="rgba(255,255,255,0)"/>
+            </linearGradient>
+            <linearGradient id="ps-glass-stem" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"   stopColor="rgba(180,200,230,0.06)"/>
+              <stop offset="30%"  stopColor="rgba(220,235,255,0.14)"/>
+              <stop offset="50%"  stopColor="rgba(255,255,255,0.10)"/>
+              <stop offset="70%"  stopColor="rgba(220,235,255,0.12)"/>
+              <stop offset="100%" stopColor="rgba(180,200,230,0.04)"/>
+            </linearGradient>
+            <linearGradient id="ps-glass-rim" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"   stopColor="rgba(255,255,255,0)"/>
+              <stop offset="20%"  stopColor="rgba(255,255,255,0.45)"/>
+              <stop offset="50%"  stopColor="rgba(255,255,255,0.60)"/>
+              <stop offset="80%"  stopColor="rgba(255,255,255,0.35)"/>
+              <stop offset="100%" stopColor="rgba(255,255,255,0)"/>
+            </linearGradient>
+            <linearGradient id="ps-glass-base" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"   stopColor="rgba(180,200,230,0.04)"/>
+              <stop offset="25%"  stopColor="rgba(220,240,255,0.12)"/>
+              <stop offset="50%"  stopColor="rgba(255,255,255,0.16)"/>
+              <stop offset="75%"  stopColor="rgba(220,240,255,0.10)"/>
+              <stop offset="100%" stopColor="rgba(180,200,230,0.03)"/>
+            </linearGradient>
+
             <clipPath id="ps-bottle-clip">
               <path d="M273 107 Q261 146 256 180 Q233 208 231 250 L231 402 Q231 458 300 466 Q369 458 369 402 L369 250 Q367 208 344 180 Q339 146 327 107 Z"/>
             </clipPath>
@@ -592,15 +629,15 @@ export default function PourAnimation() {
             </clipPath>
             {/* Glass clip (above heavy base) */}
             <clipPath id="ps-gcl">
-              <polygon points="152,520 135,655 265,655 248,520"/>
+              <polygon points="140,520 125,655 275,655 260,520"/>
             </clipPath>
             {/* Splash clip */}
             <clipPath id="ps-scl">
-              <rect x="120" y="490" width="160" height="200"/>
+              <rect x="110" y="490" width="180" height="200"/>
             </clipPath>
-             <filter id="ps-blur" x="-60%" y="-20%" width="220%" height="140%">
-               <feGaussianBlur stdDeviation="5"/>
-             </filter>
+            <filter id="ps-blur" x="-60%" y="-20%" width="220%" height="140%">
+              <feGaussianBlur stdDeviation="5"/>
+            </filter>
              
              {/* High-Fidelity Vector Lion Face and Gold Crown Logo */}
              <g id="lion-logo">
@@ -757,26 +794,68 @@ export default function PourAnimation() {
 
           {/* GLASS */}
           <g id="ps-glass" ref={glassRef} style={{ opacity: 0 }}>
-            <polygon points="152,520 132,680 268,680 248,520" fill="rgba(201,168,76,.02)" stroke="rgba(201,168,76,.45)" strokeWidth="1.5"/>
-            <line x1="135" y1="655" x2="265" y2="655" stroke="rgba(201,168,76,.35)" strokeWidth="1.5"/>
-            <path d="M142 670 L149 660 M258 670 L251 660" stroke="rgba(255,255,255,.15)" strokeWidth="1"/>
-            
+            {/* Outer glass body with premium transparent gradient */}
+            <polygon points="140,520 125,655 275,655 260,520"
+                     fill="url(#ps-glass-body)" stroke="rgba(200,220,255,0.22)" strokeWidth="2"/>
+            {/* Inner glass refraction body */}
+            <polygon points="146,524 131,652 269,652 254,524"
+                     fill="none" stroke="rgba(200,220,255,0.10)" strokeWidth="1"/>
+
+            {/* Glass rim — shiny top edge */}
+            <line x1="138" y1="520" x2="262" y2="520"
+                  stroke="url(#ps-glass-rim)" strokeWidth="2.5" strokeLinecap="round"/>
+            {/* Thin inner rim line */}
+            <line x1="144" y1="522" x2="256" y2="522"
+                  stroke="rgba(255,255,255,0.12)" strokeWidth="0.8"/>
+
+            {/* Heavy crystal base zone */}
+            <rect x="122" y="655" width="156" height="25" rx="2"
+                  fill="url(#ps-glass-base)"/>
+            {/* Base horizontal divider line */}
+            <line x1="125" y1="655" x2="275" y2="655"
+                  stroke="rgba(200,220,255,0.30)" strokeWidth="1.8"/>
+            {/* Crystal base refraction lines */}
+            <line x1="145" y1="658" x2="140" y2="675" stroke="rgba(255,255,255,0.10)" strokeWidth="0.8"/>
+            <line x1="175" y1="657" x2="172" y2="677" stroke="rgba(255,255,255,0.08)" strokeWidth="0.6"/>
+            <line x1="200" y1="656" x2="200" y2="678" stroke="rgba(255,255,255,0.12)" strokeWidth="0.7"/>
+            <line x1="225" y1="657" x2="228" y2="677" stroke="rgba(255,255,255,0.08)" strokeWidth="0.6"/>
+            <line x1="255" y1="658" x2="260" y2="675" stroke="rgba(255,255,255,0.10)" strokeWidth="0.8"/>
+
+            {/* Left-edge glass reflections / highlights */}
+            <path d="M145,526 L130,650"
+                  stroke="url(#ps-glass-highlight)" strokeWidth="5" strokeLinecap="round" opacity="0.7"/>
+            <path d="M151,524 L137,650"
+                  stroke="rgba(255,255,255,0.10)" strokeWidth="2.5" strokeLinecap="round"/>
+            {/* Right-edge subtle reflection */}
+            <path d="M255,528 L268,648"
+                  stroke="rgba(255,255,255,0.06)" strokeWidth="2" strokeLinecap="round"/>
+
             {/* Liquid fill path */}
             <path id="ps-gfill" ref={gfillRef} d="" fill="url(#ps-liq)" opacity=".82" clipPath="url(#ps-gcl)"/>
-            
+
             <ellipse id="ps-foam" ref={foamRef} cx="200" cy="680" rx="0" ry="0" fill="rgba(245,240,225,.38)" clipPath="url(#ps-gcl)"/>
             <g id="ps-foam-dots" ref={foamDotsRef} style={{ opacity: 0 }}>
-              <circle cx="163" cy="680" r="4"   fill="rgba(255,255,255,.32)"/>
-              <circle cx="181" cy="680" r="3"   fill="rgba(255,255,255,.25)"/>
-              <circle cx="200" cy="680" r="5"   fill="rgba(255,255,255,.22)"/>
-              <circle cx="218" cy="680" r="3.5" fill="rgba(255,255,255,.28)"/>
-              <circle cx="237" cy="680" r="4"   fill="rgba(255,255,255,.24)"/>
+              <circle cx="155" cy="680" r="4.5" fill="rgba(255,255,255,.30)"/>
+              <circle cx="175" cy="680" r="3"   fill="rgba(255,255,255,.25)"/>
+              <circle cx="200" cy="680" r="5.5" fill="rgba(255,255,255,.22)"/>
+              <circle cx="225" cy="680" r="3.5" fill="rgba(255,255,255,.28)"/>
+              <circle cx="245" cy="680" r="4"   fill="rgba(255,255,255,.24)"/>
             </g>
-            <rect x="194" y="680" width="12" height="26" fill="rgba(201,168,76,.14)" stroke="rgba(201,168,76,.30)" strokeWidth="1"/>
-            <ellipse cx="200" cy="706" rx="36" ry="7" fill="rgba(201,168,76,.07)" stroke="rgba(201,168,76,.28)" strokeWidth="1"/>
-            <line x1="158" y1="527" x2="138" y2="674" stroke="rgba(255,255,255,.18)" strokeWidth="3.5" strokeLinecap="round"/>
-            <line x1="180" y1="523" x2="162" y2="674" stroke="rgba(255,255,255,.06)" strokeWidth="2" stroke-linecap="round"/>
             
+            {/* Stem — filled with glass-like gradient */}
+            <rect x="192" y="680" width="16" height="26" rx="2"
+                  fill="url(#ps-glass-stem)" stroke="rgba(200,220,255,0.18)" strokeWidth="1"/>
+            {/* Stem centre shine */}
+            <line x1="200" y1="682" x2="200" y2="704"
+                  stroke="rgba(255,255,255,0.10)" strokeWidth="1.5" strokeLinecap="round"/>
+
+            {/* Base — filled ellipse with gradient */}
+            <ellipse cx="200" cy="706" rx="42" ry="8"
+                     fill="url(#ps-glass-base)" stroke="rgba(200,220,255,0.22)" strokeWidth="1.2"/>
+            {/* Base top shine arc */}
+            <ellipse cx="200" cy="705" rx="30" ry="3"
+                     fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="0.8"/>
+
             {/* Rising Bubbles */}
             <g id="ps-bubbles">
               <circle cx="156" cy="665" r="4"   fill="rgba(255,255,255,.30)" opacity="0"/>
@@ -787,13 +866,22 @@ export default function PourAnimation() {
               <circle cx="204" cy="668" r="2.5" fill="rgba(255,255,255,.28)" opacity="0"/>
               <circle cx="168" cy="620" r="3"   fill="rgba(255,255,255,.22)" opacity="0"/>
             </g>
-            
-            {/* Sparkles */}
+
+            {/* Sparkles when full — subtle SVG star/diamond shapes (NO emoji) */}
             <g id="ps-sparkles" ref={sparklesRef} style={{ opacity: 0 }}>
-              <text x="122" y="512" fontSize="14" fill="#e8c96b" opacity=".85">✨</text>
-              <text x="256" y="510" fontSize="12" fill="#c9a84c" opacity=".70">✦</text>
-              <text x="108" y="546" fontSize="10" fill="#e8c96b" opacity=".50">⋆</text>
-              <text x="270" y="548" fontSize="9"  fill="#c9a84c" opacity=".45">✦</text>
+              {/* 4-point star top-left */}
+              <path d="M125,510 L127,507 L129,510 L127,513 Z" fill="#e8c96b" opacity="0.80"/>
+              <path d="M125,510 L127,504 L129,510 L127,516 Z" fill="#e8c96b" opacity="0.35"/>
+              {/* Small diamond top-right */}
+              <path d="M265,508 L267,505 L269,508 L267,511 Z" fill="#c9a84c" opacity="0.65"/>
+              {/* 4-point star bottom-left */}
+              <path d="M112,544 L114,541 L116,544 L114,547 Z" fill="#e8c96b" opacity="0.50"/>
+              <path d="M112,544 L114,538 L116,544 L114,550 Z" fill="#e8c96b" opacity="0.20"/>
+              {/* Small diamond bottom-right */}
+              <path d="M276,546 L278,543 L280,546 L278,549 Z" fill="#c9a84c" opacity="0.45"/>
+              {/* Tiny sparkle accent */}
+              <circle cx="135" cy="525" r="1.5" fill="#ffe082" opacity="0.55"/>
+              <circle cx="270" cy="530" r="1.2" fill="#ffe082" opacity="0.40"/>
             </g>
           </g>
 
