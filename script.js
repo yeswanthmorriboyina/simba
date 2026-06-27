@@ -318,31 +318,31 @@ window.addEventListener('scroll', () => {
 
       // Get mouth positions
       var m = mouthPos(ang, dx, dy);
-      var m_left = mouthEdgePos(ang, dx, dy, -12);
-      var m_right = mouthEdgePos(ang, dx, dy, 12);
+      var m_left = mouthEdgePos(ang, dx, dy, -8);
+      var m_right = mouthEdgePos(ang, dx, dy, 8);
       
-      var g_left_x = GLASS_CX - 3;
-      var g_right_x = GLASS_CX + 3;
+      var g_left_x = GLASS_CX - 2;
+      var g_right_x = GLASS_CX + 2;
 
       var radA   = ang * Math.PI / 180;
       var exitVx = Math.sin(radA);
       var wobble = Math.sin(Date.now() * 0.005) * 1.5;
 
       // Left stream control points
-      var cp1_left_x = m_left.x + exitVx * 45 + wobble;
-      var cp1_left_y = m_left.y + 80;
+      var cp1_left_x = m_left.x + exitVx * 15 + wobble;
+      var cp1_left_y = m_left.y + 40;
       var cp2_left_x = g_left_x + wobble * 0.4;
       var cp2_left_y = GLASS_TOP - 50;
 
       // Right stream control points
-      var cp1_right_x = m_right.x + exitVx * 45 + wobble;
-      var cp1_right_y = m_right.y + 80;
+      var cp1_right_x = m_right.x + exitVx * 15 + wobble;
+      var cp1_right_y = m_right.y + 40;
       var cp2_right_x = g_right_x + wobble * 0.4;
       var cp2_right_y = GLASS_TOP - 50;
 
       // Spine control points (for spine highlight and glow)
-      var cp1x = m.x + exitVx * 45 + wobble;
-      var cp1y = m.y + 80;
+      var cp1x = m.x + exitVx * 15 + wobble;
+      var cp1y = m.y + 40;
       var cp2x = GLASS_CX + wobble * 0.4;
       var cp2y = GLASS_TOP - 50;
 
