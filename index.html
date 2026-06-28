@@ -507,6 +507,158 @@ input[type=number] { -moz-appearance: textfield; }
   transform: translateY(30px) scale(0.95);
 }
 
+
+/* ── PRODUCT DETAILS MODAL ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 6, 2, 0.85);
+  backdrop-filter: blur(12px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  padding: 1.5rem;
+}
+.modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+.modal-card {
+  background: rgba(26, 18, 8, 0.98);
+  border: 1px solid var(--border-gold);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(245, 166, 35, 0.15);
+  transform: translateY(40px) scale(0.95);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 2.5rem;
+}
+.modal-overlay.open .modal-card {
+  transform: translateY(0) scale(1);
+}
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: var(--gold);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+  z-index: 10;
+}
+.modal-close:hover {
+  color: var(--white);
+  transform: rotate(90deg);
+}
+.modal-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+.modal-bottle-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, rgba(245,166,35,0.08) 0%, transparent 70%);
+  height: 320px;
+  border-radius: 12px;
+  border: 1px solid rgba(245,166,35,0.06);
+  padding: 1rem;
+}
+.modal-bottle-img {
+  height: 280px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));
+}
+.modal-info-zone {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.modal-category {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.modal-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+.modal-desc {
+  font-size: 14px;
+  color: var(--cream-muted);
+  line-height: 1.7;
+}
+.modal-meta-row {
+  display: flex;
+  gap: 2rem;
+  border-top: 1px solid rgba(245,166,35,0.12);
+  border-bottom: 1px solid rgba(245,166,35,0.12);
+  padding: 1rem 0;
+}
+.modal-meta-item .lbl {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  margin-bottom: 4px;
+}
+.modal-meta-item .val {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+}
+.modal-ingredients {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.modal-ing-pill {
+  background: rgba(245,166,35,0.06);
+  border: 1px solid rgba(245,166,35,0.15);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: 600px) {
+  .modal-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .modal-bottle-zone {
+    height: 220px;
+  }
+  .modal-bottle-img {
+    height: 180px;
+  }
+  .modal-card {
+    padding: 1.75rem;
+  }
+}
 </style>
 </head>
 <body>
@@ -613,7 +765,19 @@ input[type=number] { -moz-appearance: textfield; }
       </div>
     </div>
     <div class="hero-right">
-      <!-- Bottle removed -->
+      <div class="bottle-stage">
+        <div class="bottle-glow"></div>
+        <svg class="halisi-badge" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="#F5A623" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <circle cx="50" cy="50" r="38" fill="#F5A623"/>
+          <text x="50" y="44" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="7" font-weight="900" fill="#0D0A06">NGUVU</text>
+          <text x="50" y="54" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="7" font-weight="900" fill="#0D0A06">HALISI</text>
+          <text x="50" y="63" text-anchor="middle" font-family="Arial,sans-serif" font-size="5" fill="#1A0F02">★ AUTHENTIC ★</text>
+        </svg>
+        <div class="bottle-float">
+          <img src="images/nkolo-bottle-real.png" alt="Vin Nkolo Mboka Bottle" class="hero-bottle" style="height: 480px; width: auto; object-fit: contain; filter: drop-shadow(0 10px 25px rgba(0,0,0,0.55));">
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -659,15 +823,15 @@ input[type=number] { -moz-appearance: textfield; }
       <p class="range-sub" data-en="From traditional wine to refreshing kombucha — crafted for every taste, every occasion, every Tanzanian." data-sw="Kutoka divai ya asili hadi kombucha ya kuburudisha — imetengenezwa kwa kila ladha, kila tukio, kila Mtanzania.">From traditional wine to refreshing kombucha — crafted for every taste, every occasion, every Tanzanian.</p>
     </div>
     <div class="range-grid reveal">
-      <div class="prod-card wine">
+      <div class="prod-card wine" onclick="openProductModal('wine')" style="cursor:pointer;">
         <div class="prod-bottle-zone"><div class="prod-glow wine-glow"></div>
-          <img src="images/hero-bottle.png" alt="Nkolo Mboka" loading="lazy" style="height: 160px; width: auto; object-fit: contain; position: relative; z-index: 2;">
+          <img src="images/nkolo-bottle-real.png" alt="Nkolo Mboka" loading="lazy" style="height: 160px; width: auto; object-fit: contain; position: relative; z-index: 2;">
         </div>
         <div class="prod-category">Traditional Wine</div><div class="prod-name">Nkolo Mboka</div>
         <div class="prod-desc">A premium traditional wine crafted with natural ingredients, offering a rich and authentic taste of African heritage.</div>
         <div class="size-tags"><span class="size-tag">330ml</span></div>
       </div>
-      <div class="prod-card kombu">
+      <div class="prod-card kombu" onclick="openProductModal('kombu')" style="cursor:pointer;">
         <div class="prod-bottle-zone"><div class="prod-glow kombu-glow"></div>
           <img src="images/bottle-kombu.png" alt="Ola Kombucha" loading="lazy" style="height: 160px; width: auto; object-fit: contain; position: relative; z-index: 2;">
         </div>
@@ -675,7 +839,7 @@ input[type=number] { -moz-appearance: textfield; }
         <div class="prod-desc">Naturally fermented sparkling kombucha tea packed with probiotics and organic nutrients to refresh and revitalize.</div>
         <div class="size-tags"><span class="size-tag">330ml</span></div>
       </div>
-      <div class="prod-card ginger">
+      <div class="prod-card ginger" onclick="openProductModal('ginger')" style="cursor:pointer;">
         <div class="prod-bottle-zone"><div class="prod-glow ginger-glow"></div>
           <img src="images/bottle-ginger.png" alt="Ginger Punch" loading="lazy" style="height: 160px; width: auto; object-fit: contain; position: relative; z-index: 2;">
         </div>
@@ -683,7 +847,7 @@ input[type=number] { -moz-appearance: textfield; }
         <div class="prod-desc">Zesty, fiery, and bold ginger beverage brewed from the finest local ginger root and natural spices.</div>
         <div class="size-tags"><span class="size-tag">330ml</span></div>
       </div>
-      <div class="prod-card energy">
+      <div class="prod-card energy" onclick="openProductModal('energy')" style="cursor:pointer;">
         <div class="prod-bottle-zone"><div class="prod-glow energy-glow"></div>
           <img src="images/bottle-energy.png" alt="Hard Rock" loading="lazy" style="height: 160px; width: auto; object-fit: contain; position: relative; z-index: 2;">
         </div>
@@ -1032,6 +1196,17 @@ input[type=number] { -moz-appearance: textfield; }
     </div>
   </div>
 </footer>
+<!-- =====================
+     PRODUCT DETAILS MODAL
+===================== -->
+<div id="product-modal" class="modal-overlay" onclick="handleModalOverlayClick(event)">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeProductModal()">×</button>
+    <div id="product-modal-content">
+      <!-- Filled dynamically by JavaScript -->
+    </div>
+  </div>
+</div>
 
 <div class="wa-widget" id="waWidget">
   <div class="wa-popover" id="waPopover">
@@ -1469,6 +1644,128 @@ if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
     requestAnimationFrame(animateTrail);
   }
   animateTrail();
+}
+
+// ── PRODUCT DETAILS MODAL LOGIC ──
+const MODAL_PRODUCT_DATA = {
+  wine: {
+    category_en: "Traditional Wine",
+    category_sw: "Divai ya Asili",
+    title: "Vin Nkolo Mboka",
+    img: "images/nkolo-bottle-real.png",
+    desc_en: "Born from Tanzania's fertile highlands, Nkolo Mboka blends the fiery warmth of fresh ginger root with the sweetness of wild honey — a bold, warming spirit unlike anything else on the continent.",
+    desc_sw: "Ikitokea kwenye miinuko yenye rutuba ya Tanzania, Nkolo Mboka inachanganya joto kali la tangawizi mbichi na utamu wa asali ya nyuki wadogo — kinywaji kikali cha kusisimua kisichofanana na kingine chochote barani.",
+    vol: "12%",
+    size: "330ml",
+    origin_en: "Dar es Salaam, TZ",
+    origin_sw: "Dar es Salaam, TZ",
+    ingredients_en: ["🫚 Wild Ginger", "🍯 Wild Honey", "🌿 Native Botanicals", "💧 Pure Highland Water"],
+    ingredients_sw: ["🫚 Tangawizi Pori", "🍯 Asali ya Nyuki", "🌿 Mimea Asilia", "💧 Maji Safi ya Milimani"]
+  },
+  kombu: {
+    category_en: "Probiotic Tea",
+    category_sw: "Chai ya Kibaolojia",
+    title: "Ola Kombucha",
+    img: "images/bottle-kombu.png",
+    desc_en: "A naturally fermented organic sparkling tea, packed with live probiotics, antioxidants, and organic acids to refresh the mind and support digestive wellness.",
+    desc_sw: "Chai ya kikaboni iliyochachushwa kiasili, iliyojaa probiotics hai, vioksidishaji, na asidi za kikaboni ili kuburudisha akili na kusaidia mfumo wa kusaga chakula.",
+    vol: "0.5% (Non-Alcoholic)",
+    size: "330ml",
+    origin_en: "Dar es Salaam, TZ",
+    origin_sw: "Dar es Salaam, TZ",
+    ingredients_en: ["🍵 Black Tea", "🍵 Green Tea", "🍬 Organic Sugar", "🦠 SCOBY Culture"],
+    ingredients_sw: ["🍵 Chai Nyeusi", "🍵 Chai ya Kijani", "🍬 Sukari ya Kikaboni", "🦠 Vijidudu vya Chachu"]
+  },
+  ginger: {
+    category_en: "Spiced Beverage",
+    category_sw: "Kinywaji Chenye Viungo",
+    title: "Ginger Punch",
+    img: "images/bottle-ginger.png",
+    desc_en: "A zesty and sparkling ginger soda crafted with fresh organic ginger juice and natural botanical extracts for an invigorating flavor profile.",
+    desc_sw: "Soda ya tangawizi yenye povu na viungo hadi tangawizi iliyotengenezwa kwa juisi mbichi ya tangawizi na dondoo asilia za mimea kwa ladha yenye nguvu.",
+    vol: "4.5%",
+    size: "330ml",
+    origin_en: "Dar es Salaam, TZ",
+    origin_sw: "Dar es Salaam, TZ",
+    ingredients_en: ["🫚 Fresh Ginger Juice", "🍋 Lemon Zest", "🍬 Natural Cane Sugar", "💧 Sparkling Water"],
+    ingredients_sw: ["🫚 Juisi ya Tangawizi", "🍋 Ganda la Limao", "🍬 Sukari ya Miwa", "💧 Maji yenye Povu"]
+  },
+  energy: {
+    category_en: "Energy Drink",
+    category_sw: "Kinywaji cha Kuongeza Nguvu",
+    title: "Hard Rock",
+    img: "images/bottle-energy.png",
+    desc_en: "A premium physical stamina and focus formula, designed to deliver clean energy, sustained athletic performance, and mental clarity.",
+    desc_sw: "Fomula ya kiwango cha juu kwa ajili ya stamina ya mwili na umakini, iliyoundwa kutoa nishati safi, utendaji endelevu, na uwazi wa akili.",
+    vol: "0.0%",
+    size: "330ml",
+    origin_en: "Dar es Salaam, TZ",
+    origin_sw: "Dar es Salaam, TZ",
+    ingredients_en: ["⚡ Caffeine", "🔋 B-Vitamins", "🍊 Natural Citrus Extracts", "💧 Carbonated Water"],
+    ingredients_sw: ["⚡ Kafeini", "🔋 Vitamini B", "🍊 Dondoo za Matunda", "💧 Maji yenye Povu"]
+  }
+};
+
+function openProductModal(prodKey) {
+  const prod = MODAL_PRODUCT_DATA[prodKey];
+  if (!prod) return;
+  
+  const currentLang = localStorage.getItem('sbl_lang') || 'en';
+  
+  const category = currentLang === 'sw' ? prod.category_sw : prod.category_en;
+  const desc = currentLang === 'sw' ? prod.desc_sw : prod.desc_en;
+  const origin = currentLang === 'sw' ? prod.origin_sw : prod.origin_en;
+  const ingredients = currentLang === 'sw' ? prod.ingredients_sw : prod.ingredients_en;
+  
+  const ingHTML = ingredients.map(ing => `<span class="modal-ing-pill">${ing}</span>`).join('');
+  
+  const html = `
+    <div class="modal-grid">
+      <div class="modal-bottle-zone">
+        <img src="${prod.img}" alt="${prod.title}" class="modal-bottle-img" />
+      </div>
+      <div class="modal-info-zone">
+        <div class="modal-category">${category}</div>
+        <h3 class="modal-title">${prod.title}</h3>
+        <p class="modal-desc">${desc}</p>
+        
+        <div class="modal-meta-row">
+          <div class="modal-meta-item">
+            <div class="lbl">Volume / Alc</div>
+            <div class="val">${prod.vol}</div>
+          </div>
+          <div class="modal-meta-item">
+            <div class="lbl">Size</div>
+            <div class="val">${prod.size}</div>
+          </div>
+          <div class="modal-meta-item">
+            <div class="lbl">Origin</div>
+            <div class="val">${origin}</div>
+          </div>
+        </div>
+        
+        <div class="modal-category">Key Ingredients</div>
+        <div class="modal-ingredients">
+          ${ingHTML}
+        </div>
+      </div>
+    </div>
+  `;
+  
+  document.getElementById('product-modal-content').innerHTML = html;
+  document.getElementById('product-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProductModal() {
+  document.getElementById('product-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleModalOverlayClick(e) {
+  if (e.target.id === 'product-modal') {
+    closeProductModal();
+  }
 }
 
 // ── PWA SERVICE WORKER ──
