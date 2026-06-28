@@ -251,6 +251,9 @@ footer{background:#080602;padding:5rem 0 2rem;border-top:1px solid var(--border-
 .custom-option:hover { background: rgba(245,166,35,0.15); color: var(--gold); }
 .custom-option.selected { background: rgba(245,166,35,0.25); color: var(--gold); font-weight: 600; }
 .custom-option.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number] { -moz-appearance: textfield; }
 </style>
 </head>
 <body>
@@ -487,7 +490,10 @@ footer{background:#080602;padding:5rem 0 2rem;border-top:1px solid var(--border-
           <div style="margin-bottom:1.75rem">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem">
               <label class="calc-label" style="margin:0" for="quantitySlider">Order Quantity</label>
-              <span id="casesLabel" style="font-family:'Oswald',sans-serif;font-size:1.2rem;font-weight:700;color:var(--gold)">10 cases</span>
+              <div style="display:flex;align-items:center;gap:6px;">
+                <input type="number" id="quantityInput" value="10" min="1" max="10000" style="background:rgba(13,10,6,.7); border:1px solid var(--border-gold); color:var(--gold); font-family:'Oswald',sans-serif; font-size:1.1rem; padding:2px 8px; width:80px; text-align:center; border-radius:4px; outline:none;">
+                <span style="font-family:'Oswald',sans-serif;font-size:1.1rem;font-weight:700;color:var(--gold)">cases</span>
+              </div>
             </div>
             <input type="range" id="quantitySlider" min="10" max="2000" value="10" step="10">
           </div>
@@ -540,7 +546,7 @@ footer{background:#080602;padding:5rem 0 2rem;border-top:1px solid var(--border-
             <div><label class="form-lbl">Last Name *</label><input id="fLastName" type="text" class="form-ctrl" placeholder="Doe" required></div>
           </div>
           <div style="margin-bottom:1.25rem"><label class="form-lbl">Email Address *</label><input id="fEmail" type="email" class="form-ctrl" placeholder="you@company.co.tz" required></div>
-          <div style="margin-bottom:1.25rem"><label class="form-lbl">Phone / WhatsApp</label><input id="fPhone" type="tel" class="form-ctrl" placeholder="+91 7XX XXX XXXX"></div>
+          <div style="margin-bottom:1.25rem"><label class="form-lbl">Phone / WhatsApp</label><input id="fPhone" type="tel" class="form-ctrl" placeholder="+255 7XX XXX XXXX"></div>
           <div style="margin-bottom:1.25rem"><label class="form-lbl">Company / Business Name *</label><input id="fCompany" type="text" class="form-ctrl" placeholder="Your business name" required></div>
           <div style="margin-bottom:1.25rem">
             <label class="form-lbl">Partnership Type *</label>
@@ -673,8 +679,15 @@ const PRODUCTS={
 // Current quote state (used by contact form)
 let quoteData=null;
 
-function updateCalc(){
-  const qty=parseInt(document.getElementById('quantitySlider').value,10);
+function updateCalc(e){
+  let qty=parseInt(document.getElementById('quantitySlider').value,10);
+  if(e && e.target.id === 'quantityInput') {
+    qty = parseInt(document.getElementById('quantityInput').value, 10) || 1;
+    document.getElementById('quantitySlider').value = qty;
+  } else {
+    document.getElementById('quantityInput').value = qty;
+  }
+  
   const prod=PRODUCTS[document.getElementById('productSelect').value];
   
   const freeCases = Math.floor(qty / 100) * 7;
@@ -685,7 +698,6 @@ function updateCalc(){
   const sel=document.getElementById('productSelect');
   const pname=sel.options[sel.selectedIndex].text;
 
-  document.getElementById('casesLabel').textContent=qty+' cases';
   document.getElementById('basePrice').textContent='Tsh '+prod.basePrice.toLocaleString();
   document.getElementById('unitPrice').textContent='Tsh '+Math.round(effectiveUnitPrice).toLocaleString();
   document.getElementById('freeCasesVal').textContent=freeCases > 0 ? '+'+freeCases : '0';
@@ -696,6 +708,7 @@ function updateCalc(){
   quoteData={pname,qty,total,freeCases};
 }
 document.getElementById('quantitySlider').addEventListener('input',updateCalc);
+document.getElementById('quantityInput').addEventListener('input',updateCalc);
 document.getElementById('productSelect').addEventListener('change',updateCalc);
 updateCalc();
 
