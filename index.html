@@ -936,9 +936,6 @@ input[type=number] { -moz-appearance: textfield; }
               <label class="calc-label" for="productSelect" data-en="Select Product" data-sw="Chagua Bidhaa">Select Product</label>
               <select id="productSelect" class="calc-select">
                 <option value="nkolomoka_330" selected>Vin Nkolo Mboka 330ml</option>
-                <option value="ola_kombucha_330">Ola Kombucha 330ml</option>
-                <option value="ginger_punch_330">Ginger Punch 330ml</option>
-                <option value="hard_rock_330">Hard Rock 330ml</option>
               </select>
             </div>
           </div>
@@ -954,18 +951,8 @@ input[type=number] { -moz-appearance: textfield; }
             <div id="qtyWarning" style="display:none; color:#E24B4A; font-size:12px; margin-top:8px; font-weight:600; text-align:right;" data-en="Minimum order is 10 cases" data-sw="Kiwango cha chini cha oda ni kreti 10">Minimum order is 10 cases</div>
           </div>
           <div class="calc-results-box">
-            <div class="result-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; text-align:center;">
-              <div style="border-right:1px solid rgba(245,166,35,0.15); padding-right:10px;">
-                <span class="result-lbl" style="font-size:10px; display:block; text-transform:uppercase; color:var(--gold); margin-bottom:4px;" data-en="Free Cases Added" data-sw="Kreti za Bure">Free Cases Added</span>
-                <span class="result-val gold" id="freeCasesVal" style="font-size:2.2rem; font-family:'Oswald',sans-serif; font-weight:700; color:var(--gold);">0</span>
-              </div>
-              <div>
-                <span class="result-lbl" style="font-size:10px; display:block; text-transform:uppercase; color:var(--gold); margin-bottom:4px;" data-en="Est. Price (TZS)" data-sw="Bei (TZS)">Est. Price (TZS)</span>
-                <span class="result-val" id="estPriceVal" style="font-size:2.2rem; font-family:'Oswald',sans-serif; font-weight:700; color:var(--white);">0</span>
-                <span id="savingsWrapper" style="display:none; font-size:11px; color:#4caf50; font-weight:600; margin-top:2px; display:block;">
-                  <span data-en="Saved: " data-sw="Umeokoa: ">Saved: </span><span id="estSavingsVal">0</span> TZS
-                </span>
-              </div>
+            <div class="result-grid" style="grid-template-columns:1fr; gap:0;">
+              <div style="text-align:center;"><span class="result-lbl" data-en="Free Cases Added To Order" data-sw="Kreti za Bure Kwenye Oda Hii">Free Cases Added To Order</span><span class="result-val gold" id="freeCasesVal" style="font-size:2.6rem;">0</span></div>
             </div>
           </div>
           <!-- CREATE ENQUIRY — scrolls to form + pre-fills message -->
@@ -1279,10 +1266,6 @@ const PRODUCTS={
 // Current quote state (used by contact form)
 let quoteData=null;
 
-function formatMoney(num) {
-  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
 function updateCalc(e){
   let qty=parseInt(document.getElementById('quantitySlider').value,10);
   if(e && e.target.id === 'quantityInput') {
@@ -1306,8 +1289,6 @@ function updateCalc(e){
     btn.style.opacity = '0.5';
     btn.style.cursor = 'not-allowed';
     document.getElementById('freeCasesVal').textContent = '0';
-    document.getElementById('estPriceVal').textContent = '0';
-    document.getElementById('savingsWrapper').style.display = 'none';
     quoteData = null;
     return;
   }
@@ -1322,32 +1303,10 @@ function updateCalc(e){
   const sel=document.getElementById('productSelect');
   const pname=sel.options[sel.selectedIndex].text;
 
-  // Calculate pricing tier
-  const basePrice = prod.basePrice;
-  let discount = 0;
-  if (qty >= 500) {
-    discount = 0.10; // 10% off
-  } else if (qty >= 100) {
-    discount = 0.05; // 5% off
-  }
-  
-  const unitPrice = basePrice * (1 - discount);
-  const totalPrice = qty * unitPrice;
-  const totalSavings = qty * basePrice * discount;
-
   document.getElementById('freeCasesVal').textContent=freeCases > 0 ? '+'+freeCases : '0';
-  document.getElementById('estPriceVal').textContent = formatMoney(totalPrice);
-  
-  const savingsWrap = document.getElementById('savingsWrapper');
-  if (totalSavings > 0) {
-    document.getElementById('estSavingsVal').textContent = formatMoney(totalSavings);
-    savingsWrap.style.display = 'block';
-  } else {
-    savingsWrap.style.display = 'none';
-  }
 
   // Store for form use
-  quoteData={pname,qty,freeCases,totalPrice,totalSavings};
+  quoteData={pname,qty,freeCases};
 }
 document.getElementById('quantitySlider').addEventListener('input',updateCalc);
 document.getElementById('quantityInput').addEventListener('input',updateCalc);
@@ -1357,8 +1316,8 @@ updateCalc();
 // ── CREATE ENQUIRY: scroll to form + pre-fill message
 function createEnquiry(){
   if(!quoteData)return;
-  const {pname,qty,freeCases,totalPrice,totalSavings}=quoteData;
-  const msg=`I'd like to enquire about: ${pname} × ${qty} cases. Est. Price: ${formatMoney(totalPrice)} TZS.${totalSavings>0?' (Saved: '+formatMoney(totalSavings)+' TZS!)':''}${freeCases>0?' (Includes '+freeCases+' FREE cases!)':''}`;
+  const {pname,qty,freeCases}=quoteData;
+  const msg=`I'd like to enquire about: ${pname} × ${qty} cases.${freeCases>0?' (Includes '+freeCases+' FREE cases!)':''}`;
 
   // Fill message field
   document.getElementById('fMessage').value=msg;
