@@ -504,6 +504,172 @@ input[type=number] { -moz-appearance: textfield; }
 .age-gate-overlay.hidden .age-gate-modal {
   transform: translateY(30px) scale(0.95);
 }
+
+/* ===========================
+   POUR ANIMATION SECTION
+=========================== */
+#pour-scene {
+  height: 550vh;
+  position: relative;
+  background: var(--black);
+}
+
+.pour-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--black);
+}
+
+/* Subtle radial glow behind the whole scene */
+.pour-sticky::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(245,166,35,.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+#pour-svg {
+  width: min(460px, 88vw);
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 0 40px rgba(245,166,35,.08));
+}
+
+.pour-title-overlay {
+  position: absolute;
+  bottom: 9%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.pour-brand {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1.9rem, 4.8vw, 4.2rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--white) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: .06em;
+  line-height: 1;
+}
+
+.pour-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: .75rem;
+  color: var(--gold);
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  margin-top: 14px;
+  opacity: 0;
+  transition: opacity .7s ease;
+}
+.pour-sub.show { opacity: 1; }
+
+.pour-scroll-cue {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: var(--gold);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  transition: opacity .4s;
+}
+.pour-arrow {
+  margin-top: 8px;
+  font-size: 1.2rem;
+  animation: bounceCue 1.6s ease-in-out infinite;
+}
+@keyframes bounceCue {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(10px); }
+}
+
+/* Progress bar along side */
+.pour-progress-bar {
+  position: absolute;
+  left: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 200px;
+  background: rgba(245,166,35,.12);
+  border-radius: 2px;
+}
+.pour-progress-fill {
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(to bottom, var(--gold), var(--gold-light));
+  border-radius: 2px;
+  transition: height .1s linear;
+}
+
+/* Stage labels that appear on the right */
+.pour-stage-label {
+  position: absolute;
+  right: 32px;
+  font-family: 'Inter', sans-serif;
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0;
+  transition: opacity .4s ease;
+  text-align: right;
+}
+.pour-stage-label.show { opacity: 1; }
+#psl-1 { top: 22%; }
+#psl-2 { top: 36%; }
+#psl-3 { top: 52%; }
+#psl-4 { top: 66%; }
+#psl-5 { bottom: 22%; }
+
+/* Premium Flowing Liquid Animation for Pour Stream */
+#ps-sp2 {
+  stroke-dasharray: 12, 16;
+  animation: pourFlow 0.8s linear infinite;
+  stroke-linecap: round;
+}
+
+#ps-sp {
+  animation: streamPulse 0.15s ease-in-out infinite alternate;
+}
+
+@keyframes pourFlow {
+  to {
+    stroke-dashoffset: -56;
+  }
+}
+
+@keyframes streamPulse {
+  0% {
+    opacity: 0.78;
+  }
+  100% {
+    opacity: 0.86;
+  }
+}
+
+@media (max-width: 768px) {
+  #pour-scene { height: auto; }
+  .pour-sticky { position: relative; height: auto; padding: 100px 0; top: auto; overflow: visible; }
+  .pour-progress-bar, .pour-stage-label { display: none; }
+}
 </style>
 </head>
 <body>
@@ -619,8 +785,142 @@ input[type=number] { -moz-appearance: textfield; }
           <text x="50" y="54" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="7" font-weight="900" fill="#0D0A06">HALISI</text>
           <text x="50" y="63" text-anchor="middle" font-family="Arial,sans-serif" font-size="5" fill="#1A0F02">★ AUTHENTIC ★</text>
         </svg>
-<div class="bottle-float">
-          <img src="images/hero-bottle.png" alt="Vin Nkolo Mboka Bottle" style="height: 540px; width: auto; object-fit: contain;">
+        <div class="bottle-float">
+          <svg viewBox="0 0 200 480" fill="none" xmlns="http://www.w3.org/2000/svg" class="hero-bottle" style="width:200px;height:auto;">
+            <defs>
+              <!-- PREMIUM GREEN WINE BOTTLE GRADIENTS -->
+              <linearGradient id="hb-cap" x1="80" y1="0" x2="120" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#1b5e20"/>
+                <stop offset="50%" stop-color="#4caf50"/>
+                <stop offset="100%" stop-color="#0d5c14"/>
+              </linearGradient>
+              <linearGradient id="hb-foil" x1="72" y1="0" x2="128" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#1b5e20"/>
+                <stop offset="50%" stop-color="#4caf50"/>
+                <stop offset="100%" stop-color="#0d5c14"/>
+              </linearGradient>
+              <linearGradient id="hb-glass" x1="60" y1="0" x2="140" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#0a2a0d"/>
+                <stop offset="30%" stop-color="#15531d"/>
+                <stop offset="70%" stop-color="#0f3d1b"/>
+                <stop offset="100%" stop-color="#051c08"/>
+              </linearGradient>
+              <linearGradient id="hb-sleeve" x1="60" y1="0" x2="140" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#f5f2eb"/>
+                <stop offset="50%" stop-color="#ffffff"/>
+                <stop offset="100%" stop-color="#e8e5dc"/>
+              </linearGradient>
+              <linearGradient id="hb-label-dark" x1="62" y1="0" x2="138" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#211003"/>
+                <stop offset="50%" stop-color="#311b0b"/>
+                <stop offset="100%" stop-color="#1a0b02"/>
+              </linearGradient>
+              <linearGradient id="hb-glass-shine" x1="38" y1="0" x2="162" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+                <stop offset="30%" stop-color="rgba(255,255,255,0.12)"/>
+                <stop offset="50%" stop-color="rgba(255,255,255,0.22)"/>
+                <stop offset="70%" stop-color="rgba(255,255,255,0.08)"/>
+                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+              </linearGradient>
+              <!-- Lion logo def -->
+              <g id="lion-logo">
+                <path d="M-10 -7 Q-5 -9 0 -9 Q5 -9 10 -7 L12 -12 L6 -16 L3 -12 L0 -20 L-3 -12 L-6 -16 L-12 -12 Z" fill="#d4af37"/>
+                <circle cx="0" cy="-20" r="1.5" fill="#d4af37"/>
+                <circle cx="-6" cy="-16" r="1.2" fill="#d4af37"/>
+                <circle cx="6" cy="-16" r="1.2" fill="#d4af37"/>
+                <circle cx="-12" cy="-12" r="1.0" fill="#d4af37"/>
+                <circle cx="12" cy="-12" r="1.0" fill="#d4af37"/>
+                <path d="M-2.5 3 L2.5 3 L1 7 L-1 7 Z" fill="#000000"/>
+                <path d="M-1 7 Q0 8 1 7 Q0 9.5 0 12" stroke="#000000" stroke-width="0.8" fill="none"/>
+                <path d="M-4 6 Q-2 7 0 6.5 Q2 7 4 6" stroke="#000000" stroke-width="0.8" fill="none"/>
+                <path d="M-6 -0.5 Q-4 -2.5 -2 -1.5" stroke="#000000" stroke-width="1.2" fill="none"/>
+                <path d="M2 -1.5 Q4 -2.5 6 -0.5" stroke="#000000" stroke-width="1.2" fill="none"/>
+                <polygon points="-5,-1 -3,-1.5 -2,-1 -3,-0.5" fill="#000000"/>
+                <polygon points="5,-1 3,-1.5 2,-1 3,-0.5" fill="#000000"/>
+                <path d="M-3 -4 Q0 -5.5 3 -4" stroke="#000000" stroke-width="0.8" fill="none"/>
+                <path d="M-2.5 -6 Q0 -8 2.5 -6" stroke="#000000" stroke-width="0.8" fill="none"/>
+                <path d="M-3 -8 L0 -12 L3 -8 L0 -9 Z" fill="#000000"/>
+                <path d="M-2 -10 C-6 -10 -9 -7 -10 -4 L-8 -5 C-7 -7 -5 -8 -2 -8 Z" fill="#000000"/>
+                <path d="M-10 -4 C-13 -3 -15 0 -15 4 L-12 2 C-12 0 -10 -2 -8 -3 Z" fill="#000000"/>
+                <path d="M-15 4 C-16 8 -14 11 -11 13 L-10 10 C-11 9 -12 7 -12 4 Z" fill="#000000"/>
+                <path d="M-11 13 C-8 15 -5 15 -2 13 L-3 11 C-5 12 -7 12 -9 11 Z" fill="#000000"/>
+                <path d="M2 -10 C6 -10 9 -7 10 -4 L8 -5 C7 -7 5 -8 2 -8 Z" fill="#000000"/>
+                <path d="M10 -4 C13 -3 15 0 15 4 L12 2 C12 0 10 -2 8 -3 Z" fill="#000000"/>
+                <path d="M15 4 C16 8 14 11 11 13 L10 10 C11 9 12 7 12 4 Z" fill="#000000"/>
+                <path d="M11 13 C8 15 5 15 2 13 L3 11 C5 12 7 12 9 11 Z" fill="#000000"/>
+                <path d="M0 12 L-2 15 L0 18 L2 15 Z" fill="#000000"/>
+                <path d="M-3 11 L-5 14 L-2 15 L-1 13 Z" fill="#000000"/>
+                <path d="M3 11 L5 14 L2 15 L1 13 Z" fill="#000000"/>
+              </g>
+            </defs>
+            <g id="hb-cap-grp">
+              <rect x="86" y="15" width="28" height="8" rx="2" fill="url(#hb-cap)"/>
+              <rect x="80" y="23" width="40" height="32" rx="3" fill="url(#hb-cap)"/>
+              <line x1="86" y1="23" x2="86" y2="55" stroke="rgba(10,42,13,0.6)" stroke-width="1.5"/>
+              <line x1="91" y1="23" x2="91" y2="55" stroke="rgba(10,42,13,0.6)" stroke-width="1.5"/>
+              <line x1="96" y1="23" x2="96" y2="55" stroke="rgba(10,42,13,0.6)" stroke-width="1.5"/>
+              <line x1="101" y1="23" x2="101" y2="55" stroke="rgba(10,42,13,0.6)" stroke-width="1.5"/>
+              <line x1="106" y1="23" x2="106" y2="55" stroke="rgba(10,42,13,0.6)" stroke-width="1.5"/>
+              <line x1="111" y1="23" x2="111" y2="55" stroke="rgba(10,42,13,0.6)" stroke-width="1.5"/>
+              <line x1="116" y1="23" x2="116" y2="55" stroke="rgba(10,42,13,0.6)" stroke-width="1.5"/>
+              <rect x="80" y="25" width="40" height="5" rx="1" fill="rgba(255,255,255,0.2)"/>
+            </g>
+
+            <!-- GLASS NECK (green glass — tapered & long) -->
+            <path d="M84 55 L78 150 L122 150 L116 55 Z" fill="url(#hb-foil)"/>
+            <line x1="84" y1="55" x2="78" y2="150" stroke="rgba(10,42,13,0.3)" stroke-width="0.8"/>
+            <line x1="100" y1="55" x2="100" y2="150" stroke="rgba(255,255,255,0.3)" stroke-width="0.6"/>
+            <line x1="116" y1="55" x2="122" y2="150" stroke="rgba(10,42,13,0.3)" stroke-width="0.8"/>
+
+            <!-- Chevron shoulder band -->
+            <rect x="77" y="147" width="46" height="6" fill="#ffffff" />
+            <path d="M78 147 L81 153 L84 147 L87 153 L90 147 L93 153 L96 147 L99 153 L102 147 L105 153 L108 147 L111 153 L114 147 L117 153 L120 147 L122 153" stroke="#000000" stroke-width="1.8" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+
+            <!-- GLASS BODY (slender green tapered) -->
+            <path d="M84 55 L78 150 Q70 175 60 200 L60 380 Q60 420 100 426 Q140 420 140 380 L140 200 Q130 175 122 150 L116 55 Z" fill="url(#hb-glass)"/>
+            <path d="M84 55 L78 150 Q70 175 60 200 L60 380 Q60 420 100 426 Q140 420 140 380 L140 200 Q130 175 122 150 L116 55 Z" fill="url(#hb-glass-shine)"/>
+            <path d="M84 55 L78 150 Q70 175 60 200 L60 380 Q60 420 100 426 Q140 420 140 380 L140 200 Q130 175 122 150 L116 55 Z" fill="none" stroke="rgba(129,199,132,0.35)" stroke-width="2"/>
+
+            <!-- SHOULDER WRAPPER (white sleeve) -->
+            <path d="M78 150 Q70 175 60 200 L60 230 L140 230 L140 200 Q130 175 122 150 Z" fill="url(#hb-sleeve)"/>
+
+            <!-- DARK BROWN LABEL -->
+            <rect x="62" y="230" width="76" height="135" rx="4" fill="url(#hb-label-dark)"/>
+            <rect x="62" y="230" width="76" height="135" rx="4" fill="none" stroke="#c9a84c" stroke-width="2.2"/>
+            <rect x="67" y="235" width="66" height="125" rx="2" fill="none" stroke="#c9a84c" stroke-width="0.8"/>
+
+            <!-- Lion badge on label -->
+            <circle cx="100" cy="263" r="17" fill="#ffffff" stroke="#d4af37" stroke-width="1.5"/>
+            <circle cx="100" cy="263" r="12" fill="none" stroke="rgba(212,175,55,0.5)" stroke-width="0.7"/>
+            <g transform="translate(100,263) scale(0.72)">
+              <use href="#lion-logo"/>
+            </g>
+
+            <!-- Brand name on label -->
+            <text x="100" y="291" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="900" font-size="8.5" fill="#ffffff" letter-spacing="1.5">VIN</text>
+            <line x1="72" y1="294" x2="128" y2="294" stroke="#d4af37" stroke-width="0.7"/>
+            <text x="100" y="306" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="900" font-size="11.5" fill="none" stroke="#ffffff" stroke-width="0.8" letter-spacing="1.5">NKOLO</text>
+            <text x="100" y="320" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="900" font-size="11.5" fill="none" stroke="#ffffff" stroke-width="0.8" letter-spacing="1.5">MBOKA</text>
+            <line x1="72" y1="324" x2="128" y2="324" stroke="#d4af37" stroke-width="0.7"/>
+            <text x="100" y="333" text-anchor="middle" font-family="'Inter',sans-serif" font-size="3.2" fill="#d4af37" letter-spacing="0.8">GINGER-BASED ALCOHOLIC BEVERAGE</text>
+            <text x="100" y="342" text-anchor="middle" font-family="'Inter',sans-serif" font-size="3.0" fill="#e8e5dc" letter-spacing="0.4">330 ml · 12% Vol · Dar es Salaam</text>
+
+            <!-- RED SWAHILI BANNER -->
+            <rect x="62" y="347" width="76" height="18" rx="2" fill="#b71c1c"/>
+            <text x="100" y="358" text-anchor="middle" font-family="'Inter',sans-serif" font-weight="700" font-size="2.8" fill="#ffffff" letter-spacing="0.1">NGUVU YA SIMBA · FAHARI YA TANZANIA</text>
+
+            <!-- Bottom chevron band pattern -->
+            <rect x="62" y="367" width="76" height="6" fill="#ffffff" />
+            <path d="M62 367 L66 373 L70 367 L74 373 L78 367 L82 373 L86 367 L90 373 L94 367 L98 373 L102 367 L106 373 L110 367 L114 373 L118 367 L122 373 L126 367 L130 373 L134 367 L138 373" stroke="#000000" stroke-width="1.8" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+
+            <!-- GLASS SHEEN EFFECTS -->
+            <path d="M66 84 Q63 200 66 390" stroke="rgba(255,255,255,0.12)" stroke-width="7" stroke-linecap="round"/>
+            <path d="M72 82 Q70 160 72 340" stroke="rgba(255,255,255,0.08)" stroke-width="3" stroke-linecap="round"/>
+            <path d="M80 84 Q100 90 120 84" stroke="rgba(255,255,255,0.15)" stroke-width="3" stroke-linecap="round"/>
+
+            <!-- BASE SHADOW -->
+            <ellipse cx="100" cy="422" rx="40" ry="5" fill="rgba(10,40,15,0.3)"/>
+          </svg>
         </div>
       </div>
     </div>
@@ -634,6 +934,342 @@ input[type=number] { -moz-appearance: textfield; }
     <span>Nguvu Ya Simba</span><span class="dot">✦</span><span>Fahari Ya Tanzania</span><span class="dot">✦</span><span>Nguvu Halisi</span><span class="dot">✦</span><span>Vin Nkolo Mboka</span><span class="dot">✦</span><span>Ginger Based Alcoholic Beverage</span><span class="dot">✦</span><span>Made in Tanzania</span><span class="dot">✦</span>
   </div>
 </div>
+
+<!-- =====================
+     POUR ANIMATION (scroll-driven)
+===================== -->
+<section id="pour-scene">
+  <div class="pour-sticky">
+
+    <!-- Side progress bar -->
+    <div class="pour-progress-bar">
+      <div class="pour-progress-fill" id="ps-prog"></div>
+    </div>
+
+    <!-- Stage labels -->
+    <div class="pour-stage-label" id="psl-1">Opening the bottle</div>
+    <div class="pour-stage-label" id="psl-2">Ready to pour</div>
+    <div class="pour-stage-label" id="psl-3">Pouring the drink</div>
+    <div class="pour-stage-label" id="psl-4">Filling the glass</div>
+    <div class="pour-stage-label" id="psl-5">Enjoy every drop</div>
+
+    <svg id="pour-svg" viewBox="0 0 600 760" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Premium Amber-Gold Beverage Gradient for Glass Fill -->
+        <linearGradient id="ps-liq" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#ffeb84"/>
+          <stop offset="15%"  stop-color="#e8c96b"/>
+          <stop offset="55%"  stop-color="#b88328"/>
+          <stop offset="100%" stop-color="#6e3e08" stop-opacity=".95"/>
+        </linearGradient>
+        <!-- Cylindrical 3D Light Reflection Gradient for Stream -->
+        <linearGradient id="ps-stream-grad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#ab751b"/>
+          <stop offset="25%" stop-color="#e8c96b"/>
+          <stop offset="50%" stop-color="#fff4bd"/>
+          <stop offset="75%" stop-color="#e8c96b"/>
+          <stop offset="100%" stop-color="#8a5308"/>
+        </linearGradient>
+        <!-- Inside-bottle Liquid Gradient (warm amber) -->
+        <linearGradient id="ps-liq-inside" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#3d1c00" stop-opacity="0.85"/>
+          <stop offset="50%" stop-color="#7a3a00" stop-opacity="0.75"/>
+          <stop offset="100%" stop-color="#2a1000" stop-opacity="0.90"/>
+        </linearGradient>
+        <!-- Green ribbed cap gradient -->
+        <linearGradient id="ps-cap-green" x1="280" y1="0" x2="320" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#1b5e20"/>
+          <stop offset="50%" stop-color="#4caf50"/>
+          <stop offset="100%" stop-color="#0d5c14"/>
+        </linearGradient>
+        <!-- Green glass neck gradient -->
+        <linearGradient id="ps-foil" x1="272" y1="0" x2="328" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#1b5e20"/>
+          <stop offset="50%" stop-color="#4caf50"/>
+          <stop offset="100%" stop-color="#0d5c14"/>
+        </linearGradient>
+        <!-- Green glass body gradient (shows dark brown beverage inside) -->
+        <linearGradient id="ps-bot-liq-grad" x1="260" y1="0" x2="340" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#0a2a0d"/>
+          <stop offset="30%" stop-color="#15531d"/>
+          <stop offset="70%" stop-color="#0f3d1b"/>
+          <stop offset="100%" stop-color="#051c08"/>
+        </linearGradient>
+        <!-- White shoulder sleeve gradient -->
+        <linearGradient id="ps-sleeve" x1="260" y1="0" x2="340" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#f5f2eb"/>
+          <stop offset="50%" stop-color="#ffffff"/>
+          <stop offset="100%" stop-color="#e8e5dc"/>
+        </linearGradient>
+        <!-- Dark brown label background -->
+        <linearGradient id="ps-label-dark" x1="262" y1="0" x2="338" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#211003"/>
+          <stop offset="50%" stop-color="#311b0b"/>
+          <stop offset="100%" stop-color="#1a0b02"/>
+        </linearGradient>
+        <!-- Green glass shine overlay -->
+        <linearGradient id="ps-bot-wrap-grad" x1="260" y1="0" x2="340" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+          <stop offset="30%" stop-color="rgba(255,255,255,0.12)"/>
+          <stop offset="55%" stop-color="rgba(255,255,255,0.22)"/>
+          <stop offset="80%" stop-color="rgba(255,255,255,0.08)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </linearGradient>
+        <radialGradient id="ps-glow" cx="50%" cy="40%" r="55%">
+          <stop offset="0%"   stop-color="#c9a84c" stop-opacity=".10"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+
+        <!-- ═══ PREMIUM GLASS GRADIENTS ═══ -->
+        <!-- Glass body fill: very transparent blue-white crystal tint -->
+        <linearGradient id="ps-glass-body" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="rgba(180,210,240,0.08)"/>
+          <stop offset="20%"  stop-color="rgba(220,235,255,0.12)"/>
+          <stop offset="50%"  stop-color="rgba(255,255,255,0.06)"/>
+          <stop offset="80%"  stop-color="rgba(200,220,245,0.10)"/>
+          <stop offset="100%" stop-color="rgba(160,190,225,0.05)"/>
+        </linearGradient>
+        <!-- Glass highlight streak gradient -->
+        <linearGradient id="ps-glass-highlight" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="rgba(255,255,255,0.35)"/>
+          <stop offset="30%"  stop-color="rgba(255,255,255,0.18)"/>
+          <stop offset="60%"  stop-color="rgba(255,255,255,0.06)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </linearGradient>
+        <!-- Stem / base fill gradient -->
+        <linearGradient id="ps-glass-stem" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="rgba(180,200,230,0.06)"/>
+          <stop offset="30%"  stop-color="rgba(220,235,255,0.14)"/>
+          <stop offset="50%"  stop-color="rgba(255,255,255,0.10)"/>
+          <stop offset="70%"  stop-color="rgba(220,235,255,0.12)"/>
+          <stop offset="100%" stop-color="rgba(180,200,230,0.04)"/>
+        </linearGradient>
+        <!-- Glass rim top shine -->
+        <linearGradient id="ps-glass-rim" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="rgba(255,255,255,0)"/>
+          <stop offset="20%"  stop-color="rgba(255,255,255,0.45)"/>
+          <stop offset="50%"  stop-color="rgba(255,255,255,0.60)"/>
+          <stop offset="80%"  stop-color="rgba(255,255,255,0.35)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </linearGradient>
+        <!-- Crystal base refraction gradient -->
+        <linearGradient id="ps-glass-base" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="rgba(180,200,230,0.04)"/>
+          <stop offset="25%"  stop-color="rgba(220,240,255,0.12)"/>
+          <stop offset="50%"  stop-color="rgba(255,255,255,0.16)"/>
+          <stop offset="75%"  stop-color="rgba(220,240,255,0.10)"/>
+          <stop offset="100%" stop-color="rgba(180,200,230,0.03)"/>
+        </linearGradient>
+
+        <!-- Bottle silhouette clip path — slender shape -->
+        <clipPath id="ps-bottle-clip">
+          <path d="M280 107 Q274 125 272 145 Q262 170 260 205 L260 425 Q260 460 300 466 Q340 460 340 425 L340 205 Q338 170 328 145 Q326 125 320 107 Z"/>
+        </clipPath>
+        <!-- Glass clip — matches new wider tapered tumbler body -->
+        <clipPath id="ps-gcl">
+          <polygon points="140,520 125,655 275,655 260,520"/>
+        </clipPath>
+        <!-- Splash clip (wider, just above glass rim) -->
+        <clipPath id="ps-scl">
+          <rect x="110" y="490" width="180" height="200"/>
+        </clipPath>
+        <!-- Soft glow blur for stream -->
+        <filter id="ps-blur" x="-60%" y="-20%" width="220%" height="140%">
+          <feGaussianBlur stdDeviation="5"/>
+        </filter>
+      </defs>
+
+      <!-- Ambient glow -->
+      <ellipse cx="300" cy="360" rx="290" ry="260" fill="url(#ps-glow)"/>
+
+      <!-- ═══ BOTTLE GROUP
+           Pivot is at (300,280) — mid-bottle, like a natural hand-hold.
+           At −72° the neck swings left to ≈(119,221), directly above glass. ═══ -->
+      <g id="ps-bot-grp">
+
+        <!-- ══ CAP (bright green screw-top) — slender tapered cap ══ -->
+        <g id="ps-cap-grp">
+          <rect x="286" y="15" width="28" height="8" rx="2" fill="url(#ps-cap-green)"/>
+          <rect x="280" y="23" width="40" height="32" rx="3" fill="url(#ps-cap-green)"/>
+          <line x1="286" y1="23" x2="286" y2="55" stroke="rgba(10,42,13,0.6)" stroke-width="1.5"/>
+          <line x1="291" y1="23" x2="291" y2="55" stroke="rgba(10,42,13,0.6)" stroke-width="1.5"/>
+          <line x1="296" y1="23" x2="296" y2="55" stroke="rgba(10,42,13,0.6)" stroke-width="1.5"/>
+          <line x1="301" y1="23" x2="301" y2="55" stroke="rgba(10,42,13,0.6)" stroke-width="1.5"/>
+          <line x1="306" y1="23" x2="306" y2="55" stroke="rgba(10,42,13,0.6)" stroke-width="1.5"/>
+          <line x1="311" y1="23" x2="311" y2="55" stroke="rgba(10,42,13,0.6)" stroke-width="1.5"/>
+          <line x1="316" y1="23" x2="316" y2="55" stroke="rgba(10,42,13,0.6)" stroke-width="1.5"/>
+          <rect x="280" y="25" width="40" height="5" rx="1" fill="rgba(255,255,255,0.2)"/>
+        </g>
+
+        <!-- ══ GLASS NECK (green glass — tapered & long) ══ -->
+        <path d="M284 55 L278 150 L322 150 L316 55 Z" fill="url(#ps-foil)"/>
+        <line x1="284" y1="55" x2="278" y2="150" stroke="rgba(10,42,13,0.3)" stroke-width="0.8"/>
+        <line x1="300" y1="55" x2="300" y2="150" stroke="rgba(255,255,255,0.3)" stroke-width="0.6"/>
+        <line x1="316" y1="55" x2="322" y2="150" stroke="rgba(10,42,13,0.3)" stroke-width="0.8"/>
+
+        <!-- Chevron shoulder band -->
+        <rect x="277" y="147" width="46" height="6" fill="#ffffff" />
+        <path d="M278 147 L281 153 L284 147 L287 153 L290 147 L293 153 L296 147 L299 153 L302 147 L305 153 L308 147 L311 153 L314 147 L317 153 L320 147 L322 153" stroke="#000000" stroke-width="1.8" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+
+        <!-- ══ GLASS BODY (slender green tapered) ══ -->
+        <path d="M284 55 L278 150 Q270 175 260 200 L260 380 Q260 420 300 426 Q340 420 340 380 L340 200 Q330 175 322 150 L316 55 Z" fill="url(#ps-bot-liq-grad)"/>
+        <path d="M284 55 L278 150 Q270 175 260 200 L260 380 Q260 420 300 426 Q340 420 340 380 L340 200 Q330 175 322 150 L316 55 Z" fill="url(#ps-bot-wrap-grad)"/>
+        <path d="M284 55 L278 150 Q270 175 260 200 L260 380 Q260 420 300 426 Q340 420 340 380 L340 200 Q330 175 322 150 L316 55 Z" fill="none" stroke="rgba(129,199,132,0.35)" stroke-width="2"/>
+
+        <!-- ══ SHOULDER WRAPPER (white sleeve) ══ -->
+        <path d="M278 150 Q270 175 260 200 L260 230 L340 230 L340 200 Q330 175 322 150 Z" fill="url(#ps-sleeve)"/>
+
+        <!-- ══ DARK BROWN LABEL ══ -->
+        <rect x="262" y="230" width="76" height="135" rx="4" fill="url(#ps-label-dark)"/>
+        <rect x="262" y="230" width="76" height="135" rx="4" fill="none" stroke="#c9a84c" stroke-width="2.5"/>
+        <rect x="267" y="235" width="66" height="125" rx="2" fill="none" stroke="#c9a84c" stroke-width="0.9"/>
+
+        <!-- Lion badge on label -->
+        <circle cx="300" cy="263" r="17" fill="#ffffff" stroke="#d4af37" stroke-width="1.5"/>
+        <circle cx="300" cy="263" r="12" fill="none" stroke="rgba(212,175,55,0.5)" stroke-width="0.7"/>
+        <use href="#lion-logo" x="300" y="263" transform="scale(0.72)" transform-origin="300 263"/>
+
+        <!-- Brand name on label -->
+        <text x="300" y="291" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="900" font-size="8.5" fill="#ffffff" letter-spacing="1.5">VIN</text>
+        <line x1="272" y1="294" x2="328" y2="294" stroke="#d4af37" stroke-width="0.7"/>
+        <text x="300" y="306" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="900" font-size="11.5" fill="none" stroke="#ffffff" stroke-width="0.8" letter-spacing="1.5">NKOLO</text>
+        <text x="300" y="320" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="900" font-size="11.5" fill="none" stroke="#ffffff" stroke-width="0.8" letter-spacing="1.5">MBOKA</text>
+        <line x1="272" y1="324" x2="328" y2="324" stroke="#d4af37" stroke-width="0.7"/>
+        <text x="300" y="333" text-anchor="middle" font-family="'Inter',sans-serif" font-size="3.2" fill="#d4af37" letter-spacing="0.8">GINGER-BASED ALCOHOLIC BEVERAGE</text>
+        <text x="300" y="342" text-anchor="middle" font-family="'Inter',sans-serif" font-size="3.0" fill="#e8e5dc" letter-spacing="0.4">330 ml · 12% Vol · Dar es Salaam</text>
+
+        <!-- ══ RED SWAHILI BANNER ══ -->
+        <rect x="262" y="347" width="76" height="18" rx="2" fill="#b71c1c"/>
+        <text x="300" y="358" text-anchor="middle" font-family="'Inter',sans-serif" font-weight="700" font-size="2.8" fill="#ffffff" letter-spacing="0.1">NGUVU YA SIMBA · FAHARI YA TANZANIA</text>
+
+        <!-- Bottom chevron band pattern -->
+        <rect x="262" y="367" width="76" height="6" fill="#ffffff" />
+        <path d="M262 367 L266 373 L270 367 L274 373 L278 367 L282 373 L286 367 L290 373 L294 367 L298 373 L302 367 L306 373 L310 367 L314 373 L318 367 L322 373 L326 367 L330 373 L334 367 L338 373" stroke="#000000" stroke-width="1.8" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+
+        <!-- ══ GLASS SHEEN ══ -->
+        <path d="M266 149 Q263 260 266 440" stroke="rgba(255,255,255,0.12)" stroke-width="8" stroke-linecap="round"/>
+        <path d="M272 147 Q270 220 272 380" stroke="rgba(255,255,255,0.08)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M280 149 Q300 155 320 149" stroke="rgba(255,255,255,0.15)" stroke-width="4" stroke-linecap="round"/>
+
+        <!-- Dynamic liquid inside bottle with counter-rotation -->
+        <g clip-path="url(#ps-bottle-clip)">
+          <g id="ps-bottle-liq-level-grp">
+            <rect id="ps-bottle-liq" x="100" y="130" width="400" height="340" fill="url(#ps-liq-inside)" />
+            <ellipse id="ps-bottle-liq-surface" cx="300" cy="130" rx="200" ry="7" fill="#c9a84c" opacity="0.55" />
+          </g>
+        </g>
+      </g>
+
+      <!-- ═══ LIQUID STREAM — soft, translucent, gravity-arc ═══ -->
+      <g id="ps-stream" opacity="0">
+        <path id="ps-sp3" d="" stroke="rgba(201,168,76,.18)" stroke-width="24"
+              fill="none" stroke-linecap="round" filter="url(#ps-blur)"/>
+        <path id="ps-sp"  d="" fill="url(#ps-stream-grad)" opacity=".80"/>
+        <path id="ps-sp2" d="" stroke="rgba(255,248,200,.75)" stroke-width="1.8"
+              fill="none" stroke-linecap="round"/>
+        <ellipse id="ps-splash" cx="200" cy="520" rx="0" ry="0"
+                 fill="none" stroke="rgba(201,168,76,.50)" stroke-width="1.5"/>
+        <circle class="ps-mdrip" cx="0" cy="0" r="2.5" fill="#e8c96b" opacity="0"/>
+        <circle class="ps-mdrip" cx="0" cy="0" r="1.8" fill="#c9a84c" opacity="0"/>
+        <circle class="ps-mdrip" cx="0" cy="0" r="2"   fill="#e8c96b" opacity="0"/>
+        <circle class="ps-sub-spark" cx="200" cy="655" r="2.2" fill="#ffe082" opacity="0"/>
+        <circle class="ps-sub-spark" cx="200" cy="655" r="1.5" fill="#ffd54f" opacity="0"/>
+        <circle class="ps-sub-spark" cx="200" cy="655" r="2.8" fill="#fff9c4" opacity="0"/>
+        <circle class="ps-sub-spark" cx="200" cy="655" r="1.8" fill="#ffca28" opacity="0"/>
+        <circle class="ps-sub-spark" cx="200" cy="655" r="2.0" fill="#ffe082" opacity="0"/>
+      </g>
+
+      <!-- ═══ COMPANY INTRO (right side, fades in while liquid falls) ═══ -->
+      <g id="ps-company" opacity="0">
+        <rect x="296" y="310" width="2" height="120" rx="1" fill="url(#ps-liq)" opacity=".35"/>
+        <g id="pit-1" opacity="0">
+          <text x="310" y="348"
+                font-family="Playfair Display,serif" font-size="22" font-weight="700"
+                fill="#c9a84c">Est. 1998</text>
+          <text x="310" y="368"
+                font-family="Inter,sans-serif" font-size="8.5" fill="#e8c96b"
+                letter-spacing="2.5">DAR ES SALAAM, Tanzania</text>
+        </g>
+        <line id="pit-div" x1="310" y1="380" x2="510" y2="380"
+              stroke="rgba(201,168,76,.2)" stroke-width=".8"/>
+        <g id="pit-2" opacity="0">
+          <text x="310" y="400" font-family="Inter,sans-serif" font-size="9.5" fill="#d0c8b8">12M+ Litres Annually</text>
+          <text x="310" y="418" font-family="Inter,sans-serif" font-size="9.5" fill="#d0c8b8">ISO Certified Quality</text>
+          <text x="310" y="436" font-family="Inter,sans-serif" font-size="9.5" fill="#d0c8b8">Proudly African · Premidis Group</text>
+        </g>
+      </g>
+
+      <!-- ═══ PREMIUM TUMBLER GLASS ═══ -->
+      <g id="ps-glass" opacity="0">
+        <polygon points="140,520 125,655 275,655 260,520" fill="url(#ps-glass-body)"/>
+        <polygon points="140,520 125,655 275,655 260,520" fill="none" stroke="rgba(200,220,255,0.28)" stroke-width="2"/>
+        <polygon points="146,524 131,652 269,652 254,524" fill="none" stroke="rgba(200,220,255,0.10)" stroke-width="1"/>
+        <line x1="138" y1="520" x2="262" y2="520" stroke="url(#ps-glass-rim)" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="144" y1="522" x2="256" y2="522" stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+        <rect x="122" y="655" width="156" height="25" rx="2" fill="url(#ps-glass-base)"/>
+        <line x1="125" y1="655" x2="275" y2="655" stroke="rgba(200,220,255,0.30)" stroke-width="1.8"/>
+        <line x1="145" y1="658" x2="140" y2="675" stroke="rgba(255,255,255,0.10)" stroke-width="0.8"/>
+        <line x1="175" y1="657" x2="172" y2="677" stroke="rgba(255,255,255,0.08)" stroke-width="0.6"/>
+        <line x1="200" y1="656" x2="200" y2="678" stroke="rgba(255,255,255,0.12)" stroke-width="0.7"/>
+        <line x1="225" y1="657" x2="228" y2="677" stroke="rgba(255,255,255,0.08)" stroke-width="0.6"/>
+        <line x1="255" y1="658" x2="260" y2="675" stroke="rgba(255,255,255,0.10)" stroke-width="0.8"/>
+        <path d="M145,526 L130,650" stroke="url(#ps-glass-highlight)" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+        <path d="M151,524 L137,650" stroke="rgba(255,255,255,0.10)" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M255,528 L268,648" stroke="rgba(255,255,255,0.06)" stroke-width="2" stroke-linecap="round"/>
+        <path id="ps-gfill" d="" fill="url(#ps-liq)" opacity=".82" clip-path="url(#ps-gcl)"/>
+        <ellipse id="ps-foam" cx="200" cy="680" rx="0" ry="0" fill="rgba(245,240,225,.38)" clip-path="url(#ps-gcl)"/>
+        <g id="ps-foam-dots" opacity="0">
+          <circle cx="155" cy="680" r="4.5" fill="rgba(255,255,255,.30)"/>
+          <circle cx="175" cy="680" r="3"   fill="rgba(255,255,255,.25)"/>
+          <circle cx="200" cy="680" r="5.5" fill="rgba(255,255,255,.22)"/>
+          <circle cx="225" cy="680" r="3.5" fill="rgba(255,255,255,.28)"/>
+          <circle cx="245" cy="680" r="4"   fill="rgba(255,255,255,.24)"/>
+        </g>
+        <rect x="192" y="680" width="16" height="26" rx="2" fill="url(#ps-glass-stem)" stroke="rgba(200,220,255,0.18)" stroke-width="1"/>
+        <line x1="200" y1="682" x2="200" y2="704" stroke="rgba(255,255,255,0.10)" stroke-width="1.5" stroke-linecap="round"/>
+        <ellipse cx="200" cy="706" rx="42" ry="8" fill="url(#ps-glass-base)" stroke="rgba(200,220,255,0.22)" stroke-width="1.2"/>
+        <ellipse cx="200" cy="705" rx="30" ry="3" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+        <g id="ps-bubbles">
+          <circle cx="156" cy="665" r="4"   fill="rgba(255,255,255,.30)" opacity="0"/>
+          <circle cx="186" cy="648" r="3"   fill="rgba(255,255,255,.25)" opacity="0"/>
+          <circle cx="222" cy="660" r="5"   fill="rgba(255,255,255,.20)" opacity="0"/>
+          <circle cx="174" cy="636" r="3.5" fill="rgba(255,255,255,.22)" opacity="0"/>
+          <circle cx="216" cy="624" r="4"   fill="rgba(255,255,255,.18)" opacity="0"/>
+          <circle cx="204" cy="668" r="2.5" fill="rgba(255,255,255,.28)" opacity="0"/>
+          <circle cx="168" cy="620" r="3"   fill="rgba(255,255,255,.22)" opacity="0"/>
+        </g>
+        <g id="ps-sparkles" opacity="0">
+          <path d="M125,510 L127,507 L129,510 L127,513 Z" fill="#e8c96b" opacity="0.80"/>
+          <path d="M125,510 L127,504 L129,510 L127,516 Z" fill="#e8c96b" opacity="0.35"/>
+          <path d="M265,508 L267,505 L269,508 L267,511 Z" fill="#c9a84c" opacity="0.65"/>
+          <path d="M112,544 L114,541 L116,544 L114,547 Z" fill="#e8c96b" opacity="0.50"/>
+          <path d="M112,544 L114,538 L116,544 L114,550 Z" fill="#e8c96b" opacity="0.20"/>
+          <path d="M276,546 L278,543 L280,546 L278,549 Z" fill="#c9a84c" opacity="0.45"/>
+          <circle cx="135" cy="525" r="1.5" fill="#ffe082" opacity="0.55"/>
+          <circle cx="270" cy="530" r="1.2" fill="#ffe082" opacity="0.40"/>
+        </g>
+      </g>
+
+      <!-- Shadow under glass -->
+      <ellipse id="ps-shadow" cx="200" cy="718" rx="0" ry="0" fill="rgba(0,0,0,.35)"/>
+
+    </svg>
+
+    <!-- Brand title (appears at end) -->
+    <div class="pour-title-overlay" id="ps-title">
+      <div class="pour-brand" id="ps-brand"></div>
+      <div class="pour-sub"   id="ps-sub">Premium Quality · Tanzania · Est. 1998</div>
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="pour-scroll-cue" id="ps-cue">
+      <div>Scroll to experience</div>
+      <div class="pour-arrow">↓</div>
+    </div>
+
+  </div>
+</section>
+
 
 <!-- FLAGSHIP PRODUCT -->
 <section class="product-section" id="product">
@@ -979,7 +1615,7 @@ input[type=number] { -moz-appearance: textfield; }
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="footer-brand-name">SIMBA BEVERAGES</div>
+        <img src="images/sbl-logo.png" alt="SBL Logo" style="height: 48px; width: auto; object-fit: contain; border-radius: 50%; margin-bottom: 1rem;" />
         <p data-en="A proudly Tanzanian beverage company crafting premium spirits from the heart of East Africa." data-sw="Kampuni ya vinywaji ya Kitanzania inayojivunia kutengeneza vinywaji vya kifahari kutoka moyoni mwa Afrika Mashariki.">A proudly Tanzanian beverage company crafting premium spirits from the heart of East Africa.</p>
         <p style="margin-top:1rem;color:rgba(253,246,233,.22);font-size:12px">Plot 1204, Industrial Area, Dar es Salaam, Tanzania</p>
       </div>
@@ -1039,6 +1675,457 @@ input[type=number] { -moz-appearance: textfield; }
 </div>
 
 <script>
+// ============================================================
+//  POUR ANIMATION — scroll-driven, sticky section
+// ============================================================
+(function pourInit() {
+  var scene = document.getElementById('pour-scene');
+  if (!scene) return;
+
+  var botGrp    = document.getElementById('ps-bot-grp');
+  var capGrp    = document.getElementById('ps-cap-grp');
+  var stream    = document.getElementById('ps-stream');
+  var sp        = document.getElementById('ps-sp');
+  var sp2       = document.getElementById('ps-sp2');
+  var glass     = document.getElementById('ps-glass');
+  var gfill     = document.getElementById('ps-gfill');
+  var foam      = document.getElementById('ps-foam');
+  var foamDots  = document.getElementById('ps-foam-dots');
+  var bubbles   = Array.from(document.querySelectorAll('#ps-bubbles circle'));
+  var sparks    = document.getElementById('ps-sparkles');
+  var shadow    = document.getElementById('ps-shadow');
+  var cue       = document.getElementById('ps-cue');
+  var titleWrap = document.getElementById('ps-title');
+  var brandDiv  = document.getElementById('ps-brand');
+  var subDiv    = document.getElementById('ps-sub');
+  var progFill  = document.getElementById('ps-prog');
+  var company   = document.getElementById('ps-company');
+  var pit1      = document.getElementById('pit-1');
+  var pit2      = document.getElementById('pit-2');
+  var stageLabels = [
+    document.getElementById('psl-1'),
+    document.getElementById('psl-2'),
+    document.getElementById('psl-3'),
+    document.getElementById('psl-4'),
+    document.getElementById('psl-5')
+  ];
+
+  // Build letter-by-letter brand title
+  var txt = 'SIMBA BEVERAGES';
+  brandDiv.innerHTML = txt.split('').map(function(c, i) {
+    if (c === ' ') return '<span style="display:inline-block;width:.3em;">&nbsp;</span>';
+    var rot = (i % 2 === 0 ? 14 : -14);
+    return '<span style="display:inline-block;opacity:0;' +
+           'transform:translateY(24px) rotate(' + rot + 'deg);' +
+           'transition:opacity .4s ease,transform .4s ease;">' + c + '</span>';
+  }).join('');
+  var letters = Array.from(brandDiv.querySelectorAll('span'))
+                    .filter(function(s){ return !/width/.test(s.style.cssText); });
+
+  // Helpers
+  function clamp(v,lo,hi){ return Math.max(lo,Math.min(hi,v)); }
+  function lerp(a,b,t)   { return a+(b-a)*t; }
+  function easeIO(t)     { return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2; }
+  function easeOut(t)    { return 1-Math.pow(1-t,3); }
+
+  // Bottle geometry
+  var PX = 300, PY = 280;       // pivot at mid-bottle
+  var MX = 300, MY = 55;         // mouth when upright
+  var GLASS_CX  = 200;          // glass centre-x
+  var GLASS_TOP = 530;          // liquid top y (full)
+  var GLASS_BOT = 655;          // liquid bottom y (base)
+
+  function setBottle(angleDeg, dx, dy) {
+    botGrp.setAttribute('transform',
+      'translate(' + dx + ',' + dy + ')' +
+      ' rotate(' + angleDeg + ',' + (PX-dx) + ',' + (PY-dy) + ')'
+    );
+  }
+
+  // World position of bottle mouth after rotation + translation
+  function mouthPos(angleDeg, dx, dy) {
+    var rad = angleDeg * Math.PI / 180;
+    var rx  = MX - PX;   // = 0
+    var ry  = MY - PY;   // = -225
+    return {
+      x: PX + dx + rx*Math.cos(rad) - ry*Math.sin(rad),
+      y: PY + dy + rx*Math.sin(rad) + ry*Math.cos(rad)
+    };
+  }
+
+  // World position of mouth edges for sheet pour
+  function mouthEdgePos(angleDeg, dx, dy, offsetX) {
+    var rad = angleDeg * Math.PI / 180;
+    var rx  = offsetX;
+    var ry  = MY - PY;
+    return {
+      x: PX + dx + rx*Math.cos(rad) - ry*Math.sin(rad),
+      y: PY + dy + rx*Math.sin(rad) + ry*Math.cos(rad)
+    };
+  }
+
+  // Bubble animation
+  var bubblesAlive = false;
+  function startBubbles() {
+    if (bubblesAlive) return;
+    bubblesAlive = true;
+    bubbles.forEach(function(b, i) {
+      var delay = i * 200 + Math.random() * 100;
+      setTimeout(function loop() {
+        if (!bubblesAlive) return;
+        var start = performance.now();
+        var dur   = 1000 + Math.random() * 800;
+        var rx = 160 + Math.random() * 80;
+        b.setAttribute('cx', '' + rx);
+
+        (function tick(now) {
+          if (!bubblesAlive) return;
+          var t = Math.min(1, (now - start) / dur);
+          
+          var currentFillY = liveFillY;
+          var y = GLASS_BOT - t * (GLASS_BOT - currentFillY);
+          b.setAttribute('cy', '' + y.toFixed(1));
+
+          var op = 0;
+          if (t < 0.15) {
+            op = (t / 0.15) * 0.55;
+          } else if (t > 0.85) {
+            op = ((1 - t) / 0.15) * 0.55;
+          } else {
+            op = 0.55;
+          }
+          b.setAttribute('opacity', '' + op.toFixed(2));
+
+          if (t < 1) {
+            requestAnimationFrame(tick);
+          } else {
+            setTimeout(loop, 200 + Math.random() * 500);
+          }
+        })(start);
+      }, delay);
+    });
+  }
+
+  // Physics-based Splash Particles
+  var splashParticles = Array.from(document.querySelectorAll('.ps-sub-spark'));
+  var splashAlive = false;
+
+  function animateSplashParticles() {
+    if (splashAlive) return;
+    splashAlive = true;
+
+    splashParticles.forEach(function(p, i) {
+      var delay = i * 120;
+      setTimeout(function loop() {
+        if (!splashAlive) return;
+        var start = performance.now();
+        var dur = 400 + Math.random() * 300;
+
+        var vx = (Math.random() - 0.5) * 4.5;
+        var vy = -3.5 - Math.random() * 5;
+        var gravity = 0.16;
+
+        (function tick(now) {
+          var tMs = now - start;
+          var t = Math.min(1, tMs / dur);
+
+          var currentFillY = liveFillY;
+          var x = GLASS_CX + vx * (tMs * 0.05);
+          var y = currentFillY + vy * (tMs * 0.05) + 0.5 * gravity * Math.pow(tMs * 0.05, 2);
+
+          p.setAttribute('cx', '' + x.toFixed(1));
+          p.setAttribute('cy', '' + y.toFixed(1));
+          p.setAttribute('opacity', '' + (1 - t).toFixed(2));
+
+          var streamOpacity = parseFloat(stream.style.opacity) || 0;
+          if (t < 1 && streamOpacity > 0.1) {
+            requestAnimationFrame(tick);
+          } else {
+            p.setAttribute('opacity', '0');
+            if (streamOpacity > 0.1) {
+              setTimeout(loop, Math.random() * 80);
+            } else {
+              splashAlive = false;
+            }
+          }
+        })(start);
+      }, delay);
+    });
+  }
+
+  // State variables
+  var curStage = -1;
+  var liveFillY = GLASS_BOT;
+
+  function setStage(idx) {
+    if (idx === curStage) return;
+    curStage = idx;
+    stageLabels.forEach(function(l,i){ l.classList.toggle('show', i===idx); });
+  }
+
+  // Main render
+  var prevP = -1;
+  function render(p) {
+    if (progFill) progFill.style.height = (p*100)+'%';
+
+    cue.style.opacity = ''+clamp(1-p/0.06, 0, 1);
+
+    var p1 = easeOut(clamp((p-0.04)/0.20, 0, 1));
+    capGrp.setAttribute('transform','translate(0,'+(-p1*65)+')');
+    capGrp.style.opacity = ''+clamp(1-easeOut(clamp((p-0.14)/0.10,0,1)),0,1);
+    if (p>=0.04 && p<0.24) setStage(0);
+
+    var p2  = easeIO(clamp((p-0.22)/0.22, 0, 1));
+    var ang = -65 * p2;
+    var dx  = 65 * p2;
+    var dy  = 15 * p2;
+    setBottle(ang, dx, dy);
+    
+    var liqLevelGrp = document.getElementById('ps-bottle-liq-level-grp');
+    if (liqLevelGrp) {
+      liqLevelGrp.setAttribute('transform', 'rotate(' + (-ang) + ', 300, 280)');
+    }
+    
+    if (p>=0.22 && p<0.44) setStage(1);
+
+    var gA = easeOut(clamp((p-0.28)/0.14, 0, 1));
+    glass.style.opacity  = ''+gA;
+    shadow.setAttribute('rx',''+gA*44);
+    shadow.setAttribute('ry',''+gA*5.5);
+
+    var p3 = clamp((p-0.44)/0.34, 0, 1);
+    
+    var bottleLiq = document.getElementById('ps-bottle-liq');
+    var bottleSurface = document.getElementById('ps-bottle-liq-surface');
+    var liqY = 130 + p3 * 300;
+    if (bottleLiq && bottleSurface) {
+      bottleLiq.setAttribute('y', '' + liqY);
+      bottleLiq.setAttribute('height', '' + (470 - liqY));
+      bottleSurface.setAttribute('cy', '' + liqY);
+    }
+
+    if (p3 > 0) {
+      stream.style.opacity = ''+easeOut(Math.min(p3*5,1));
+
+      var m = mouthPos(ang, dx, dy);
+      var m_left = mouthEdgePos(ang, dx, dy, -14);
+      var m_right = mouthEdgePos(ang, dx, dy, 14);
+      
+      var g_left_x = GLASS_CX - 4.5;
+      var g_right_x = GLASS_CX + 4.5;
+
+      var radA   = ang * Math.PI / 180;
+      var exitVx = Math.sin(radA);
+      var wobble = Math.sin(Date.now() * 0.005) * 1.5;
+
+      var cp1_left_x = m_left.x + exitVx * 5 + wobble;
+      var cp1_left_y = m_left.y + 40;
+      var cp2_left_x = g_left_x + wobble * 0.4;
+      var cp2_left_y = GLASS_TOP - 50;
+
+      var cp1_right_x = m_right.x + exitVx * 5 + wobble;
+      var cp1_right_y = m_right.y + 40;
+      var cp2_right_x = g_right_x + wobble * 0.4;
+      var cp2_right_y = GLASS_TOP - 50;
+
+      var cp1x = m.x + exitVx * 5 + wobble;
+      var cp1y = m.y + 40;
+      var cp2x = GLASS_CX + wobble * 0.4;
+      var cp2y = GLASS_TOP - 50;
+
+      var pathFilled = 'M' + m_left.x.toFixed(1) + ' ' + m_left.y.toFixed(1) +
+                       ' C' + cp1_left_x.toFixed(1) + ' ' + cp1_left_y.toFixed(1) +
+                       ' ' + cp2_left_x.toFixed(1) + ' ' + cp2_left_y.toFixed(1) +
+                       ' ' + g_left_x.toFixed(1) + ' ' + GLASS_TOP.toFixed(1) +
+                       ' L' + g_right_x.toFixed(1) + ' ' + GLASS_TOP.toFixed(1) +
+                       ' C' + cp2_right_x.toFixed(1) + ' ' + cp2_right_y.toFixed(1) +
+                       ' ' + cp1_right_x.toFixed(1) + ' ' + cp1_right_y.toFixed(1) +
+                       ' ' + m_right.x.toFixed(1) + ' ' + m_right.y.toFixed(1) +
+                       ' Z';
+
+      var pathSpine = 'M'+m.x.toFixed(1)+' '+m.y.toFixed(1)+
+                      ' C'+cp1x.toFixed(1)+' '+cp1y.toFixed(1)+
+                      ' '+cp2x.toFixed(1)+' '+cp2y.toFixed(1)+
+                      ' '+GLASS_CX+' '+GLASS_TOP;
+
+      sp.setAttribute('d',  pathFilled);
+      sp2.setAttribute('d', pathSpine);
+
+      var sp3 = document.getElementById('ps-sp3');
+      if (sp3) sp3.setAttribute('d', pathSpine);
+
+      var maxH  = GLASS_BOT - GLASS_TOP;
+      var fillH = easeIO(p3) * maxH;
+      var fillY = GLASS_BOT - fillH;
+      liveFillY = fillY;
+
+      var splash = document.getElementById('ps-splash');
+      if (splash) {
+        var sr = Math.min(p3 * 18, 14);
+        splash.setAttribute('cx', ''+GLASS_CX);
+        splash.setAttribute('cy', ''+fillY);
+        splash.setAttribute('rx', ''+sr);
+        splash.setAttribute('ry', ''+(sr*0.25));
+        splash.style.opacity = ''+(p3 > 0.05 && p3 < 0.98 ? 0.65 : 0);
+      }
+
+      var mdrips = document.querySelectorAll('.ps-mdrip');
+      if (mdrips.length >= 3) {
+        var t1=0.25, t2=0.55, t3=0.78;
+        [[t1,0],[t2,1],[t3,2]].forEach(function(td) {
+          var t=td[0], i=td[1];
+          var bx = Math.pow(1-t,3)*m.x + 3*Math.pow(1-t,2)*t*cp1x + 3*(1-t)*t*t*cp2x + t*t*t*GLASS_CX;
+          var by = Math.pow(1-t,3)*m.y + 3*Math.pow(1-t,2)*t*cp1y + 3*(1-t)*t*t*cp2y + t*t*t*GLASS_TOP;
+          mdrips[i].setAttribute('cx',''+bx.toFixed(1));
+          mdrips[i].setAttribute('cy',''+by.toFixed(1));
+          mdrips[i].style.opacity = p3 > 0.15 && p3 < 0.98 ? '0.55' : '0';
+        });
+      }
+
+      var wave = Math.sin(Date.now() * 0.008) * 2.2;
+      if (p3 === 0 || p3 >= 0.98) wave = 0;
+      var pathGfill = 'M 120 680 L 120 ' + fillY.toFixed(1) + 
+                     ' Q 160 ' + (fillY + wave).toFixed(1) + ' 200 ' + fillY.toFixed(1) + 
+                     ' Q 240 ' + (fillY - wave).toFixed(1) + ' 280 ' + fillY.toFixed(1) + 
+                     ' L 280 680 Z';
+      gfill.setAttribute('d', pathGfill);
+
+      var fr  = Math.min(fillH/maxH*56, 56);
+      var fry = Math.min(fillH/maxH*9,   9);
+      var foamWobble = Math.sin(Date.now() * 0.004) * 0.4;
+      if (p3 >= 0.98) foamWobble = 0;
+      foam.setAttribute('cx',''+GLASS_CX);
+      foam.setAttribute('cy',''+fillY);
+      foam.setAttribute('rx',''+fr);
+      foam.setAttribute('ry',''+(fry + foamWobble).toFixed(2));
+
+      if (foamDots) {
+        foamDots.style.opacity = fillH>20 ? ''+Math.min(1,(fillH-20)/30) : '0';
+        foamDots.querySelectorAll('circle').forEach(function(d, idx){
+          var dotWobble = Math.sin(Date.now() * 0.003 + idx) * 1.2;
+          if (p3 >= 0.98) dotWobble = 0;
+          d.setAttribute('cy',''+(fillY + dotWobble).toFixed(1));
+        });
+      }
+
+      if (fillH > 10) {
+        startBubbles();
+        if (p3 < 0.98) animateSplashParticles();
+      }
+      sparks.style.opacity = fillH>90 ? ''+easeOut((fillH-90)/24) : '0';
+
+      company.style.opacity = ''+easeOut(Math.min(p3*3, 1));
+      pit1.style.opacity    = ''+easeOut(clamp((p3-0.04)/0.22,0,1));
+      pit2.style.opacity    = ''+easeOut(clamp((p3-0.30)/0.22,0,1));
+
+      if (p3<0.5) setStage(2); else setStage(3);
+    } else {
+      stream.style.opacity = '0';
+      gfill.setAttribute('d', '');
+      foam.setAttribute('rx','0'); foam.setAttribute('ry','0');
+      if (foamDots) foamDots.style.opacity = '0';
+      sparks.style.opacity = '0';
+      company.style.opacity = '0';
+      if (pit1) pit1.style.opacity = '0';
+      if (pit2) pit2.style.opacity = '0';
+      splashAlive = false;
+      bubblesAlive = false;
+    }
+
+    var p4 = easeIO(clamp((p-0.78)/0.12, 0, 1));
+    if (p4 > 0) {
+      setBottle(ang*(1-p4), dx*(1-p4), dy*(1-p4));
+      stream.style.opacity  = ''+clamp(1-easeOut(p4)*1.6, 0, 1);
+      company.style.opacity = ''+clamp(1-easeOut(p4),     0, 1);
+      capGrp.style.opacity  = '0';
+      splashAlive = false;
+      
+      if (liqLevelGrp) {
+        liqLevelGrp.setAttribute('transform', 'rotate(' + (-ang*(1-p4)) + ', 300, 280)');
+      }
+    }
+
+    var p5 = clamp((p-0.88)/0.12, 0, 1);
+    titleWrap.style.opacity = p5 > 0 ? '1' : '0';
+    if (p5 > 0) {
+      setStage(4);
+      letters.forEach(function(s, i) {
+        var fe = easeOut(clamp((p5-i*0.048),0,1));
+        s.style.opacity   = ''+fe;
+        var rot = (i%2===0?14:-14)*(1-fe);
+        s.style.transform = 'translateY('+(24*(1-fe)).toFixed(1)+'px) rotate('+rot.toFixed(1)+'deg)';
+      });
+      subDiv.classList.toggle('show', p5>0.55);
+    } else {
+      subDiv.classList.remove('show');
+    }
+  }
+
+  var sceneTop = 0;
+  var sceneHeight = 0;
+  var isIntersecting = false;
+
+  function cacheLayout() {
+    if (window.innerWidth <= 1024) return;
+    var rect = scene.getBoundingClientRect();
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    sceneTop = rect.top + scrollTop;
+    sceneHeight = scene.offsetHeight;
+  }
+
+  window.addEventListener('resize', cacheLayout);
+  window.addEventListener('orientationchange', cacheLayout);
+  window.addEventListener('load', cacheLayout);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(cacheLayout);
+  }
+  cacheLayout();
+
+  var scrollScheduled = false;
+  function onScroll() {
+    if (!isIntersecting || window.innerWidth <= 1024) return;
+    if (!scrollScheduled) {
+      scrollScheduled = true;
+      requestAnimationFrame(function() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var total = sceneHeight - window.innerHeight;
+        var p = clamp((scrollTop - sceneTop) / total, 0, 1);
+        if (Math.abs(p - prevP) > 0.0004) {
+          prevP = p;
+          render(p);
+        }
+        scrollScheduled = false;
+      });
+    }
+  }
+
+  var sceneObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      isIntersecting = entry.isIntersecting;
+      if (isIntersecting) {
+        cacheLayout();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var total = sceneHeight - window.innerHeight;
+        var p = clamp((scrollTop - sceneTop) / total, 0, 1);
+        prevP = p;
+        render(p);
+      } else {
+        window.removeEventListener('scroll', onScroll);
+        bubblesAlive = false;
+        splashAlive = false;
+      }
+    });
+  }, { threshold: 0, rootMargin: '100px 0px 100px 0px' });
+
+  if (window.innerWidth <= 1024) {
+    render(0.75);
+  } else {
+    sceneObserver.observe(scene);
+  }
+})();
+
 // MOBILE MENU
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.querySelector('.nav-links');
