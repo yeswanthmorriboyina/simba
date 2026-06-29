@@ -491,21 +491,30 @@ input[type=number] { -moz-appearance: textfield; }
 /* ── AGE GATE ── */
 .age-gate-overlay {
   position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(13,10,6,0.98); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  background: radial-gradient(circle at center, #1C1103 0%, #080602 100%);
   z-index: 99999; display: flex; align-items: center; justify-content: center;
-  transition: opacity 0.6s ease, visibility 0.6s ease;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+  overflow: hidden;
 }
-.age-gate-modal {
-  background: linear-gradient(160deg, #1A0F02 0%, #0D0A06 100%);
-  border: 1px solid var(--border-gold); border-radius: 12px;
-  padding: 3.5rem 2rem; max-width: 440px; width: 90%; text-align: center;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(245,166,35,0.1);
-  transform: translateY(0); transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+.age-gate-watermark {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140%; height: 140%;
+  opacity: 0.035; pointer-events: none; z-index: 1;
+  filter: drop-shadow(0 0 40px var(--gold));
+  object-fit: contain;
+}
+.age-gate-content {
+  position: relative; z-index: 2;
+  text-align: center; max-width: 500px; width: 90%;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 1.5rem; transform: translateY(0) scale(1);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .age-gate-overlay.hidden {
   opacity: 0; visibility: hidden; pointer-events: none;
 }
-.age-gate-overlay.hidden .age-gate-modal {
+.age-gate-overlay.hidden .age-gate-content {
   transform: translateY(30px) scale(0.95);
 }
 
@@ -661,6 +670,31 @@ input[type=number] { -moz-appearance: textfield; }
     padding: 1.75rem;
   }
 }
+
+/* ── INTERACTIVE DISTRIBUTION MAP ── */
+@keyframes pinPulse {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+.ping-circle {
+  animation: pinPulse 2s infinite ease-out;
+  transform-origin: center;
+}
+.map-pin:hover circle:nth-child(2) {
+  fill: #fff;
+  filter: drop-shadow(0 0 8px var(--gold));
+}
+.map-pin.active circle:nth-child(2) {
+  fill: #fff;
+  filter: drop-shadow(0 0 10px var(--gold));
+}
+@media (max-width: 768px) {
+  .map-container {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    padding: 1.25rem !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -677,13 +711,15 @@ input[type=number] { -moz-appearance: textfield; }
 
 <!-- AGE GATE -->
 <div id="ageGate" class="age-gate-overlay">
-  <div class="age-gate-modal">
-    <img src="images/sbl-logo.png" alt="Simba Logo" style="width:80px; height:auto; margin:0 auto 1.5rem; display:block; filter: drop-shadow(0 0 15px rgba(245,166,35,0.6));">
-    <h2 style="font-family:'Oswald',sans-serif;font-size:2.2rem;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;line-height:1.2;">Are you of legal drinking age?</h2>
-    <p style="font-size:14px;color:var(--cream-dim);margin-bottom:2.5rem;padding:0 1rem;">You must be 18 years of age or older to enter this site. Please verify your age.</p>
-    <div style="display:flex;gap:1rem;justify-content:center;">
-      <button onclick="verifyAge(true)" class="btn" style="background:var(--gold);color:var(--black);border:none;flex:1;cursor:pointer;">YES, I AM 18+</button>
-      <button onclick="verifyAge(false)" class="btn btn-dark" style="flex:1;cursor:pointer;">NO, I AM NOT</button>
+  <img src="images/lion-bg.svg" alt="Lion Watermark" class="age-gate-watermark">
+  <div class="age-gate-content">
+    <img src="images/sbl-logo.png" alt="Simba Logo" style="width:110px; height:auto; filter: drop-shadow(0 0 20px rgba(245,166,35,0.4)); margin-bottom: 0.5rem;">
+    <div style="font-family:'Oswald',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase;">NGUVU HALISI</div>
+    <h2 style="font-family:'Arial Black', Impact, sans-serif; font-size:2.8rem; color:var(--white); text-transform:uppercase; margin:0; line-height:1.1; letter-spacing:1px; text-shadow: 0 0 20px rgba(255,255,255,0.05);">VERIFY YOUR AGE</h2>
+    <p style="font-size:15px; color:var(--cream-muted); line-height:1.6; margin:0 0 1.5rem;">To enter the world of Simba Beverages, please confirm that you are of legal drinking age (18+) in Tanzania.</p>
+    <div style="display:flex; gap:1.25rem; width:100%; max-width:360px;">
+      <button onclick="verifyAge(true)" class="btn" style="background:var(--gold); color:var(--black); border:none; flex:1; cursor:pointer; font-weight:700; padding:15px; letter-spacing:0.05em; transition:all 0.3s;" onmouseover="this.style.background='#FAC55A'; this.style.transform='scale(1.05)';" onmouseout="this.style.background='#F5A623'; this.style.transform='scale(1)';">YES, I AM 18+</button>
+      <button onclick="verifyAge(false)" class="btn btn-dark" style="flex:1; cursor:pointer; padding:15px; border:1px solid rgba(245,166,35,0.3);" onmouseover="this.style.borderColor='var(--gold)';" onmouseout="this.style.borderColor='rgba(245,166,35,0.3)';">NO, I AM NOT</button>
     </div>
   </div>
 </div>
@@ -804,6 +840,49 @@ input[type=number] { -moz-appearance: textfield; }
         <h2 class="section-title" data-en="Vin <span class='accent'>Nkolo Mboka</span>" data-sw="Vin <span class='accent'>Nkolo Mboka</span>">Vin <span class="accent">Nkolo Mboka</span></h2>
         <p class="section-desc" data-en="Born from Tanzania's fertile highlands, Nkolo Mboka blends the fiery warmth of fresh ginger root with the sweetness of wild honey — a bold, warming spirit unlike anything else on the continent." data-sw="Ikitokea kwenye miinuko yenye rutuba ya Tanzania, Nkolo Mboka inachanganya joto kali la tangawizi mbichi na utamu wa asali ya nyuki wadogo — kinywaji kikali cha kusisimua kisichofanana na kingine chochote barani.">Born from Tanzania's fertile highlands, Nkolo Mboka blends the fiery warmth of fresh ginger root with the sweetness of wild honey — a bold, warming spirit unlike anything else on the continent.</p>
         <p class="section-desc" style="margin-bottom:0" data-en="&quot;Nkolo Mboka&quot; captures the Swahili spirit of rising, of emergence — a drink that lifts you like the lion that defines our land." data-sw="&quot;Nkolo Mboka&quot; inabeba roho ya Kiswahili ya kuinuka, ya kujitokeza — kinywaji kinachokuinua kama simba anayeelezea ardhi yetu.">"Nkolo Mboka" captures the Swahili spirit of rising, of emergence — a drink that lifts you like the lion that defines our land.</p>
+        
+        <!-- Flagship Tasting Profile Card -->
+        <div class="flagship-tasting-card" style="margin-top:2rem; background:rgba(245,166,35,0.04); border:1px solid rgba(245,166,35,0.15); padding:1.25rem; border-radius:8px;">
+          <div style="font-family:'Oswald',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.12em; color:var(--gold); text-transform:uppercase; margin-bottom:12px;" data-en="TASTING PROFILE" data-sw="MTAZAMO WA LADHA">Tasting Profile</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem 2rem;">
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px; font-weight:500;">
+                <span data-en="Ginger Heat" data-sw="Ukali wa Tangawizi" style="color:var(--cream-muted);">Ginger Heat</span>
+                <span style="color:var(--gold); font-weight:700;">5/5</span>
+              </div>
+              <div style="height:5px; background:rgba(255,255,255,0.06); border-radius:3px; overflow:hidden;">
+                <div style="height:100%; width:100%; background:linear-gradient(90deg, var(--gold) 0%, #FAC55A 100%); border-radius:3px;"></div>
+              </div>
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px; font-weight:500;">
+                <span data-en="Honey Sweetness" data-sw="Utamu wa Asali" style="color:var(--cream-muted);">Honey Sweetness</span>
+                <span style="color:var(--gold); font-weight:700;">3/5</span>
+              </div>
+              <div style="height:5px; background:rgba(255,255,255,0.06); border-radius:3px; overflow:hidden;">
+                <div style="height:100%; width:60%; background:linear-gradient(90deg, var(--gold) 0%, #FAC55A 100%); border-radius:3px;"></div>
+              </div>
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px; font-weight:500;">
+                <span data-en="Body / Richness" data-sw="Uzito wa Kinywaji" style="color:var(--cream-muted);">Body / Richness</span>
+                <span style="color:var(--gold); font-weight:700;">4/5</span>
+              </div>
+              <div style="height:5px; background:rgba(255,255,255,0.06); border-radius:3px; overflow:hidden;">
+                <div style="height:100%; width:80%; background:linear-gradient(90deg, var(--gold) 0%, #FAC55A 100%); border-radius:3px;"></div>
+              </div>
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px; font-weight:500;">
+                <span data-en="Aromatic Spices" data-sw="Harufu ya Viungo" style="color:var(--cream-muted);">Aromatic Spices</span>
+                <span style="color:var(--gold); font-weight:700;">4/5</span>
+              </div>
+              <div style="height:5px; background:rgba(255,255,255,0.06); border-radius:3px; overflow:hidden;">
+                <div style="height:100%; width:80%; background:linear-gradient(90deg, var(--gold) 0%, #FAC55A 100%); border-radius:3px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div style="margin-top:2rem"><a href="#wholesale" class="btn btn-primary" data-en="Enquire for Wholesale" data-sw="Uliza Bei ya Jumla">Enquire for Wholesale</a></div>
       </div>
       <div class="ingredients-grid reveal">
@@ -1079,22 +1158,55 @@ input[type=number] { -moz-appearance: textfield; }
   <div class="container">
     <div class="section-label" data-en="Where to Buy" data-sw="Wapi kwa Kununua">Where to Buy</div>
     <h2 class="section-title" style="margin-bottom:2rem;" data-en="Our Distributors" data-sw="Wasambazaji Wetu">Our Distributors</h2>
-    <div style="border: 1px solid var(--border-gold); border-radius: 12px; overflow: hidden; height: 400px; position: relative;">
-      <!-- REPLACE WITH REAL LOCATIONS: Embed Map -->
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126742.66814322426!2d39.18659223847775!3d-6.804961557025807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x185c4babc051287d%3A0xc6222b467cbaf388!2sDar%20es%20Salaam%2C%20Tanzania!5e0!3m2!1sen!2sus!4v1714578193892!5m2!1sen!2sus" width="100%" height="100%" style="border:0; filter: grayscale(100%) invert(90%) hue-rotate(180deg);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-    <div style="margin-top:2rem; display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
-      <div style="background:#140F0A; padding:1.5rem; border:1px solid var(--border-gold); border-radius:8px;">
-        <h4 style="color:var(--gold); font-family:'Oswald',sans-serif;">Kariakoo Wholesale</h4>
-        <p style="font-size:13px; color:var(--cream-dim);">Msimbazi Street, Dar es Salaam</p>
+    <div class="map-container" style="display:grid; grid-template-columns:1.8fr 1.2fr; gap:2.5rem; background:#0A0804; border:1px solid rgba(245,166,35,0.15); border-radius:12px; padding:2rem; min-height:420px; align-items:center;">
+      <!-- Left Side: Interactive SVG Map -->
+      <div style="position:relative; width:100%; height:360px; background:rgba(0,0,0,0.45); border-radius:8px; border:1px solid rgba(245,166,35,0.06); overflow:hidden; display:flex; align-items:center; justify-content:center;">
+        <!-- Grid Overlay -->
+        <div style="position:absolute; inset:0; background-image:linear-gradient(rgba(245,166,35,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(245,166,35,0.02) 1px, transparent 1px); background-size:20px 20px;"></div>
+        
+        <svg viewBox="0 0 500 400" style="width:100%; height:100%; max-width:480px; position:relative; z-index:2;">
+          <!-- Stylized Tanzania Outline (Polygonal Glassmorphic) -->
+          <polygon points="100,60 300,60 400,200 400,340 200,340 70,180" fill="rgba(245,166,35,0.03)" stroke="rgba(245,166,35,0.15)" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <polygon points="110,70 290,70 390,195 390,330 210,330 80,185" fill="rgba(245,166,35,0.02)" stroke="rgba(245,166,35,0.08)" stroke-width="1"/>
+          
+          <!-- Connective Lines -->
+          <line x1="360" y1="230" x2="380" y2="235" stroke="rgba(245,166,35,0.3)" stroke-width="1" stroke-dasharray="2 2" />
+          <line x1="220" y1="210" x2="360" y2="230" stroke="rgba(245,166,35,0.3)" stroke-width="1" stroke-dasharray="2 2" />
+          <line x1="280" y1="90" x2="360" y2="230" stroke="rgba(245,166,35,0.3)" stroke-width="1" stroke-dasharray="2 2" />
+          <line x1="140" y1="80" x2="220" y2="210" stroke="rgba(245,166,35,0.3)" stroke-width="1" stroke-dasharray="2 2" />
+          
+          <!-- Interactive Pins -->
+          <!-- Kibaha HQ -->
+          <g class="map-pin active" onclick="selectHub('kibaha')" style="cursor:pointer;" transform="translate(360, 230)">
+            <circle cx="0" cy="0" r="14" fill="rgba(245,166,35,0.2)" class="ping-circle" />
+            <circle cx="0" cy="0" r="6" fill="var(--gold)" stroke="#000" stroke-width="1.5" />
+          </g>
+          <!-- Dar es Salaam -->
+          <g class="map-pin" onclick="selectHub('dar')" style="cursor:pointer;" transform="translate(380, 235)">
+            <circle cx="0" cy="0" r="14" fill="rgba(245,166,35,0.2)" class="ping-circle" />
+            <circle cx="0" cy="0" r="6" fill="var(--gold)" stroke="#000" stroke-width="1.5" />
+          </g>
+          <!-- Arusha -->
+          <g class="map-pin" onclick="selectHub('arusha')" style="cursor:pointer;" transform="translate(280, 90)">
+            <circle cx="0" cy="0" r="14" fill="rgba(245,166,35,0.2)" class="ping-circle" />
+            <circle cx="0" cy="0" r="6" fill="var(--gold)" stroke="#000" stroke-width="1.5" />
+          </g>
+          <!-- Dodoma -->
+          <g class="map-pin" onclick="selectHub('dodoma')" style="cursor:pointer;" transform="translate(220, 210)">
+            <circle cx="0" cy="0" r="14" fill="rgba(245,166,35,0.2)" class="ping-circle" />
+            <circle cx="0" cy="0" r="6" fill="var(--gold)" stroke="#000" stroke-width="1.5" />
+          </g>
+          <!-- Mwanza -->
+          <g class="map-pin" onclick="selectHub('mwanza')" style="cursor:pointer;" transform="translate(140, 80)">
+            <circle cx="0" cy="0" r="14" fill="rgba(245,166,35,0.2)" class="ping-circle" />
+            <circle cx="0" cy="0" r="6" fill="var(--gold)" stroke="#000" stroke-width="1.5" />
+          </g>
+        </svg>
       </div>
-      <div style="background:#140F0A; padding:1.5rem; border:1px solid var(--border-gold); border-radius:8px;">
-        <h4 style="color:var(--gold); font-family:'Oswald',sans-serif;">Mwenge Distributors</h4>
-        <p style="font-size:13px; color:var(--cream-dim);">Mwenge Station, Dar es Salaam</p>
-      </div>
-      <div style="background:#140F0A; padding:1.5rem; border:1px solid var(--border-gold); border-radius:8px;">
-        <h4 style="color:var(--gold); font-family:'Oswald',sans-serif;">Posta Mega Mart</h4>
-        <p style="font-size:13px; color:var(--cream-dim);">Samora Ave, Dar es Salaam</p>
+      
+      <!-- Right Side: Hub Details Display -->
+      <div id="hubDetailsCard" style="background:#140F0A; padding:2rem; border:1px solid rgba(245,166,35,0.15); border-radius:8px; display:flex; flex-direction:column; gap:1.25rem; min-height:280px; justify-content:center;">
+        <!-- Filled dynamically by JavaScript -->
       </div>
     </div>
   </div>
@@ -1572,6 +1684,10 @@ function toggleLanguage() {
       waTextArea.value = "Hi Simba Beverages, I'd like to enquire about wholesale pricing for Vin Nkolo Mboka.";
     }
   }
+  // Refresh active map details card if initialized
+  if (typeof activeHubKey !== 'undefined') {
+    selectHub(activeHubKey);
+  }
 }
 
 function setLang(lang){
@@ -1821,6 +1937,111 @@ function handleModalOverlayClick(e) {
     closeProductModal();
   }
 }
+
+// ── INTERACTIVE DISTRIBUTION MAP LOGIC ──
+let activeHubKey = 'kibaha';
+const HUB_DATA = {
+  kibaha: {
+    title_en: "Corporate HQ & Factory",
+    title_sw: "Makao Makuu na Kiwanda",
+    location: "Block F, Plot no. 12 zegereni Area, Kibaha, Tanzania",
+    phone: "+255 713822240",
+    email: "info@simba-beverages.co.tz",
+    mapQuery: "Simba Beverages Limited, Kibaha, Tanzania",
+    desc_en: "Our primary manufacturing facility, administrative headquarters, and central logistics depot.",
+    desc_sw: "Kiwanda chetu kikuu cha uzalishaji, ofisi kuu za utawala, na bohari kuu ya usafirishaji."
+  },
+  dar: {
+    title_en: "Kariakoo Wholesale Depot",
+    title_sw: "Bohari ya Jumla ya Kariakoo",
+    location: "Msimbazi Street, Dar es Salaam, Tanzania",
+    phone: "+255 713822240",
+    email: "sales@simba-beverages.co.tz",
+    mapQuery: "Kariakoo, Dar es Salaam, Tanzania",
+    desc_en: "Main coastal distribution center serving Dar es Salaam retailers and neighboring commercial centers.",
+    desc_sw: "Kituo kikuu cha usambazaji wa pwani kinachohudumia wauzaji wa Dar es Salaam na vituo vya biashara vya jirani."
+  },
+  arusha: {
+    title_en: "Northern Zone Logistics Hub",
+    title_sw: "Bohari ya Kanda ya Kaskazini",
+    location: "Arusha City Center, Tanzania",
+    phone: "+255 713822240",
+    email: "arusha@simba-beverages.co.tz",
+    mapQuery: "Arusha, Tanzania",
+    desc_en: "Regional supply hub servicing Arusha, Moshi, Kilimanjaro, and northern tourist zone retailers.",
+    desc_sw: "Kituo cha usambazaji cha kanda kinachohudumia wauzaji wa Arusha, Moshi, Kilimanjaro, na ukanda wa utalii wa kaskazini."
+  },
+  dodoma: {
+    title_en: "Central Capitol Hub",
+    title_sw: "Bohari Kuu ya Dodoma",
+    location: "Capitol Area, Dodoma, Tanzania",
+    phone: "+255 713822240",
+    email: "dodoma@simba-beverages.co.tz",
+    mapQuery: "Dodoma, Tanzania",
+    desc_en: "Strategic inland depot serving the national capital and surrounding central region wholesale markets.",
+    desc_sw: "Bohari ya kimkakati ya bara inayohudumia makao makuu ya nchi na masoko ya jumla ya kanda ya kati yanayozunguka."
+  },
+  mwanza: {
+    title_en: "Lake Zone Gateway Depot",
+    title_sw: "Bohari ya Kanda ya Ziwa",
+    location: "Mwanza Port City, Tanzania",
+    phone: "+255 713822240",
+    email: "mwanza@simba-beverages.co.tz",
+    mapQuery: "Mwanza, Tanzania",
+    desc_en: "Strategic logistics gateway serving Mwanza, Mara, Kagera regions, and trade border ports.",
+    desc_sw: "Lango kuu la kimkakati la usafirishaji linalohudumia mikoa ya Mwanza, Mara, Kagera, na bandari za biashara mipakani."
+  }
+};
+
+function selectHub(key) {
+  activeHubKey = key;
+  // Update active pins in SVG
+  document.querySelectorAll('.map-pin').forEach(el => el.classList.remove('active'));
+  const pins = document.querySelectorAll('.map-pin');
+  pins.forEach(pin => {
+    if (pin.getAttribute('onclick') && pin.getAttribute('onclick').includes(`'${key}'`)) {
+      pin.classList.add('active');
+    }
+  });
+  
+  const hub = HUB_DATA[key];
+  if (!hub) return;
+  
+  const currentLang = localStorage.getItem('sbl_lang') || 'en';
+  const title = currentLang === 'sw' ? hub.title_sw : hub.title_en;
+  const desc = currentLang === 'sw' ? hub.desc_sw : hub.desc_en;
+  const btnText = currentLang === 'sw' ? "PATA MAELEKEZO 🗺️" : "GET DIRECTIONS 🗺️";
+  const addressLabel = currentLang === 'sw' ? "Anwani:" : "Address:";
+  const phoneLabel = currentLang === 'sw' ? "Simu:" : "Phone:";
+  const emailLabel = currentLang === 'sw' ? "Barua Pepe:" : "Email:";
+  const hubLabel = currentLang === 'sw' ? "KITUO CHA USAMBAZAJI" : "DISTRIBUTOR HUB";
+  
+  const card = document.getElementById('hubDetailsCard');
+  if (card) {
+    card.innerHTML = `
+      <div>
+        <div style="font-size:11px; text-transform:uppercase; color:var(--gold); letter-spacing:0.12em; font-weight:600; margin-bottom:4px;">${hubLabel}</div>
+        <h3 style="font-family:'Oswald',sans-serif; font-size:1.8rem; color:var(--white); margin:0; line-height:1.2;">${title}</h3>
+      </div>
+      <p style="font-size:13px; color:var(--cream-dim); line-height:1.6; margin:0;">${desc}</p>
+      
+      <div style="display:flex; flex-direction:column; gap:8px; border-top:1px solid rgba(245,166,35,0.1); border-bottom:1px solid rgba(245,166,35,0.1); padding:1rem 0;">
+        <div style="font-size:13px; color:var(--cream-muted);"><strong style="color:var(--gold);">${addressLabel}</strong> ${hub.location}</div>
+        <div style="font-size:13px; color:var(--cream-muted);"><strong style="color:var(--gold);">${phoneLabel}</strong> <a href="tel:${hub.phone.replace(/\s+/g,'')}" style="color:inherit; text-decoration:none;">${hub.phone}</a></div>
+        <div style="font-size:13px; color:var(--cream-muted);"><strong style="color:var(--gold);">${emailLabel}</strong> <a href="mailto:${hub.email}" style="color:inherit; text-decoration:none;">${hub.email}</a></div>
+      </div>
+      
+      <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(hub.mapQuery)}" target="_blank" class="btn btn-primary" style="align-self:flex-start; font-size:12px; padding:10px 24px; text-align:center; text-decoration:none; color:var(--black);">
+        ${btnText}
+      </a>
+    `;
+  }
+}
+
+// Initialize map on DOM load
+document.addEventListener('DOMContentLoaded', () => {
+  selectHub('kibaha');
+});
 
 // ── PWA SERVICE WORKER ──
 if ('serviceWorker' in navigator) {
