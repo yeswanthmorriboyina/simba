@@ -1521,7 +1521,7 @@ function sendViaWhatsApp(){
   ].filter(l=>l!==undefined);
   const waText=encodeURIComponent(lines.join('\n'));
   window.open('https://wa.me/'+WA_NUMBER+'?text='+waText,'_blank');
-  showSuccess();
+  showSuccess(f);
 }
 
 // ── SEND VIA EMAIL (Formspree)
@@ -1549,7 +1549,7 @@ document.getElementById('contactForm').addEventListener('submit',async function(
     );
     window.open('https://mail.google.com/mail/?view=cm&fs=1&to=sales@simba-beverages.co.tz&su='+subject+'&body='+body, '_blank');
     btn.disabled=false;btn.textContent='Send via Email';
-    showSuccess();
+    showSuccess(f);
     return;
   }
 
@@ -1564,7 +1564,7 @@ document.getElementById('contactForm').addEventListener('submit',async function(
         _subject:'Wholesale Enquiry — '+f.company
       })
     });
-    if(res.ok){showSuccess();}
+    if(res.ok){showSuccess(f);}
     else{alert('There was a problem sending. Please email us directly at sales@simba-beverages.co.tz');}
   }catch{
     alert('Network error. Please email us directly at sales@simba-beverages.co.tz');
@@ -1572,7 +1572,44 @@ document.getElementById('contactForm').addEventListener('submit',async function(
   btn.disabled=false;btn.textContent='Send via Email';
 });
 
-function showSuccess(){
+function formatTanzanianPhone(phone) {
+  let cleaned = phone.replace(/\D/g, '');
+  if (cleaned.startsWith('0')) {
+    cleaned = cleaned.substring(1);
+  }
+  if (!cleaned.startsWith('255') && cleaned.length === 9) {
+    cleaned = '255' + cleaned;
+  }
+  return cleaned;
+}
+
+function triggerVirtualAssistantResponse(f) {
+  if (!f.phone) return;
+  const userPhone = formatTanzanianPhone(f.phone);
+  // Only trigger if we have a reasonably formatted phone number
+  if (userPhone.length >= 10) {
+    const lines = [
+      `Hi ${f.firstName},`,
+      '',
+      `I am your virtual assistant for *Simba Beverages*. 🦁`,
+      '',
+      `Thank you for contacting us! We have received your inquiry. Here are the details of what you asked:`,
+      '',
+      `*Partnership:* ${f.type}`,
+      `*Company:* ${f.company}`,
+      `*Details:* ${f.message || 'No additional message'}`,
+      '',
+      `Our sales team will review this and be in touch with you shortly. Feel free to save this message for your reference!`
+    ];
+    const waText = encodeURIComponent(lines.join('\n'));
+    // Open chat to the user's phone number containing the pre-filled VA text
+    setTimeout(() => {
+      window.open(`https://wa.me/${userPhone}?text=${waText}`, '_blank');
+    }, 800); // Small timeout to allow the primary form action to execute first
+  }
+}
+
+function showSuccess(f){
   sessionStorage.setItem('sbl_form_submitted', 'true');
   document.getElementById('contactForm').reset();
   document.getElementById('quoteBanner').style.display='none';
@@ -1581,6 +1618,10 @@ function showSuccess(){
   const s=document.getElementById('formSuccess');
   s.style.display='block';
   setTimeout(()=>s.style.display='none',6000);
+  
+  if (f) {
+    triggerVirtualAssistantResponse(f);
+  }
 }
 
 // ── CUSTOM SELECT REPLACEMENT ──
