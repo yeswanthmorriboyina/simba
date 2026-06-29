@@ -1681,7 +1681,9 @@ const MODAL_PRODUCT_DATA = {
     origin_en: "Dar es Salaam, TZ",
     origin_sw: "Dar es Salaam, TZ",
     ingredients_en: ["🫚 Wild Ginger", "🍯 Wild Honey", "🌿 Native Botanicals", "💧 Pure Highland Water"],
-    ingredients_sw: ["🫚 Tangawizi Pori", "🍯 Asali ya Nyuki", "🌿 Mimea Asilia", "💧 Maji Safi ya Milimani"]
+    ingredients_sw: ["🫚 Tangawizi Pori", "🍯 Asali ya Nyuki", "🌿 Mimea Asilia", "💧 Maji Safi ya Milimani"],
+    tasting_en: { "Ginger Heat": 5, "Honey Sweetness": 3, "Body / Richness": 4 },
+    tasting_sw: { "Ukali wa Tangawizi": 5, "Utamu wa Asali": 3, "Uzito wa Kinywaji": 4 }
   },
   kombu: {
     category_en: "Probiotic Tea",
@@ -1695,7 +1697,9 @@ const MODAL_PRODUCT_DATA = {
     origin_en: "Dar es Salaam, TZ",
     origin_sw: "Dar es Salaam, TZ",
     ingredients_en: ["🍵 Black Tea", "🍵 Green Tea", "🍬 Organic Sugar", "🦠 SCOBY Culture"],
-    ingredients_sw: ["🍵 Chai Nyeusi", "🍵 Chai ya Kijani", "🍬 Sukari ya Kikaboni", "🦠 Vijidudu vya Chachu"]
+    ingredients_sw: ["🍵 Chai Nyeusi", "🍵 Chai ya Kijani", "🍬 Sukari ya Kikaboni", "🦠 Vijidudu vya Chachu"],
+    tasting_en: { "Fizziness / Carbonation": 4, "Tartness": 3, "Herbal Notes": 3 },
+    tasting_sw: { "Povu / Gesi": 4, "Ukali wa Ukachuzi": 3, "Ladha ya Mimea": 3 }
   },
   ginger: {
     category_en: "Spiced Beverage",
@@ -1709,7 +1713,9 @@ const MODAL_PRODUCT_DATA = {
     origin_en: "Dar es Salaam, TZ",
     origin_sw: "Dar es Salaam, TZ",
     ingredients_en: ["🫚 Fresh Ginger Juice", "🍋 Lemon Zest", "🍬 Natural Cane Sugar", "💧 Sparkling Water"],
-    ingredients_sw: ["🫚 Juisi ya Tangawizi", "🍋 Ganda la Limao", "🍬 Sukari ya Miwa", "💧 Maji yenye Povu"]
+    ingredients_sw: ["🫚 Juisi ya Tangawizi", "🍋 Ganda la Limao", "🍬 Sukari ya Miwa", "💧 Maji yenye Povu"],
+    tasting_en: { "Zesty Punch": 4, "Citrus Blend": 3, "Refreshment Level": 5 },
+    tasting_sw: { "Ukali wa Tangawizi": 4, "Mchanganyiko wa Ndimu": 3, "Kiwango cha Burudisho": 5 }
   },
   energy: {
     category_en: "Energy Drink",
@@ -1723,7 +1729,9 @@ const MODAL_PRODUCT_DATA = {
     origin_en: "Dar es Salaam, TZ",
     origin_sw: "Dar es Salaam, TZ",
     ingredients_en: ["⚡ Caffeine", "🔋 B-Vitamins", "🍊 Natural Citrus Extracts", "💧 Carbonated Water"],
-    ingredients_sw: ["⚡ Kafeini", "🔋 Vitamini B", "🍊 Dondoo za Matunda", "💧 Maji yenye Povu"]
+    ingredients_sw: ["⚡ Kafeini", "🔋 Vitamini B", "🍊 Dondoo za Matunda", "💧 Maji yenye Povu"],
+    tasting_en: { "Energy Kick": 5, "Sweetness": 3, "Carbonation": 4 },
+    tasting_sw: { "Nguvu ya Kinywaji": 5, "Utamu": 3, "Povu / Gesi": 4 }
   }
 };
 
@@ -1739,6 +1747,29 @@ function openProductModal(prodKey) {
   const ingredients = currentLang === 'sw' ? prod.ingredients_sw : prod.ingredients_en;
   
   const ingHTML = ingredients.map(ing => `<span class="modal-ing-pill">${ing}</span>`).join('');
+  
+  const tastingData = currentLang === 'sw' ? prod.tasting_sw : prod.tasting_en;
+  let tastingHTML = '';
+  if (tastingData) {
+    tastingHTML = `
+      <div class="modal-category" style="margin-top:1.25rem;">Tasting Profile</div>
+      <div style="display:flex; flex-direction:column; gap:10px; margin-top:0.5rem;">
+    `;
+    for (const [key, value] of Object.entries(tastingData)) {
+      tastingHTML += `
+        <div>
+          <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px; font-weight:500;">
+            <span style="color:var(--cream-muted);">${key}</span>
+            <span style="color:var(--gold); font-weight:700;">${value}/5</span>
+          </div>
+          <div style="height:6px; background:rgba(255,255,255,0.08); border-radius:3px; overflow:hidden;">
+            <div style="height:100%; width:${value * 20}%; background:linear-gradient(90deg, var(--gold) 0%, #FAC55A 100%); border-radius:3px;"></div>
+          </div>
+        </div>
+      `;
+    }
+    tastingHTML += `</div>`;
+  }
   
   const html = `
     <div class="modal-grid">
@@ -1766,9 +1797,11 @@ function openProductModal(prodKey) {
         </div>
         
         <div class="modal-category">Key Ingredients</div>
-        <div class="modal-ingredients">
+        <div class="modal-ingredients" style="margin-bottom:0;">
           ${ingHTML}
         </div>
+        
+        ${tastingHTML}
       </div>
     </div>
   `;
